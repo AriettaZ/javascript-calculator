@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="info-section">
+          <button type="button" name="button" id="clear-button">Clear All Histories</button>
+          <div class="history-container" id="history-contaienr">
+              <div class="history-line">
+                <p class="eq-container">1+2+3=6</p>
+                <button class="remove-button" type="button" name="button">Remove History</button>
+              </div>
+              <div class="history-line">
+                <p class="eq-container">2/4=0.5</p>
+                <button class="remove-button" type="button" name="button">Remove History</button>
+              </div>
+              <div class="history-line">
+                <p class="eq-container">1+2+3=6</p>
+                <button class="remove-button" type="button" name="button">Remove History</button>
+              </div>
+              <div class="history-line">
+                <p class="eq-container">2/4=0.5</p>
+                <button class="remove-button" type="button" name="button">Remove History</button>
+              </div>
+              <div class="history-line">
+                <p class="eq-container">2/4=0.5</p>
+                <button class="remove-button" type="button" name="button">Remove History</button>
+              </div>
+          </div>
+          <div class="screen-container">
+            <input class="screen-item user-input" type="text" id="current-input">
+            <div class="screen-item" id="current-value"></div>
+          </div>
+      </div>
+        <div class="keyboard-container">
+          <div class="keyboard-item" id="ms">MS</div>
+          <div class="keyboard-item" id="mr">MR</div>
+          <div class="keyboard-item" id="m+">M+</div>
+          <div class="keyboard-item" id="m-">M-</div>
+          <div class="keyboard-item" id="mc">MC</div>
+          <div class="keyboard-item" id="(">(</div>
+          <div class="keyboard-item" id=")">)</div>
+          <div class="keyboard-item" id="squareroot"></div>
+          <div class="keyboard-item" id="square"></div>
+          <div class="keyboard-item" id="c">C</div>
+          <div class="keyboard-item">7</div>
+          <div class="keyboard-item">8</div>
+          <div class="keyboard-item">9</div>
+          <div class="keyboard-item" id="division"></div>
+          <div class="keyboard-item" id="del"></div>
+          <div class="keyboard-item">4</div>
+          <div class="keyboard-item">5</div>
+          <div class="keyboard-item">6</div>
+          <div class="keyboard-item" id="times"></div>
+          <div class="keyboard-item" id="exponentiation"></div>
+          <div class="keyboard-item">1</div>
+          <div class="keyboard-item">2</div>
+          <div class="keyboard-item">3</div>
+          <div class="keyboard-item" id="minus">-</div>
+          <div class="keyboard-item">%</div>
+          <div class="keyboard-item">0</div>
+          <div class="keyboard-item">.</div>
+          <div class="keyboard-item" id="">E</div>
+          <div class="keyboard-item" id="plus">+</div>
+          <div class="keyboard-item" id="equal">=</div>
+        </div>
+      </div>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+</html>
