@@ -27,6 +27,8 @@ clearBtn.addEventListener("click",clearHistory,false);
 //}, false);
 //};
 //
+<<<<<<< HEAD
+=======
 
 var backBtn = document.getElementsByClassName('fa-backspace');
 backBtn[0].addEventListener('click', function(){
@@ -37,4 +39,5 @@ if (equation.value != undefined){
         equation.value=0;
     }
 }
-}, false);
+}, false); 
+>>>>>>> 95d1e943649c171927ed8bf75f6b06303d08ef03
