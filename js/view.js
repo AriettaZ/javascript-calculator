@@ -19,29 +19,28 @@ function update(equation){
 function addHistory(equation, result){
 	var historyContainer = document.getElementById("history-container");
 
-	//If there is no record in the history container, then let clear button appear
-	var currentLines = historyContainer.getElementsByClassName("history-line");
-	if(currentLines.length==0){
-		changeClearButtonOpacity(1);
-	}
-
 	//Create a record
 	var line = document.createElement("div");
 	line.setAttribute("class","history-line");
 	var eqContainer = document.createElement("p");
-	eqContainer.innerHTML = equation+" = "+result;
+	eqContainer.innerHTML = equation+result;
 	eqContainer.setAttribute("class","eq-container")
-	var removeButton  = document.createElement("button");
-	removeButton.setAttribute("class", "remove-button");
-	removeButton.innerHTML = "Remove History";
+	var removeButton  = document.createElement("i");
+	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
 
 	//Append the record to the historyContainer
-	line.appendChild(eqContainer);
 	line.appendChild(removeButton);
+	line.appendChild(eqContainer);
 	historyContainer.appendChild(line);
 
 	//Setup remove button listener
 	removeButton.addEventListener("click",removeHistory);
+	
+	//If there is no record in the history container, then let clear button appear
+	var currentLines = historyContainer.getElementsByClassName("history-line");
+	if(currentLines.length==1){
+		changeClearButtonOpacity(1);
+	}
 }
 
 //Author: Mike
