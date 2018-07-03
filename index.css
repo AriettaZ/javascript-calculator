@@ -88,6 +88,7 @@ body{
 #clear-button{
   width:100%;
   margin-bottom: 20px;
+  opacity: 0;
 }
 #clear-button:hover{
   background-color: #7fc9a5;
