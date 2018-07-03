@@ -26,4 +26,3 @@ clearBtn.addEventListener("click",clearHistory,false);
 //this.parentNode.parentNode.removeChild(this.parentNode);
 //}, false);
 //};
-//
