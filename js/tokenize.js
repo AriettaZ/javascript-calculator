@@ -45,8 +45,7 @@ function tokenize(equation) {
 				break;
 			case /\./.test(str):
 				if(/[+\-*\/\(E\^]/.test(equation[i - 1])) {
-					tokens.push("0");
-					tokens.push(str);
+					tokens.push("0.");
 				} else if(/\d.*/.test(tokens[tokens.length - 1])) {
 					tokens[tokens.length - 1] += str;
 				} else {
