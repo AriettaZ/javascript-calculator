@@ -48,7 +48,7 @@ function evaluate() {
     // Find, remove, and use the operator with the second val
     while (equation[0] === "^") {
       equation.shift();  // remove operator
-      result ** val(equation);  // use operator
+      result **= val(equation);  // use operator
     }
     return result;
   }
