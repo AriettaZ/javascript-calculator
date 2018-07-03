@@ -1,7 +1,7 @@
 .screen-container {
-  display: grid;
+  display: block;
   /* grid-template-columns: auto; */
-  grid-template-rows: 50% 50%;
+  /* grid-template-rows: 50% 50%; */
   clear:both;
   height: 100px;
   padding-top: 20px;
@@ -105,27 +105,29 @@ button{
 .eq-container{
   margin-bottom: 5px;
 }
-#current-input{
+.current-input{
   border:none;
-  display: inline-block;
+  display: inline;
   border-width: 0px;
   padding: 0px;
   color: black;
   font-family: 'Bitter', serif;
   weight:bold;
-  font-size: 20px;
-  padding-right: 10px;
+  font-size: 25px;
   text-align: right;
+  line-height: 50px;
+  width: 93%;
 }
 #current-value{
   background: #6599f5;
   color: white;
   font-family: 'Bitter', serif;
   weight:bold;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 50px;
   padding-right: 10px;
   text-align: right;
+  height: 50%;
 }
 button:focus,input:focus{
   outline:0;
@@ -135,4 +137,13 @@ footer{
 }
 footer i{
   color: #d89cc4;
+}
+.user-input{
+  background: white;
+  color: #304468;
+  height: 50px;
+}
+.screen-container  i:hover{
+  cursor: pointer;
+  z-index: 10;
 }

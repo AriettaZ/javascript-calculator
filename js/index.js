@@ -1,12 +1,14 @@
+
+
 katex.render("\\sqrt{x}", squareroot);
 katex.render("x^2", square);
 katex.render("\\div", division);
-katex.render("\\gets", del);
 katex.render("\\times", times);
 katex.render("x^y", exponentiation);
 katex.render("-", minus);
 katex.render("+", plus);
 katex.render("=", equal);
+katex.render("\\pm",reverse)
 
 var clearBtn = document.getElementById('clear-button');
 clearBtn.addEventListener('click', function(){
@@ -22,3 +24,11 @@ for (var i = 0; i < removeBtn.length; i++) {
   this.parentNode.parentNode.removeChild(this.parentNode);
 }, false);
 };
+
+var backBtn = document.getElementsByClassName('fa-backspace');
+backBtn[0].addEventListener('click', function(){
+  var equation = document.getElementById("equation-container");
+  if (equation.value != undefined){
+    equation.value= equation.value.substring(0, equation.value.length - 1);
+  }
+}, false);

@@ -49,7 +49,10 @@
               </div>
           </div>
           <div class="screen-container">
-            <input class="screen-item user-input" type="text" id="current-input">
+            <div class="screen-item user-input">
+              <input class="current-input" type="text" id="equation-container">
+              <span><i class="fas fa-backspace"></i></span>
+            </div>
             <div class="screen-item" id="current-value"></div>
           </div>
       </div>
@@ -68,7 +71,7 @@
           <div class="keyboard-item" id="8">8</div>
           <div class="keyboard-item" id="9">9</div>
           <div class="keyboard-item" id="division"></div>
-          <div class="keyboard-item" id="del"></div>
+          <div class="keyboard-item" id="reverse"></div>
           <div class="keyboard-item" id="4">4</div>
           <div class="keyboard-item" id="5">5</div>
           <div class="keyboard-item" id="6">6</div>
@@ -92,5 +95,8 @@
         </p>
       </footer>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/inputListener.js"></script>
+    <script type="text/javascript" src="js/tokenize.js"></script>
+    <script type="text/javascript" src="js/view.js"></script>
   </body>
 </html>
