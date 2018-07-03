@@ -163,10 +163,10 @@ function keyboardInput(event) {
     }
 }
 
-var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "×", "÷", "=", "C", "^", "^2", "E", "(", ")", "%", "√(", ".", "MR", "MS", "M+", "M-", "MC", "<-"];
-var operation = ["+", "-", "×", "÷", "^", "E", ".", "(", "√("];
+var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C", "^", "^2", "E", "(", ")", "%", "√(", ".", "MR", "MS", "M+", "M-", "MC", "<-"];
+var operation = ["+", "-", "*", "/", "^", "E", ".", "(", "√("];
 var startOp = ["(", "√(", "-"];
-var midOp = ["+", "×", "÷", "^", "E"];
+var midOp = ["+", "*", "/", "^", "E"];
 var endOp = ["^2", ")", "%"];
 var clear = ["=", "C", "MR", "MS", "M+", "M-", "MC"];
 var other = ["<-"];
@@ -216,28 +216,28 @@ function printToScreen(input){
         break;
 
       case "+":
-      case "×":
-      case "÷":
-        if(["+", "-", "×", "÷", "^", "E", "."].includes(last) || last2 == "√("){
+      case "*":
+      case "/":
+        if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "-":
-        if(["+", "-", "×", "÷", "^", "."].includes(last) || (last == "0" && twoBefore == "")){
+        if(["+", "-", "*", "/", "^", "."].includes(last) || (last == "0" && twoBefore == "")){
           equation = cutLast;
         }
         break;
 
       case "%":
-        if(["+", "-", "×", "÷", "^", "E", "(", ".", "%"].includes(last)){
+        if(["+", "-", "*", "/", "^", "E", "(", ".", "%"].includes(last)){
           equation = cutLast;
         }
         break;
 
       case "^":
       case "^2":
-        if(["+", "-", "×", "÷", "E", "(", "."].includes(last)){
+        if(["+", "-", "*", "/", "E", "(", "."].includes(last)){
           equation = cutLast;
         }
         break;
@@ -261,7 +261,7 @@ function printToScreen(input){
         break;
 
       case ")":
-        if(["+", "-", "×", "÷", "^", "E", "."].includes(last) || last2 == "√("){
+        if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
@@ -296,7 +296,7 @@ function printToScreen(input){
       case "M-":
       case "MC":
       case "=":
-        if(["+", "-", "×", "÷", "^", "E", ".", "("].includes(last)  || last2 == "√("){
+        if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
           equation = cutLast;
         }
         equation += "=";
@@ -310,10 +310,10 @@ function printToScreen(input){
     if(!clear.includes(input) && input != "<-"){
       if(!(input == "^2" || input == "^") && input != "."){
         equation += input;
-        if (["+", "-", "×", "÷", "(", ")"].includes(input)){
+        if (["+", "-", "*", "/", "(", ")"].includes(input)){
           setexp = 0;
         }
-        if (["+", "-", "×", "÷", "(", "^"].includes(input)){
+        if (["+", "-", "*", "/", "(", "^"].includes(input)){
           dot = 0;
         }
       } else{
