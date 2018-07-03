@@ -8,7 +8,6 @@ katex.render("x^y", exponentiation);
 katex.render("-", minus);
 katex.render("+", plus);
 katex.render("=", equal);
-katex.render("\\pm",reverse)
 
 var clearBtn = document.getElementById('clear-button');
 clearBtn.addEventListener("click",clearHistory,false);
