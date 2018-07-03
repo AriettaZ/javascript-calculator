@@ -37,4 +37,4 @@ if (equation.value != undefined){
         equation.value=0;
     }
 }
-}, false);
+}, false); 
