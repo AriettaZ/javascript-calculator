@@ -2,10 +2,10 @@
 //Created: 7/1
 //Edit: N/A
 //Description: update the equation field with given equation
-//Update: #equation-container
+//Update: #current-input
 //Return: N/A
 function update(equation){
-	var equationField = document.getElementById("equation-container"); //Which equation
+	var equationField = document.getElementById("current-input"); //Which equation
 	equationField.innerHTML=equation;
 }
 
@@ -17,13 +17,13 @@ function update(equation){
 //Return: N/A
 function addHistory(equation, result){
 	var historyContainer = document.getElementById("history-container");
-	
+
 	//If there is no record in the history container, then let clear button appear
 	var currentLines = historyContainer.getElementsByClassName("history-line");
 	if(currentLines.length==0){
 		changeClearButtonOpacity(1);
 	}
-	
+
 	//Create a record
 	var line = document.createElement("div");
 	line.setAttribute("class","history-line");
@@ -33,12 +33,12 @@ function addHistory(equation, result){
 	var removeButton  = document.createElement("button");
 	removeButton.setAttribute("class", "remove-button");
 	removeButton.innerHTML = "Remove History";
-	
+
 	//Append the record to the historyContainer
 	line.appendChild(eqContainer);
 	line.appendChild(removeButton);
 	historyContainer.appendChild(line);
-	
+
 	//Setup remove button listener
 	removeButton.addEventListener("click",removeHistory);
 }
