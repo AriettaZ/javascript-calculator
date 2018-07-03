@@ -70,6 +70,9 @@
 }
 header{
   height:80px;
+  line-height: 100px;
+  font-size: 40px;
+  weight:bold;
 }
 body{
   background-color: #304468;
@@ -116,7 +119,7 @@ button{
   font-size: 25px;
   text-align: right;
   line-height: 50px;
-  width: 93%;
+  width: 92%;
 }
 #current-value{
   background: #6599f5;
@@ -143,7 +146,30 @@ footer i{
   color: #304468;
   height: 50px;
 }
+
 .screen-container  i:hover{
   cursor: pointer;
   z-index: 10;
+}
+
+@media screen and (max-width: 1020px) {
+  .keyboard-container{
+    width:100%;
+    float:center;
+    margin: 20px 0px;
+  }
+  .info-section{
+    width:100%;
+    float:center;
+    margin: 20px 0px;
+  }
+  .current-input{
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 438px) {
+  body{
+    width: 90%;
+  }
 }
