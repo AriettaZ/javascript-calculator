@@ -27,13 +27,14 @@ clearBtn.addEventListener("click",clearHistory,false);
 //}, false);
 //};
 //
-//var backBtn = document.getElementsByClassName('fa-backspace');
-//backBtn[0].addEventListener('click', function(){
-//var equation = document.getElementById("equation-container");
-//if (equation.value != undefined){
-//  equation.value= equation.value.substring(0, equation.value.length - 1);
-//  if (equation.value==''){
-//      equation.value=0;
-//  }
-//}
-//}, false);
+
+var backBtn = document.getElementsByClassName('fa-backspace');
+backBtn[0].addEventListener('click', function(){
+var equation = document.getElementById("equation-container");
+if (equation.value != undefined){
+    equation.value= equation.value.substring(0, equation.value.length - 1);
+    if (equation.value==''){
+        equation.value=0;
+    }
+}
+}, false);
