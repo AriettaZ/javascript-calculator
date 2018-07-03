@@ -30,6 +30,7 @@ function disableMemory(){
 // Update: memory
 // Return: N/A
 function handleMS(){
+  var result = document.getElementById("current-value").innerHTML;
   memory = result;
   // equation = memory.toString(); // Just for testing purpose
   // update(equation); // Just for testing purpose
@@ -43,6 +44,7 @@ function handleMS(){
 // Update: memory
 // Return: N/A
 function handleMR(){
+  var result = document.getElementById("current-value").innerHTML;
   result += memory;
   update(equation);
 }
@@ -55,6 +57,8 @@ function handleMR(){
 // Update: equation, #current-input
 // Return: N/A
 function handleMPlus(){
+  var result = document.getElementById("current-value").innerHTML;
+  memory += result;
   // showMemory();
 }
 
@@ -66,6 +70,7 @@ function handleMPlus(){
 // Update: memory
 // Return: N/A
 function handleMMinus(){
+  var result = document.getElementById("current-value").innerHTML;
   memory -= result;
   // showMemory();
 }
