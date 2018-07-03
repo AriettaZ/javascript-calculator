@@ -42,16 +42,16 @@ function handleInput(){
 // Update: equation, #current-input
 // Return: N/A
 function keyboardInput(event) {
-  var charCode = event.which || event.keyCode;
+  var keyCode = event.which || event.keyCode;
   var input;
-  if (charCode != 0) {
-    if (!((charCode <= 57) && (charCode >= 48)) && !CHAR_CODE.includes(charCode)) {
+  if (keyCode != 0) {
+    if (!((keyCode <= 57) && (keyCode >= 48)) && !CHAR_CODE.includes(keyCode)) {
       event.preventDefault();
     }else {
-      if((charCode <= 57) && (charCode >= 48)){
-        input = String.fromCharCode(charCode);
+      if((keyCode <= 57) && (keyCode >= 48)){
+        input = String.fromCharCode(keyCode);
       } else {
-          switch(charCode){
+          switch(keyCode){
             case 43:
               input = "+";
               break;
