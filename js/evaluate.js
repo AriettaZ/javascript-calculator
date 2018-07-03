@@ -29,7 +29,7 @@ function evaluate() {
     // Get first factor
     var result = factor(equation);
     // Find, remove, and use the operator with the second factor
-    while (equation[0] === "*" || equation === "/") {
+    while (equation[0] === "*" || equation[0] === "/") {
       if (equation[0] === "*") {
         equation.shift();  // remove operator
         result *= factor(equation);  // use operator
