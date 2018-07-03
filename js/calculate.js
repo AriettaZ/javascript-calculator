@@ -1,6 +1,10 @@
 function calculate(num1,num2,operator){
   var result;
   try {
+      if ((typeof num1 || typeof num2) !== 'number'){
+        num1= parseFloat(num1);
+        num2=parseFloat(num2);
+      };
       switch(operator) {
         case "division":
             result=num1/num2;
@@ -33,6 +37,9 @@ function calculate(num1,num2,operator){
     }
     catch(err) {
       alert(err);
+    }
+    if (parseInt(result)!==result){
+      result = parseFloat(result.toFixed(5));
     }
     return result;
 }

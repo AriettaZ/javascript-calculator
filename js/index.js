@@ -27,3 +27,17 @@ clearBtn.addEventListener("click",clearHistory,false);
 //}, false);
 //};
 //
+<<<<<<< HEAD
+=======
+
+var backBtn = document.getElementsByClassName('fa-backspace');
+backBtn[0].addEventListener('click', function(){
+var equation = document.getElementById("equation-container");
+if (equation.value != undefined){
+    equation.value= equation.value.substring(0, equation.value.length - 1);
+    if (equation.value==''){
+        equation.value=0;
+    }
+}
+}, false); 
+>>>>>>> 95d1e943649c171927ed8bf75f6b06303d08ef03
