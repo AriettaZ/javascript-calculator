@@ -13,24 +13,6 @@ var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 // Require: N/A
 // Update: equation, #current-input
 // Return: N/A
-<<<<<<< HEAD
-function getInput(){
-  update("0");
-  var textArea = document.getElementById("equation-container");
-  document.addEventListener("keypress",keyboardInput,true);
-  textArea.addEventListener("focusin", function(event) {
-    document.removeEventListener("keypress", keyboardInput, true);
-  });
-  textArea.addEventListener("focusout", function(event) {
-    document.addEventListener("keypress", keyboardInput, true);
-  });
-  var buttons = document.getElementsByClassName("keyboard-item");
-  var backSpace = document.getElementsByClassName('fa-backspace');
-  backSpace[0].addEventListener("click", handleInput);
-  for (i = 5; i < buttons.length; i++){
-    buttons[i].addEventListener("click", handleInput);
-  }
-=======
 function getInput() {
 //	update("0");
 	// handleMemory();
@@ -51,10 +33,12 @@ function getInput() {
 	});
 
 	// document.addEventListener("keypress", keyboardInput);
-	var buttons = document.getElementsByClassName("keyboard-item");
-	for(i = 5; i < buttons.length; i++) {
-		buttons[i].addEventListener("click", handleInput);
-	}
+  var buttons = document.getElementsByClassName("keyboard-item");
+  var backSpace = document.getElementsByClassName('fa-backspace');
+  backSpace[0].addEventListener("click", handleInput);
+  for (i = 5; i < buttons.length; i++){
+    buttons[i].addEventListener("click", handleInput);
+  }
 }
 
 // Author: Mike
@@ -88,7 +72,6 @@ function inputKeyHandling(event) {
 		textArea.selectionStart = inputIndex;
 		textArea.selectionEnd = inputIndex;
 	}
->>>>>>> 95d1e943649c171927ed8bf75f6b06303d08ef03
 }
 
 // Author: Gail Chen
@@ -110,7 +93,6 @@ function handleInput(){
 // Update: equation, #current-input
 // Return: N/A
 function keyboardInput(event) {
-<<<<<<< HEAD
   var keyCode = event.which || event.keyCode;
   var input;
   if (keyCode != 0) {
@@ -179,77 +161,6 @@ function keyboardInput(event) {
         }
       }
     }
-=======
-	var keyCode = event.which || event.keyCode;
-	var input;
-	if(keyCode != 0) {
-		if(!((keyCode <= 57) && (keyCode >= 48)) && !CHAR_CODE.includes(keyCode)) {
-			event.preventDefault();
-		} else {
-			if((keyCode <= 57) && (keyCode >= 48)) {
-				input = String.fromCharCode(keyCode);
-				document.getElementById(input).click();
-			} else {
-				switch(keyCode) {
-					case 43:
-						input = "+";
-						document.getElementById("plus").click();
-						break;
-					case 45:
-						input = "-";
-						document.getElementById("minus").click();
-						break;
-					case 42:
-						input = "×";
-						document.getElementById("times").click();
-						break;
-					case 47:
-						input = "÷";
-						document.getElementById("division").click();
-						break;
-					case 40:
-						input = "(";
-						document.getElementById("(").click();
-						break;
-					case 41:
-						input = ")";
-						document.getElementById(")").click();
-						break;
-					case 69:
-						input = "E";
-						document.getElementById("scientific").click();
-						break;
-					case 13: //enter
-					case 61:
-						input = "=";
-						document.getElementById("equal").click();
-						break;
-					case 8: // backspace
-						input = "<-";
-						document.getElementsByClassName('fa-backspace')[0].click();
-						break;
-					case 46:
-						input = ".";
-						document.getElementById("dot").click();
-						break;
-					case 37:
-						input = "%";
-						document.getElementById("percentage").click();
-						break;
-					case 94:
-						input = "^";
-						document.getElementById("exponentiation").click();
-						break;
-					case 8730:
-						input = "√(";
-						document.getElementById("squareroot").click();
-						break;
-				}
-			}
-			// printToScreen(input);
-		}
-	}
->>>>>>> 95d1e943649c171927ed8bf75f6b06303d08ef03
 }
 
 var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "×", "÷", "=", "C", "^", "^2", "E", "(", ")", "%", "√(", ".", "MR", "MS", "M+", "M-", "MC", "<-"];
@@ -417,19 +328,7 @@ function printToScreen(input){
       }
     }
 
-<<<<<<< HEAD
-    if(equation === ""){
-      equation += "0";
-    }
-    update(equation);
-    if(equation !== "0"){
-      disableMemory();
-    } else {
-      handleMemory();
-    }
-  }
-}
-=======
+
 		if(equation === "") {
 			equation += "0";
 		}
@@ -441,4 +340,3 @@ function printToScreen(input){
 		}
 	}
 }
->>>>>>> 95d1e943649c171927ed8bf75f6b06303d08ef03
