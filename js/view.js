@@ -2,10 +2,10 @@
 //Created: 7/1
 //Edit: N/A
 //Description: update the equation field with given equation
-//Update: #current-input
+//Update: #equation-container
 //Return: N/A
 function update(equation){
-	var equationField = document.getElementById("current-input"); //Which equation
+	var equationField = document.getElementById("equation-container"); //Which equation
 	equationField.innerHTML=equation;
 }
 
