@@ -82,7 +82,7 @@ function keyboardInput(event) {
           }
         }
         printToScreen(input);
-      } 
+      }
     }
 }
 
@@ -108,7 +108,7 @@ function printToScreen(input){
   var numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   var nochange = ((equation == '0') && [')', '<-'].includes(input)) && (numbers.include[last] && input == '.');
 
-  if (!((equation == '0') && [')', '<-'].includes(input))){ 
+  if (!((equation == '0') && [')', '<-'].includes(input))){
     if (!nochange){
       id = '';
       switch(input){
@@ -126,7 +126,7 @@ function printToScreen(input){
             equation = cutLast;
           }
           break;
-          
+
         case '+':
         case '×':
         case '÷':
@@ -171,21 +171,21 @@ function printToScreen(input){
             equation = cutLast;
           }
           break;
-        
+
         case 'E':
           if (!numbers.includes(last)){
             equation = cutLast;
           }
           break;
-        
+
         case '<-':
           equation = cutLast;
           break;
-        
+
         case 'C':
           equation = '0';
           break;
-        
+
         case 'MR':
         case 'MS':
         case 'M+':
@@ -216,7 +216,7 @@ function printToScreen(input){
           }
         }
       }
-      
+
       if(equation === ''){
         equation += '0';
       }
