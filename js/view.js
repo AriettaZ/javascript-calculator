@@ -6,7 +6,8 @@
 //Return: N/A
 function update(equation){
 	var equationField = document.getElementById("equation-container"); //Which equation
-	equationField.innerHTML=equation;
+	// equationField.innerHTML=equation;
+	equationField.value=equation;
 }
 
 //Author: Mike

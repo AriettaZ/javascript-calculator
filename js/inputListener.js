@@ -17,6 +17,7 @@ function getInput(){
   update(equation);
   handleMemory();
   document.addEventListener("keypress", keyboardInput, false);
+  // var backsapce = document.getElementsById("keyboard-item");
   var buttons = document.getElementsByClassName("keyboard-item");
   for (i = 5; i < buttons.length; i++){
     buttons[i].addEventListener("click", handleInput);
