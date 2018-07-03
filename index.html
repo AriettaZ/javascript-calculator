@@ -2,36 +2,50 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>¡Calculator</title>
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
   </head>
   <body>
+    <header>
+      <i class="fas fa-calculator"></i>  ¡Calculator
+    </header>
     <div class="main">
       <div class="info-section">
           <button type="button" name="button" id="clear-button">Clear All Histories</button>
           <div class="history-container" id="history-contaienr">
               <div class="history-line">
-                <p class="eq-container">1+2+3=6</p>
-                <button class="remove-button" type="button" name="button">Remove History</button>
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">1+2+3=6</p>
               </div>
               <div class="history-line">
-                <p class="eq-container">2/4=0.5</p>
-                <button class="remove-button" type="button" name="button">Remove History</button>
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">2/4=0.5</p>
               </div>
               <div class="history-line">
-                <p class="eq-container">1+2+3=6</p>
-                <button class="remove-button" type="button" name="button">Remove History</button>
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">1+2+3=6</p>
               </div>
               <div class="history-line">
-                <p class="eq-container">2/4=0.5</p>
-                <button class="remove-button" type="button" name="button">Remove History</button>
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">2/4=0.5</p>
               </div>
               <div class="history-line">
-                <p class="eq-container">2/4=0.5</p>
-                <button class="remove-button" type="button" name="button">Remove History</button>
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">2/4+2+3+3+2+3+9+3+3+2+3+9+3+3+2+3+9+3+3+2+3+9+3+3+2+3+9=0.5</p>
+              </div>
+              <div class="history-line">
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">1+2+3=6</p>
+              </div>
+              <div class="history-line">
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">2/4=0.5</p>
+              </div>
+              <div class="history-line">
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">1+2+3=6</p>
+              </div>
+              <div class="history-line">
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">2/4=0.5</p>
+              </div>
+              <div class="history-line">
+                <i class="far fa-trash-alt remove-button"></i><p class="eq-container">2/4=0.5</p>
               </div>
           </div>
           <div class="screen-container">
@@ -51,30 +65,37 @@
           <div class="keyboard-item" id="squareroot" name="√("></div>
           <div class="keyboard-item" id="square" name="^2"></div>
           <div class="keyboard-item" id="c" name="C">C</div>
-          <div class="keyboard-item" name="7">7</div>
-          <div class="keyboard-item" name="8">8</div>
-          <div class="keyboard-item" name="9">9</div>
+          <div class="keyboard-item" id="7" name="7">7</div>
+          <div class="keyboard-item" id="8" name="8">8</div>
+          <div class="keyboard-item" id="9" name="9">9</div>
           <div class="keyboard-item" id="division" name="÷"></div>
-          <div class="keyboard-item" id="del" name="<-"></div>
-          <div class="keyboard-item" name="4">4</div>
-          <div class="keyboard-item" name="5">5</div>
-          <div class="keyboard-item" name="6">6</div>
+          <div class="keyboard-item" id="reverse" name="<-"></div>
+          <div class="keyboard-item" id="4" name="4">4</div>
+          <div class="keyboard-item" id="5" name="5">5</div>
+          <div class="keyboard-item" id="6" name="6">6</div>
           <div class="keyboard-item" id="times" name="×"></div>
           <div class="keyboard-item" id="exponentiation" name="^"></div>
-          <div class="keyboard-item" name="1">1</div>
-          <div class="keyboard-item" name="2">2</div>
-          <div class="keyboard-item" name="3">3</div>
+          <div class="keyboard-item" id="1" name="1">1</div>
+          <div class="keyboard-item" id="2" name="2">2</div>
+          <div class="keyboard-item" id="3" name="3">3</div>
           <div class="keyboard-item" id="minus" name="-">-</div>
-          <div class="keyboard-item" name="%">%</div>
-          <div class="keyboard-item" name="0">0</div>
-          <div class="keyboard-item" name=".">.</div>
-          <div class="keyboard-item" id="" name="E">E</div>
+          <div class="keyboard-item" id="percentage" name="%">%</div>
+          <div class="keyboard-item" id="0" name="0">0</div>
+          <div class="keyboard-item" id="dot" name=".">.</div>
+          <div class="keyboard-item" id="scientific" name="E">E</div>
           <div class="keyboard-item" id="plus" name="+">+</div>
           <div class="keyboard-item" id="equal" name="=">=</div>
         </div>
       </div>
+      <footer>
+        <p>
+          Created by MAG¡C with <i class="fas fa-heart"></i>
+        </p>
+      </footer>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/view.js"></script>
+    <script type="text/javascript" src="js/tokenize.js"></script>
+    <script type="text/javascript" src="js/calculate.js"></script>
     <script type="text/javascript" src="js/updateMemory.js"></script>
     <script type="text/javascript" src="js/inputListener.js"></script>
     <script>
