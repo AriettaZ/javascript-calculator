@@ -7,9 +7,9 @@
 
 var memory = 0;
 function handleMemory(){
+  document.getElementById("mr").addEventListener("click", handleMR);
   showMemory(); // Node need to display the memory
   document.getElementById("ms").addEventListener("click", handleMS);
-  // document.getElementById("mr").addEventListener("click", handleMR);
   document.getElementById("m+").addEventListener("click", handleMPlus);
   document.getElementById("m-").addEventListener("click", handleMMinus);
   document.getElementById("mc").addEventListener("click", handleMC);
@@ -30,10 +30,10 @@ function disableMemory(){
 // Update: memory
 // Return: N/A
 function handleMS(){
-  var result = document.getElementById("current-value").innerHTML;
+  // var result = parseFloat(document.getElementById("current-value").innerHTML);
   memory = result;
-  // equation = memory.toString(); // Just for testing purpose
-  // update(equation); // Just for testing purpose
+  equation = memory.toString(); // Just for testing purpose
+  update(equation); // Just for testing purpose
 }
 
 // Author: Gail Chen
@@ -44,7 +44,7 @@ function handleMS(){
 // Update: memory
 // Return: N/A
 function handleMR(){
-  var result = document.getElementById("current-value").innerHTML;
+  // var result = parseFloat(document.getElementById("current-value").innerHTML);
   result += memory;
   update(equation);
 }
@@ -57,9 +57,9 @@ function handleMR(){
 // Update: equation, #current-input
 // Return: N/A
 function handleMPlus(){
-  var result = document.getElementById("current-value").innerHTML;
+  // var result = parseFloat(document.getElementById("current-value").innerHTML);
   memory += result;
-  // showMemory();
+  showMemory();
 }
 
 // Author: Gail Chen
@@ -70,9 +70,9 @@ function handleMPlus(){
 // Update: memory
 // Return: N/A
 function handleMMinus(){
-  var result = document.getElementById("current-value").innerHTML;
+  // var result = parseFloat(document.getElementById("current-value").innerHTML);
   memory -= result;
-  // showMemory();
+  showMemory();
 }
 
 // Author: Gail Chen
@@ -84,7 +84,7 @@ function handleMMinus(){
 // Return: N/A
 function handleMC(){
   memory = 0;
-  // showMemory();
+  showMemory();
 }
 
 function showMemory(){
