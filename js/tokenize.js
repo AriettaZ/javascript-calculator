@@ -80,8 +80,8 @@ function tokenize(equation) {
 		if(!isNaN(parse2num)){
 			tokens[i]=parse2num;
 		}
-		document.write(tokens[i]);
-		document.write(typeof(tokens[i]) + "<br />");
+//		document.write(tokens[i]);
+//		document.write(typeof(tokens[i]) + "<br />");
 	}
 	if(parenthesis!=0){
 		alert("Parenthesis error");

@@ -3,7 +3,7 @@
 // Edit: Gail 7/2 update corresponding to design of buttons in index.html
 // Description: Using buttons and keyboard to enter the equation.
 
-// var equation = "0";
+var equation = "0";
 var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 
 // Author: Gail Chen
@@ -14,7 +14,7 @@ var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 // Update: equation, #current-input
 // Return: N/A
 function getInput() {
-//	update("0");
+	//update("0");
 	// handleMemory();
 
 	var textArea = document.getElementById("equation-container");
@@ -67,7 +67,7 @@ function inputKeyHandling(event) {
 	if(inputIndex < 0) {
 		inputIndex = 0;
 	}
-	if(!/\d|[\+\-\*\/\^\%\(\)\.]/.test(textArea.value[inputIndex])) {
+	if(!/\d|[\+\-\*\/\^\%\(\)\.E]/.test(textArea.value[inputIndex])) {
 		textArea.value = textArea.value.slice(0, inputIndex) + textArea.value.slice(inputIndex + 1, textArea.value.length);
 		textArea.selectionStart = inputIndex;
 		textArea.selectionEnd = inputIndex;
@@ -182,7 +182,7 @@ var dot = 0;
 // Update: equation, #current-input, #history-container
 // Return: N/A
 function printToScreen(input){
-  var equation = document.getElementById("equation-container").value;
+//var equation = document.getElementById("equation-container").value;
   var last = equation.slice(-1);
   var last2 = equation.slice(-2);
   var twoBefore = equation.charAt(equation.length - 2);
@@ -300,8 +300,8 @@ function printToScreen(input){
           equation = cutLast;
         }
         equation += "=";
-        // result = evaluate equation
-        addHistory(equation, "5")
+        result = evaluate()
+        addHistory(equation, result)
         equation = "0";
         setexp = 0;
         dot = 0;

@@ -4,8 +4,9 @@
 // Description: Evaluates a well-formatted input string. Returning
 // a single number. Updates the string == "".
 function evaluate() {
-  var equation = ["(",1,")"]
-  return expression(equation);
+//var equation = ["(",1,")"]
+var eq = tokenize(equation)
+  return expression(eq);
 
   // Expression consists of [term +|- term] or just [term]
   function expression(equation) {
@@ -29,7 +30,7 @@ function evaluate() {
     // Get first factor
     var result = factor(equation);
     // Find, remove, and use the operator with the second factor
-    while (equation[0] === "*" || equation === "/") {
+    while (equation[0] === "*" || equation[0] === "/") {
       if (equation[0] === "*") {
         equation.shift();  // remove operator
         result *= factor(equation);  // use operator
@@ -48,7 +49,7 @@ function evaluate() {
     // Find, remove, and use the operator with the second val
     while (equation[0] === "^") {
       equation.shift();  // remove operator
-      result ** val(equation);  // use operator
+      result **= val(equation);  // use operator
     }
     return result;
   }
