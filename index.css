@@ -166,10 +166,16 @@ footer i{
   .current-input{
     width: 88%;
   }
+  .history-container{
+    height: 150px;
+  }
 }
 
 @media screen and (max-width: 438px) {
   body{
     width: 90%;
+  }
+  .history-container{
+    height: 100px;
   }
 }
