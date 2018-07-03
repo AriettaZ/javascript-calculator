@@ -4,7 +4,7 @@
 // Description: Using buttons and keyboard to enter the equation.
 
 // var equation = "0";
-var CHAR_CODE = [16, 43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
+var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 
 // Author: Gail Chen
 // Created: 7/2
@@ -15,7 +15,7 @@ var CHAR_CODE = [16, 43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730
 // Return: N/A
 function getInput(){
   update("0");
-  handleMemory();
+  // handleMemory();
 
   var textArea = document.getElementById("equation-container");
   document.addEventListener("keypress",keyboardInput,true);
@@ -79,11 +79,11 @@ function keyboardInput(event) {
               break;
             case 47:
               input = "÷";
-              document.getElementById("plus").click();
+              document.getElementById("division").click();
               break;
             case 40:
               input = "(";
-              document.getElementById("division").click();
+              document.getElementById("(").click();
               break;
             case 41:
               input = ")";
@@ -211,7 +211,7 @@ function printToScreen(input) {
 				break;
 
 			case "√(":
-				if(["", "."].includes(last)) {
+				if(["", ".", "0"].includes(last)) {
 					equation = cutLast;
 				}
 				break;
@@ -266,7 +266,7 @@ function printToScreen(input) {
 				// addHistory(equation, result);
 				addHistory(equation, "5")
 				equation = "0";
-				update(equation);
+				// update(equation);
 				setexp = 0;
 				dot = 0;
 				break;
@@ -296,5 +296,10 @@ function printToScreen(input) {
 			equation += "0";
 		}
 		update(equation);
+    if(equation !== "0"){
+      disableMemory();
+    } else {
+      handleMemory();
+    }
 	}
 }
