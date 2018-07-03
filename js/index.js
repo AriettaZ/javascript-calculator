@@ -8,14 +8,17 @@ katex.render("-", minus);
 katex.render("+", plus);
 katex.render("=", equal);
 
+var clearBtn = document.getElementById('clear-button');
+clearBtn.addEventListener('click', function(){
+  while (this.nextElementSibling.firstChild) {
+      this.nextElementSibling.removeChild(this.nextElementSibling.firstChild);
+  }
+}, false);
 
-// window.onscroll = function() {scrollFunction()};
-//
-// function scrollFunction() {
-//   var x = document.getElementByClassName("myDIV");
-//   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-//     document.getElementById("navbar").style.top = "0";
-//   } else {
-//     document.getElementById("navbar").style.top = "-50px";
-//   }
-// }
+var removeBtn = document.getElementsByClassName('remove-button');
+
+for (var i = 0; i < removeBtn.length; i++) {
+  removeBtn[i].addEventListener('click', function(){
+  this.parentNode.parentNode.removeChild(this.parentNode);
+}, false);
+};

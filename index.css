@@ -7,9 +7,6 @@
   padding-top: 20px;
   /* float: left; */
 }
-.screen-item{
-  border: solid 1px white;
-}
 .keyboard-container{
   width: 40%;
   margin: 20px;
@@ -21,7 +18,7 @@
 .keyboard-item{
   background: #6599f5;
   padding: 10px;
-  border: solid 3px white;
+  border: solid 3px #304468;;
 }
 
 .keyboard-item:hover{
@@ -34,7 +31,12 @@
   width: 100%;
   height: 300px;
   overflow-y: scroll;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.eq-container,.remove-button{
+  display: inline;
 }
 .info-section{
     display: inline-block;
@@ -43,39 +45,61 @@
 }
 .history-line{
   position: relative;
-  left: 5%;
+  margin: 20px;
+  width: 94%;
+}
+.history-line p{
+  overflow-wrap: break-word;
+}
+.history-line i{
+  display: inline;
+  margin-right: 50px;
+  color:#7fc9a5;
+}
+.history-line i:hover{
+  display: inline;
+  margin-right: 50px;
+  color:  #44d68e;
+  cursor: pointer;
 }
 .main{
-  height:100%;
-  width: 80%;
-  margin: 80px auto;
-  /* display: inline-block; */
+  /* height:100%; */
+  display: block;
+  margin: auto;
   overflow: auto;
 }
-
+header{
+  height:80px;
+}
 body{
   background-color: #304468;
   font-size: 20px;
   font-family: 'Bitter', serif;
   color:white;
   weight: bold;
+  display: block;
+  width: 80%;
+  margin: auto;
 }
 
 #clear-button{
   width:100%;
   margin-bottom: 20px;
 }
-
+#clear-button:hover{
+  background-color: #7fc9a5;
+  cursor: pointer;
+  weight:700;
+}
 button{
   border:none;
-  background-color: #7fc9a5;
+  background-color: #6599f5;
   color:white;
   padding:4px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-  border-radius: 4px;
   font-family: 'Bitter', serif;
 }
 .eq-container{
@@ -83,7 +107,6 @@ button{
 }
 #current-input{
   border:none;
-  width: 100%;
   display: inline-block;
   border-width: 0px;
   padding: 0px;
@@ -91,10 +114,25 @@ button{
   font-family: 'Bitter', serif;
   weight:bold;
   font-size: 20px;
+  padding-right: 10px;
+  text-align: right;
 }
 #current-value{
   background: #6599f5;
+  color: white;
+  font-family: 'Bitter', serif;
+  weight:bold;
+  font-size: 20px;
+  line-height: 50px;
+  padding-right: 10px;
+  text-align: right;
 }
 button:focus,input:focus{
   outline:0;
+}
+footer{
+  text-align: center;
+}
+footer i{
+  color: #d89cc4;
 }
