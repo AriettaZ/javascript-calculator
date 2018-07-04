@@ -24,7 +24,11 @@ function addHistory(equation, result) {
 	var line = document.createElement("div");
 	line.setAttribute("class", "history-line");
 	var eqContainer = document.createElement("p");
-	eqContainer.innerHTML = equation + " = " + result.toString().replace("e+","E");
+	var result2String = result.toString();
+	if(result > Number.MAX_SAFE_INTEGER) {
+		result2String = result.toExponential(5);
+	}
+	eqContainer.innerHTML = equation + " = " + result2String.replace("e+", "E");
 	eqContainer.setAttribute("class", "eq-container")
 	var removeButton = document.createElement("i");
 	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
@@ -97,8 +101,17 @@ function changeClearButtonOpacity(opacity) {
 //Return: N/A
 function updatePlaceholder(result) {
 	var equationContainer = document.getElementById("equation-container");
-	result = result.toString().replace("e+","E");
-	equationContainer.setAttribute("placeholder", result);
+	if(result == Infinity) {
+		result = 0;
+	} else if(result.toString() == "NaN") {
+		result = 0;
+	}
+	if(result > Number.MAX_SAFE_INTEGER) {
+		equationContainer.setAttribute("placeholder", result.toExponential(5).replace("e+", "E"));
+	} else {
+		result = result.toString().replace("e+", "E");
+		equationContainer.setAttribute("placeholder", result);
+	}
 }
 
 // Author: Gail Chen
@@ -109,7 +122,13 @@ function updatePlaceholder(result) {
 // Update: #current-memory
 // Return: N/A
 function updateMemory(memory) {
-	document.getElementById("current-memory").innerHTML = memory.toString().replace("e+","E");
+	if(memory > Number.MAX_SAFE_INTEGER) {
+		document.getElementById("current-memory").innerHTML = memory.toExponential(5).replace("e+", "E");
+	} else {
+
+		document.getElementById("current-memory").innerHTML = memory.toString().replace("e+", "E");
+	}
+
 }
 
 // Author: Mike
@@ -133,13 +152,17 @@ function showM(event) {
 			memoryField.innerHTML = 0;
 			break;
 		case "mr":
-			equationField.value = memory.toString().replace("e+","E");
+			if(memory > Number.MAX_SAFE_INTEGER) {
+				equationField.value = memory.toExponential(5).replace("e+", "E");
+			} else {
+				equationField.value = memory.toString().replace("e+", "E");
+			}
 			break;
 		case "ms":
 			var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
 			if(equation != "") {
 				memoryField.innerHTML = "= " + equation;
-			}else if(placeholder!=0){
+			} else if(placeholder != 0) {
 				memoryField.innerHTML = "= " + placeholder;
 			}
 			break;
@@ -160,19 +183,17 @@ function hideM(event) {
 	var memoryField = document.getElementById("current-memory");
 	switch(event.target.id) {
 		case "m+":
-			equationField.value = equation;
-			break;
 		case "m-":
-			equationField.value = equation;
-			break;
-		case "mc":
-			memoryField.innerHTML = memory.toString().replace("e+","E");
-			break;
 		case "mr":
 			equationField.value = equation;
 			break;
+		case "mc":
 		case "ms":
-			memoryField.innerHTML = memory.toString().replace("e+","E");
+			if(memory > Number.MAX_SAFE_INTEGER) {
+				memoryField.innerHTML = memory.toExponential(5).replace("e+", "E");
+			} else {
+				memoryField.innerHTML = memory.toString().replace("e+", "E");
+			}
 			break;
 		default:
 			break;
