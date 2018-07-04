@@ -1,4 +1,7 @@
-
+// Author: Ariel Zhu
+// Created: 7/3/18
+// Edit: N/A
+// Description: set up calculator home page
 
 katex.render("\\sqrt{x}", squareroot);
 katex.render("x^2", square);
