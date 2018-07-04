@@ -67,9 +67,8 @@ var eq = tokenize(equation)
         var result = equation[0];
         equation.shift();
       }
-      // unshift
       return result;
     }
 }
 
-console.info(evaluate())
+//console.info(evaluate())

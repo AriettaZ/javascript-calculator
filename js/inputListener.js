@@ -15,7 +15,7 @@ var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 // Return: N/A
 function getInput() {
 	update(equation);
-	// handleMemory();
+	handleMemory();
 
 	var textArea = document.getElementById("equation-container");
 	document.addEventListener("keypress", keyboardInput, true);
@@ -175,6 +175,28 @@ var other = ["<-"];
 var setexp = 0;
 var dot = 0;
 
+function invalidToAdd(input){
+	var last = equation.slice(-1);
+  var last2 = equation.slice(-2);
+  var twoBefore = equation.charAt(equation.length - 2);
+  var threeBefore = equation.charAt(equation.length - 3);
+  var cutLast = equation.substring(0, equation.length - 1);
+  var cutLast2 = equation.substring(0, equation.length - 2);
+	// Not acceptable inputs (will not modify the equation):
+	// 1. start the equation with characters in midOp and endOp
+	// 2. 0 can't be the leading number of nonezero numbers
+	// 3. ) and % will not be followed by numbers or E
+  var invalidToAdd = (equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
+                  (operation.includes(last) && input == ".") ||
+									(numbers.includes(input) && endOp.includes(last)) ||
+                  (last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
+                  (input == "%" && (startOp.includes(last) || midOp.includes(last))) ||
+                  ((input == "^" || input == "^2") && last == "%") ||
+                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "") ||
+									(input == "=" && (equation == "" || operation.includes(last) || last2 == "√("));
+	return invalidToAdd;
+}
+
 // Author: Gail Chen
 // Created: 7/1
 // Edit: N/A
@@ -191,19 +213,24 @@ function printToScreen(input){
   var threeBefore = equation.charAt(equation.length - 3);
   var cutLast = equation.substring(0, equation.length - 1);
   var cutLast2 = equation.substring(0, equation.length - 2);
-	// Not acceptable inputs: start the equation with midOp or endOp
-	//
-  var nochange = ((equation == "" || equation == "0") && [")"].includes(input)) ||
-									(equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
-                  (operation.includes(last) && input == ".") ||
-									(numbers.includes(input) && endOp.includes(last)) ||
-                  (last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
-                  (input == "%" && (startOp.includes(last) || midOp.includes(last))) ||
-                  ((input == "^" || input == "^2") && last == "%") ||
-                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "") ||
-									(input == "=" && (equation == "" || operation.includes(last) || last2 == "√("));
-
-  if (!nochange){
+	// // Not acceptable inputs (will not modify the equation):
+	// // 1. start the equation with characters in midOp and endOp
+	// // 2. 0 can't be the leading number of nonezero numbers
+	// // 3. ) and % will not be followed by numbers or E
+  // var invalidToAdd = (equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
+  //                 (operation.includes(last) && input == ".") ||
+	// 								(numbers.includes(input) && endOp.includes(last)) ||
+  //                 (last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
+  //                 (input == "%" && (startOp.includes(last) || midOp.includes(last))) ||
+  //                 ((input == "^" || input == "^2") && last == "%") ||
+  //                 ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "") ||
+	// 								(input == "=" && (equation == "" || operation.includes(last) || last2 == "√("));
+	var invalid = invalidToAdd(input);
+	if(document.getElementById("equation-container").getAttribute("placeholder")!=0){
+		invalid=false;
+	}
+  // if (!invalidToAdd){
+	if(!invalid){
     id = "";
     switch(input){
       case "0":
@@ -219,9 +246,11 @@ function printToScreen(input){
         if(last == "0" && !numbers.includes(twoBefore) && twoBefore != "."){
           equation = cutLast;
         }
+        clearPlaceholder();
         break;
 
 			case "e":
+			clearPlaceholder()
 				if(last == "."){
 					equation = cutLast;
 				}
@@ -230,18 +259,25 @@ function printToScreen(input){
       case "+":
       case "*":
       case "/":
+      handlePlaceholder()
+        var last = equation.slice(-1);
         if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "-":
+      handlePlaceholder()
+        var last = equation.slice(-1);
         if(["+", "-", "*", "/", "^", "."].includes(last) || (last == "0" && twoBefore == "")){
           equation = cutLast;
         }
         break;
 
       case "%":
+      handlePlaceholder()
+        var last = equation.slice(-1);
+
         if(["+", "-", "*", "/", "^", "E", "(", ".", "%"].includes(last)){
           equation = cutLast;
         }
@@ -249,42 +285,56 @@ function printToScreen(input){
 
       case "^":
       case "^2":
+      handlePlaceholder()
+        var last = equation.slice(-1);
         if(["+", "-", "*", "/", "E", "(", "."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case ".":
+      handlePlaceholder()
+        var last = equation.slice(-1);
+  var last2 = equation.slice(-2);
         if(["%", ")"].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "√(":
+      clearPlaceholder();
+      var last = equation.slice(-1);
         if(["","."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case "(":
+      clearPlaceholder()
         if(["."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case ")":
+      clearPlaceholder()
         if(["+", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "E":
-        if (!numbers.includes(last)){
+      	handlePlaceholder()
+      	  var last = equation.slice(-1);
+        if (!numbers.includes(last) & last != ")"){
           equation = cutLast;
         }
         break;
 
       case "<-":
+      	handlePlaceholder();
+      	  var last = equation.slice(-1);
+  var cutLast = equation.substring(0, equation.length - 1);
         if(last2 == "√("){
           equation = cutLast2;
         } else {
@@ -299,6 +349,7 @@ function printToScreen(input){
         break;
 
       case "C":
+      clearPlaceholder()
         equation = "";
 				dot = 0;
 				setexp = 0;
@@ -310,10 +361,12 @@ function printToScreen(input){
       case "M-":
       case "MC":
       case "=":
-        if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
-          equation = cutLast;
-        }
-        result = normalize(evaluate())
+      clearPlaceholder()
+        // if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
+        //   equation = cutLast;
+        // }
+        result = normalize(evaluate());
+        updatePlaceholder(result);
         addHistory(equation, result);
         equation = "";
         setexp = 0;
@@ -346,12 +399,30 @@ function printToScreen(input){
 		// 	equation += "0";
 		// }
 		update(equation);
-    //handleMemory();
-    /*
-		if(equation !== "0") {
-			disableMemory();
-		} else {
-			handleMemory();
-		}*/
+		// if(equation !== "") {
+		// 	disableMemory();
+		// } else {
+		// 	handleMemory();
+		// }
 	}
+}
+
+
+function handlePlaceholder(){
+	var inputfield = document.getElementById("equation-container");
+	var placeholder = inputfield.getAttribute("placeholder");
+	if(placeholder!=0){
+		equation=placeholder.toString();
+		inputfield.setAttribute("placeholder",0);
+		if(parseFloat(equation)!=parseInt(equation)){
+			dot=1;
+		}
+		update(equation);
+	}
+}
+
+function clearPlaceholder(){
+	var inputfield = document.getElementById("equation-container");
+	var placeholder = inputfield.getAttribute("placeholder");
+	inputfield.setAttribute("placeholder",0);
 }

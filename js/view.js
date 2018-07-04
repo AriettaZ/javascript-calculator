@@ -88,3 +88,8 @@ function changeClearButtonOpacity(opacity) {
 	var clearButton = document.getElementById("clear-button");
 	clearButton.style.opacity = opacity;
 }
+
+function updatePlaceholder(result){
+	var equationContainer = document.getElementById("equation-container");
+	equationContainer.setAttribute("placeholder",result);
+}
