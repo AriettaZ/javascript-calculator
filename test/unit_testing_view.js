@@ -67,6 +67,7 @@ describe("view", function() {
 		});
 	});
 
+<<<<<<< HEAD
 	describe("Add history", function() {
 		var testPlanEquation = ["3+5", "12341234123412341234", "1234123412341234123412341234"]
 		var testPlanResult = [8, 1.23412e+19, 1.23412e+27];
@@ -192,3 +193,23 @@ describe("view", function() {
 		});
 	});
 });
+=======
+  beforeEach(function() {
+    var dummyMemory = document.createElement('div');
+    document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyMemory);
+  });
+
+  describe("it should update Memory", function() {
+    it("should update memory", function() {
+      updateMemory('2.567')
+      expect(document.getElementById("current-memory").innerHTML).toEqual('2.567');
+    });
+    it("should update e+ to E", function() {
+      updateMemory('2.34e+10')
+      expect(document.getElementById("current-memory").innerHTML).toEqual('2.34E10');
+    });
+  });
+
+
+});
+>>>>>>> 730445f47484e3cdb80ea716647990015af247ae

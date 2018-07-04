@@ -129,4 +129,7 @@ function findEndParenIndex(equation, index) {
 			return i;
 		}
 	}
+	if(parenthesis < 0) {
+		alert("Root Match Error")
+	}
 }
