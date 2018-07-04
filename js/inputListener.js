@@ -300,8 +300,8 @@ function printToScreen(input){
           equation = cutLast;
         }
         equation += "=";
-        result = evaluate()
-        addHistory(equation, result)
+        result = normalize(evaluate())
+        addHistory(equation, result);
         equation = "0";
         setexp = 0;
         dot = 0;

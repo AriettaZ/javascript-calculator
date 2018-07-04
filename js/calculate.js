@@ -1,45 +1,10 @@
-function calculate(num1,num2,operator){
-  var result;
-  try {
-      if ((typeof num1 || typeof num2) !== 'number'){
-        num1= parseFloat(num1);
-        num2=parseFloat(num2);
-      };
-      switch(operator) {
-        case "division":
-            result=num1/num2;
-            break;
-        case "times":
-            result=num1*num2;
-            break;
-        case "exponentiation":
-            result=Math.pow(num1, num2);
-            break;
-        case "minus":
-            result=num1-num2;
-            break;
-        case "reminder":
-            result=num1%num2;
-            break;
-        case "dot":
-            result=num1+num2*0.1;
-            break;
-        case "scientific":
-            result=num1*Math.pow(10, num2);
-            break;
-        case "plus":
-            result=num1+num2;
-            break;
-        default:
-          throw "The operator does not exist!";
-
-      }
-    }
-    catch(err) {
-      alert(err);
-    }
-    if (parseInt(result)!==result){
+function normalize(result){
+  if (parseInt(result)!==result){
+    if (/[eE]/){
+      result = parseFloat(result.toPrecision(6));
+    }else{
       result = parseFloat(result.toFixed(5));
     }
-    return result;
+  }
+  return result;
 }
