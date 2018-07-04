@@ -1,3 +1,7 @@
+/* Author: Ariel Zhu
+Created: 7/3/18
+Edit: N/A
+Description: stylesheet foe calculator display page */
 .screen-container {
   display: block;
   /* grid-template-columns: auto; */
@@ -180,7 +184,7 @@ footer i{
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    top:25px;
+    top:35px;
     right:0px;
     font-size: 12px;
 }
@@ -196,7 +200,7 @@ footer i{
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    top:25px;
+    top:35px;
     left:0px;
     font-size: 12px;
 }
