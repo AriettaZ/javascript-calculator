@@ -333,10 +333,12 @@ function printToScreen(input){
 			equation += "0";
 		}
 		update(equation);
+    handleMemory();
+    /*
 		if(equation !== "0") {
 			disableMemory();
 		} else {
 			handleMemory();
-		}
+		}*/
 	}
 }

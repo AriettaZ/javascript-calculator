@@ -7,21 +7,21 @@
 
 var memory = 0;
 function handleMemory(){
-  document.getElementById("mr").addEventListener("click", handleMR);
   showMemory(); // Node need to display the memory
+  document.getElementById("mr").addEventListener("click", handleMR);
   document.getElementById("ms").addEventListener("click", handleMS);
   document.getElementById("m+").addEventListener("click", handleMPlus);
   document.getElementById("m-").addEventListener("click", handleMMinus);
   document.getElementById("mc").addEventListener("click", handleMC);
 }
-
+/*
 function disableMemory(){
   document.getElementById("ms").removeEventListener("click", handleMS);
   document.getElementById("m+").removeEventListener("click", handleMPlus);
   document.getElementById("m-").removeEventListener("click", handleMMinus);
   document.getElementById("mc").removeEventListener("click", handleMC);
 }
-
+*/
 // Author: Gail Chen
 // Created: 7/2
 // Edit: N/A
@@ -31,9 +31,12 @@ function disableMemory(){
 // Return: N/A
 function handleMS(){
   // var result = parseFloat(document.getElementById("current-value").innerHTML);
+  result =
   memory = result;
-  equation = memory.toString(); // Just for testing purpose
-  update(equation); // Just for testing purpose
+  //console.info(result)
+  //equation = memory.toString(); // Just for testing purpose
+  update(memory.toString()); // Just for testing purpose
+  showMemory();
 }
 
 // Author: Gail Chen
@@ -45,8 +48,8 @@ function handleMS(){
 // Return: N/A
 function handleMR(){
   // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  result += memory;
-  update(equation);
+  //result += memory;
+  update(equation + memory.toString());
 }
 
 // Author: Gail Chen
