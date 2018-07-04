@@ -1,6 +1,7 @@
 // Author: Gail Chen
 // Created: 7/1
 // Edit: Gail 7/2 update corresponding to design of buttons in index.html
+// Edit: Gail 7/3 add documentation
 // Description: Using buttons and keyboard to enter the equation.
 
 // Key codes for acceptable keyboard inputs.
@@ -11,13 +12,11 @@ var KEY_CODE = [43, 45, 42, 47, 40, 41, 69, 101, 13, 61, 8, 46, 37, 94, 8730];
 // Edit: N/A
 // Description: Get valid inputs from keyboard or buttons.
 // Require: N/A
-// Update: equation, #equation-container
+// Update: equation, #equation-container, result, dotExists
 // Return: N/A
 function getInput() {
-	// Update the equation in #equation-container
-	update(equation);
-	// Active buttons associated with memory.
-	handleMemory();
+	update(equation); // Update the equation in #equation-container
+	handleMemory(); // Active buttons associated with memory.
 
 	// Active keyboard for inputs.
 	document.addEventListener("keypress", keyboardInput, true);
@@ -82,7 +81,7 @@ function inputKeyHandling(event) {
 // Edit: N/A
 // Description: Get inputs from buttons.
 // Require: N/A
-// Update: equation, #equation-container
+// Update: equation, #equation-container, result, dotExists
 // Return: N/A
 function buttonInput(){
   printToScreen(this.getAttribute("name"));
@@ -90,14 +89,13 @@ function buttonInput(){
 
 // Author: Gail Chen
 // Created: 7/1
-// Edit: 7/2 Gail
+// Edit: N/A
 // Description: Get acceptable keyboard inputs. Only numbers and operator keys are acceptable.
 // Require: N/A
 // Update: equation, #equation-container
 // Return: N/A
 function keyboardInput(event) {
   var keyCode = event.which || event.keyCode;
-  var input;
   if (keyCode != 0) {
 		// Prevent the user from entering unacceptable inputs.
     if (!((keyCode <= 57) && (keyCode >= 48)) && !KEY_CODE.includes(keyCode)) {
@@ -105,66 +103,52 @@ function keyboardInput(event) {
     }else {
 			// Get keyboard input and click the corresponding button.
       if((keyCode <= 57) && (keyCode >= 48)){
-        input = String.fromCharCode(keyCode);
+        var input = String.fromCharCode(keyCode);
         document.getElementById(input).click();
       } else {
           switch(keyCode){
             case 43:
-              input = "+";
               document.getElementById("plus").click();
               break;
             case 45:
-              input = "-";
               document.getElementById("minus").click();
               break;
             case 42:
-              input = "*";
               document.getElementById("times").click();
               break;
             case 47:
-              input = "/";
               document.getElementById("division").click();
               break;
             case 40:
-              input = "(";
               document.getElementById("(").click();
               break;
             case 41:
-              input = ")";
               document.getElementById(")").click();
               break;
             case 69:
-              input = "E";
               document.getElementById("scientific").click();
               break;
 						case 101:
-              input = "e";
               document.getElementById("e").click();
               break;
             case 13: //enter
             case 61:
-              input = "=";
               document.getElementById("equal").click();
               break;
             case 8: // backspace
-              input = "<-";
               event.preventDefault();
               document.getElementsByClassName('fa-backspace')[0].click();
               break;
             case 46:
-              input = ".";
               document.getElementById("dot").click();
               break;
             case 37:
-              input = "%";
               document.getElementById("percentage").click();
               break;
             case 94:
-              input = "^";
               document.getElementById("exponentiation").click();
               break;
             case 8730:
-              input = "√(";
               document.getElementById("squareroot").click();
               break;
           }
@@ -173,68 +157,76 @@ function keyboardInput(event) {
     }
 }
 
-var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C", "^", "^2", "E", "e", "(", ")", "%", "√(", ".", "MR", "MS", "M+", "M-", "MC", "<-"];
+var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C", "^", "^2", "E", "e", "(", ")", "%", "√(", ".", "<-"];
 var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var operator = ["+", "-", "*", "/", "^", "^2", "E", ".", "(", ")", "^2", "√("];
+var operator = ["+", "-", "*", "/", "^", "^2", "E", ".", "(", ")", "%", "√("];
+// Operators that start the term
 var startOp = ["(", "√(", "-"];
+// Operators that operate two numbers/terms
 var midOp = ["+", "*", "/", "^", "E", "."];
+// Operators that end the term.
 var endOp = ["^2", ")", "%"];
-var clear = ["=", "C", "MR", "MS", "M+", "M-", "MC"];
-var other = ["<-"];
-var setexp = 0;
+// Operator that will clean the #equation-container
+var clear = ["=", "C"];
+var others = ["<-"];
 
+// Author: Gail Chen
+// Created: 7/3
+// Edit: N/A
+// Description: Checks if users' input is valid to be added to the end of equation.
+// Require: input is a string
+// Update: N/A
+// Return: invalidToAdd
 function invalidToAdd(input) {
-	var last = equation.slice(-1);
-  var last2 = equation.slice(-2);
-  var twoBefore = equation.charAt(equation.length - 2);
-  var threeBefore = equation.charAt(equation.length - 3);
-  var cutLast = equation.substring(0, equation.length - 1);
-  var cutLast2 = equation.substring(0, equation.length - 2);
-	// Unacceptable inputs that will not be added to the end of the equation:
-	// 1. add a operator from midOp and endOp shown above to an empty equation
-	// 2. add dot after operators (accetable only if the operator is ^2)
+	var last = equation.slice(-1); // The last character of the equation.
+  var last2 = equation.slice(-2); // The last two characters of the equation, for checking '^2' and '√('.
+  var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
+
+	// Inputs will not be added to the end of the equation in following situations:
+	// 1. add an operator in midOp or endOp shown above to an empty equation
+	// 2. add a decimal point after operators or e or when the term has '.' in it already
 	// 3. add a number after %, ) or e
-	// 4. add a operator from midOp and endOp after )
-	// 5. add % after the operator from startOp and midOp
-	// 6. add ^, ^2 or E after %
-	// 7. add an operator from endOp or midOp to an equation that is "-"
-	// 8. enter "=" when equation is empty or the equation is end with an operator
-
-
+	// 4. add an operator in midOp or endOp after (
+	// 5. add ) or % after an operator in startOp or midOp
+	// 6. add E after %
+	// 7. add ^, ^2 after %
+	// 8. add ^, ^2 after an operator in ["+", "-", "*", "/", "^", "E", ".", "^2"] where there is a % before the operator
+	// 9. add an operator in endOp or midOp to an equation that is "-" or "(-"
+	// 10. enter "=" when equation is empty or the equation ends with an operator in startOp or midOp
   var invalidToAdd = (equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
-                  ((operator.includes(last) || last == "e") && input == ".") ||
-									(numbers.includes(input) && (endOp.includes(last) || last == "e")) ||
+                  ((operator.includes(last) || last == "e" || dotExists == 1) && input == ".") ||
+									(numbers.includes(input) && (endOp.includes(last) || last == "e" )) ||
                   (last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
-                  (input == "%" && (startOp.includes(last) || midOp.includes(last))) ||
-                  ((input == "^" || input == "^2" || input == "E") && last == "%") ||
-                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "") ||
-									(input == "=" && (equation == "" || operator.includes(last) || last2 == "√("));
+									([")", "%"].includes(input) && (startOp.includes(last) || midOp.includes(last))) ||
+                  (input == "E" && last == "%") ||
+                  (["^", "^2"].includes(input) && last == "%") ||
+									(["^", "^2"].includes(input) && (twoBefore == "%" && (["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "^2"))) ||
+                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && ["", "("].includes(twoBefore)) ||
+									(input == "=" && (equation == "" || midOp.includes(last) || startOp.includes(last)));
 	return invalidToAdd;
 }
 
 // Author: Gail Chen
 // Created: 7/1
-// Edit: N/A
+// Edit: 7/3 Gail modified switch cases to handle ignored cases
 // Description: Adjust the inputs to an create an acceptable equation
 // then print the result of the calculation and update the history list.
 // Require: N/A
 // Update: equation, #equation-container, #history-container
 // Return: N/A
 function printToScreen(input){
-//var equation = document.getElementById("equation-container").value;
-  var last = equation.slice(-1);
-  var last2 = equation.slice(-2);
-  var twoBefore = equation.charAt(equation.length - 2);
-  var threeBefore = equation.charAt(equation.length - 3);
-  var cutLast = equation.substring(0, equation.length - 1);
-  var cutLast2 = equation.substring(0, equation.length - 2);
-	var invalid = invalidToAdd(input);
+	var last = equation.slice(-1); // The last character of the equation.
+  var last2 = equation.slice(-2); // The last two characters of the equation, for checking '^2' and '√('.
+  var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
+  var cutLast = equation.substring(0, equation.length - 1); // Remove the equation's last character.
+  var cutLast2 = equation.substring(0, equation.length - 2); // Remove the equation's last 2 characters.
+	var invalid = invalidToAdd(input); // Checks if the input is valid to be added to the end of equation.
 	if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
 		invalid = false;
-	}
+	} // Has a problem with adding '.', )
 
+	// If the input is valid to be added to the end of equation, do the following.
 	if(!invalid){
-    id = "";
     switch(input){
       case "0":
       case "1":
@@ -245,7 +237,8 @@ function printToScreen(input){
       case "6":
       case "7":
       case "8":
-      case "9": // || endOp.includes(last)
+      case "9":
+				// If a nonzero number starts with 0, remove the leading 0.
         if(last == "0" && !numbers.includes(twoBefore) && twoBefore != "."){
           equation = cutLast;
         }
@@ -254,147 +247,106 @@ function printToScreen(input){
 
 			case "e":
 				clearPlaceholder()
+				// If the last character in the equation is a decimal point,
+				// repace the decimal point with the input and set the dotExists flag to 0.
 				if(last == ".") {
 					equation = cutLast;
+					dotExists = 0;
 				}
 				break;
 
 			case "+":
+			case "-":
 			case "*":
 			case "/":
-				handlePlaceholder()
-				var last = equation.slice(-1);
-				if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√(") {
-					equation = cutLast;
-				}
-				break;
-
-			case "-":
-				handlePlaceholder()
-				var last = equation.slice(-1);
-				if(["+", "-", "*", "/", "^", "."].includes(last) || (last == "0" && twoBefore == "")) {
-					equation = cutLast;
-				}
-				break;
-
-      case "%":
-	      handlePlaceholder()
-        var last = equation.slice(-1);
-
-				if(["+", "-", "*", "/", "^", "E", "(", ".", "%"].includes(last)) {
-					equation = cutLast;
-				}
-				break;
-
 			case "^":
 			case "^2":
+			case "E":
+			case "%":
+			// If the equation is ended with '-' or an operator in mipDop, replace that operator with the input.
 				handlePlaceholder()
 				var last = equation.slice(-1);
-				if(["+", "-", "*", "/", "E", "(", "."].includes(last)) {
+				if(midOp.includes(last) || last == "-") {
 					equation = cutLast;
 				}
 				break;
 
       case ".":
 	      handlePlaceholder()
-        var last = equation.slice(-1);
-			  var last2 = equation.slice(-2);
-        if(["%", ")"].includes(last) || last2 == "√("){
-          equation = cutLast;
-        }
+        // var last = equation.slice(-1);
+			  // var last2 = equation.slice(-2);
+        // if(["%", ")"].includes(last)){
+        //   equation = cutLast;
+        // }
         break;
 
       case "√(":
+			case "(": // If the equation is ended with the decimal point, replace '.' with the input.
 	      clearPlaceholder();
 	      var last = equation.slice(-1);
-        if(["","."].includes(last)){
+        if(last == "."){
           equation = cutLast;
         }
         break;
 
-      case "(":
+      case ")": // If the equation is ended with an operator from midOp or startOp, remove this operator.
 	      clearPlaceholder()
-        if(["."].includes(last)){
-          equation = cutLast;
-        }
-        break;
-
-      case ")":
-	      clearPlaceholder()
-        if(["+", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
-          equation = cutLast;
-        }
-        break;
-
-      case "E":
-      	handlePlaceholder()
-    	  var last = equation.slice(-1);
-        if (!numbers.includes(last) && last != "e" && last != ")"){
-          equation = cutLast;
-        }
+        // if(midOp.includes(last) || startOp.includes(last)){
+        //   equation = cutLast;
+        // }
         break;
 
       case "<-":
       	handlePlaceholder();
-    	  var last = equation.slice(-1);
-			  var cutLast = equation.substring(0, equation.length - 1);
+    	  last = equation.slice(-1);
+			  cutLast = equation.substring(0, equation.length - 1);
+
+				// If the equation is ended with '√(', remove '√(';
+				// otherwise, remove the last character in the equataion.
         if(last2 == "√("){
           equation = cutLast2;
         } else {
           equation = cutLast;
         }
+
+				// Reset the dotExists flag if the removed character is a decimal point.
         if(last == "."){
-          dot = 0;
-        }
-        if(last == "^"){
-          setexp = 0;
+          dotExists = 0;
         }
         break;
 
       case "C":
 	      clearPlaceholder()
-        equation = "";
-				dot = 0;
-				setexp = 0;
+        equation = ""; // Clear the equation.
+				dotExists = 0; // Reset the dotExists flag.
         break;
 
-      case "MR":
-      case "MS":
-      case "M+":
-      case "M-":
-      case "MC":
       case "=":
-		handlePlaceholder()
-        result = normalize(evaluate());
-        updatePlaceholder(result);
-        addHistory(equation, result);
-        equation = "";
-        setexp = 0;
-        dot = 0;
+        result = normalize(evaluate()); // Evaluate the equation and update the result.
+        updatePlaceholder(result); // Update the placeholder with the calculated result.
+        addHistory(equation, result); // Add the equation and its result to the history.
+        equation = ""; // Clear the equation;
+        dotExists = 0; // Reset the dotExists flag.
         break;
       }
-		//
+
+		// If the input doesn't clear the equation or delete the last character of the equation,
+		// add the input to the end of the equation.
     if(!clear.includes(input) && input != "<-"){
-      if(!(input == "^2" || input == "^") && input != "."){
-        equation += input;
-        if (["+", "-", "*", "/", "(", ")"].includes(input)){
-          setexp = 0;
-        }
-        if (["+", "-", "*", "/", "(", "^"].includes(input)){
-          dot = 0;
-        }
-      } else{
-        if(setexp == 0 && (input == "^2" || input == "^")){
-          setexp = 1;
-          dot = 0;
-          equation += input;
-        } else if (input == "." && dot == 0){
-          dot = 1;
-          equation += input;
-        }
+			equation += input;
+			// If the input is in ["+", "-", "*", "/", "(", ")", "^", "^2", '√('] which means
+			// a new number will be entered after it, then reset the dotExists flag.
+      if (["+", "-", "*", "/", "(", ")", "^", "^2", '√('].includes(input)){
+        dotExists = 0;
+      }
+
+			// If the input is a decimal point, set dotExists flag to 1.
+			if (input == "."){
+        dotExists = 1;
       }
     }
 
+		// Display the resulting equation to #equation-container.
 		update(equation);
 	}
 }
@@ -413,7 +365,7 @@ function handlePlaceholder() {
 		equation = placeholder.toString();
 		inputfield.setAttribute("placeholder", 0);
 		if(parseFloat(equation) != parseInt(equation)) {
-			dot = 1;
+			dotExists = 1;
 		}
 		update(equation);
 	}

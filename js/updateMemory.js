@@ -53,7 +53,7 @@ function handleMS(){
 function handleMR(){
   equation = memory.toString().replace("e+","E");
   if(equation.includes(".")){
-    dot=1;
+    dotExists=1;
   }
   update(equation);
 }
