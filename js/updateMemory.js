@@ -5,13 +5,13 @@
 // MS, M+, M-, MC can only be called if the equation == "0".
 // MR is can be used after operation
 
-function handleMemory(){
-  updateMemory(memory); // Node need to display the memory
-  document.getElementById("mr").addEventListener("click", handleMR);
-  document.getElementById("ms").addEventListener("click", handleMS);
-  document.getElementById("m+").addEventListener("click", handleMPlus);
-  document.getElementById("m-").addEventListener("click", handleMMinus);
-  document.getElementById("mc").addEventListener("click", handleMC);
+function handleMemory() {
+	updateMemory(memory); // Node need to display the memory
+	document.getElementById("mr").addEventListener("click", handleMR);
+	document.getElementById("ms").addEventListener("click", handleMS);
+	document.getElementById("m+").addEventListener("click", handleMPlus);
+	document.getElementById("m-").addEventListener("click", handleMMinus);
+	document.getElementById("mc").addEventListener("click", handleMC);
 }
 /*
 function disableMemory(){
@@ -28,19 +28,19 @@ function disableMemory(){
 // Require: N/A
 // Update: memory
 // Return: N/A
-function handleMS(){
-  var invalid_expression = invalidToAdd("=");
-  var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
-  if (!invalid_expression) {
-    printToScreen("=");
-    memory = result;
-    updateMemory(memory);
-  } else if(placeholder !=0){
-  	memory = parseFloat(placeholder);
-  	updateMemory(memory);
-  }else {
-    update("ERROR");
-  }
+function handleMS() {
+	var invalid_expression = invalidToAdd("=");
+	var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
+	if(!invalid_expression) {
+		printToScreen("=");
+		memory = result;
+		updateMemory(memory);
+	} else if(placeholder != 0) {
+		memory = parseFloat(placeholder);
+		updateMemory(memory);
+	} else {
+		update("ERROR");
+	}
 }
 
 // Author: Gail Chen
@@ -50,12 +50,17 @@ function handleMS(){
 // Require: N/A
 // Update: memory
 // Return: N/A
-function handleMR(){
-  equation = memory.toString().replace("e+","E");
-  if(equation.includes(".")){
-    dotExists=1;
-  }
-  update(equation);
+function handleMR() {
+
+	if(memory > Number.MAX_SAFE_INTEGER) {
+		equation = memory.toExponential(5).replace("e+", "E");
+	} else {
+		equation = memory.toString().replace("e+", "E");
+	}
+	if(equation.includes(".")) {
+		dotExists = 1;
+	}
+	update(equation);
 }
 
 // Author: Gail Chen
@@ -65,15 +70,15 @@ function handleMR(){
 // Require: N/A
 // Update: equation, #current-input
 // Return: N/A
-function handleMPlus(){
-  var invalid_expression = invalidToAdd("=");
-  if (!invalid_expression) {
-    printToScreen("=");
-    memory += result;
-    updateMemory(memory);
-  } else {
-    update("ERROR");
-  }
+function handleMPlus() {
+	var invalid_expression = invalidToAdd("=");
+	if(!invalid_expression) {
+		printToScreen("=");
+		memory += result;
+		updateMemory(memory);
+	} else {
+		update("ERROR");
+	}
 }
 
 // Author: Gail Chen
@@ -83,15 +88,15 @@ function handleMPlus(){
 // Require: N/A
 // Update: memory
 // Return: N/A
-function handleMMinus(){
-  var invalid_expression = invalidToAdd("=");
-  if (!invalid_expression) {
-    printToScreen("=");
-      memory -= result;
-      updateMemory(memory);
-  } else {
-    update("ERROR");
-  }
+function handleMMinus() {
+	var invalid_expression = invalidToAdd("=");
+	if(!invalid_expression) {
+		printToScreen("=");
+		memory -= result;
+		updateMemory(memory);
+	} else {
+		update("ERROR");
+	}
 }
 
 // Author: Gail Chen
@@ -101,7 +106,7 @@ function handleMMinus(){
 // Require: N/A
 // Update: memory
 // Return: N/A
-function handleMC(){
-  memory = 0;
-  updateMemory(memory);
+function handleMC() {
+	memory = 0;
+	updateMemory(memory);
 }
