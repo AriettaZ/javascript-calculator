@@ -58,7 +58,7 @@ Description: stylesheet foe calculator display page */
   position: relative;
   margin: 10px 20px;
   width: 94%;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 .history-line p{
   overflow-wrap: break-word;
@@ -146,9 +146,9 @@ button{
   border-width: 0px;
   padding: 0px;
   color: black;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Sans', sans-serif;
   weight: 700;
-  font-size: 30px;
+  font-size: 28px;
   text-align: right;
   line-height: 50px;
   width: 92%;
@@ -163,9 +163,9 @@ button{
 .memory{
   background: #6599f5;
   color: white;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Sans', sans-serif;
   weight:bold;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 50px;
   padding-right: 10px;
   text-align: right;
