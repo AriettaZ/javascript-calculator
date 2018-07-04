@@ -172,7 +172,7 @@ var endOp = ["^2", ")", "%"];
 var clear = ["=", "C", "MR", "MS", "M+", "M-", "MC"];
 var other = ["<-"];
 var setexp = 0;
-var dot = 0;
+//var dot = 0;
 
 function invalidToAdd(input) {
 	var last = equation.slice(-1);

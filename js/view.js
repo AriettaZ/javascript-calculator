@@ -24,7 +24,7 @@ function addHistory(equation, result) {
 	var line = document.createElement("div");
 	line.setAttribute("class", "history-line");
 	var eqContainer = document.createElement("p");
-	eqContainer.innerHTML = equation +" = "+ result;
+	eqContainer.innerHTML = equation + " = " + result;
 	eqContainer.setAttribute("class", "eq-container")
 	var removeButton = document.createElement("i");
 	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
@@ -43,7 +43,7 @@ function addHistory(equation, result) {
 		changeClearButtonOpacity(1);
 	}
 
-	historyContainer.scrollTop=historyContainer.scrollHeight
+	historyContainer.scrollTop = historyContainer.scrollHeight
 
 }
 
@@ -95,9 +95,9 @@ function changeClearButtonOpacity(opacity) {
 //Description: Update the place holder of the equation-container
 //Update: #equation-container
 //Return: N/A
-function updatePlaceholder(result){
+function updatePlaceholder(result) {
 	var equationContainer = document.getElementById("equation-container");
-	equationContainer.setAttribute("placeholder",result);
+	equationContainer.setAttribute("placeholder", result);
 }
 
 // Author: Gail Chen
@@ -107,41 +107,57 @@ function updatePlaceholder(result){
 // Require: N/A
 // Update: #current-memory
 // Return: N/A
-function updateMemory(memory){
-  document.getElementById("current-memory").innerHTML = memory;
+function updateMemory(memory) {
+	document.getElementById("current-memory").innerHTML = memory;
 }
 
-function showM(event){
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: show memory illustration
+// Require: N/A
+// Update: #current-memory, #equation-container
+// Return: N/A
+function showM(event) {
 	var equationField = document.getElementById("equation-container");
 	var memoryField = document.getElementById("current-memory");
-	switch (event.target.id){
+	switch(event.target.id) {
 		case "m+":
-			equationField.value = "Memory+("+equationField.value+")"
+			equationField.value = "Memory+(" + equationField.value + ")"
 			break;
 		case "m-":
-			equationField.value = "Memory-("+equationField.value+")"
+			equationField.value = "Memory-(" + equationField.value + ")"
 			break;
 		case "mc":
 			memoryField.innerHTML = "0";
 			break;
 		case "mr":
-			equationField.value=memory;
+			equationField.value = memory;
 			break;
 		case "mr":
 			equationField.value = memory;
 			break;
 		case "ms":
-			memoryField.innerHTML = equation;
+			if(equation != "") {
+				memoryField.innerHTML = "= " + equation;
+			}
 			break;
 		default:
 			break;
 	}
 }
 
-function hideM(event){
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: hide memory illustration
+// Require: N/A
+// Update: #current-memory, #equation-container
+// Return: N/A
+function hideM(event) {
 	var equationField = document.getElementById("equation-container")
 	var memoryField = document.getElementById("current-memory");
-	switch (event.target.id){
+	switch(event.target.id) {
 		case "m+":
 			equationField.value = equation;
 			break;
@@ -152,10 +168,10 @@ function hideM(event){
 			memoryField.innerHTML = memory;
 			break;
 		case "mr":
-			equationField.value=equation;
+			equationField.value = equation;
 			break;
 		case "ms":
-			memory.innerHTML = memory;
+			memoryField.innerHTML = memory.toString();
 			break;
 		default:
 			break;
