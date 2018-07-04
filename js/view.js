@@ -24,7 +24,7 @@ function addHistory(equation, result) {
 	var line = document.createElement("div");
 	line.setAttribute("class", "history-line");
 	var eqContainer = document.createElement("p");
-	eqContainer.innerHTML = equation + " = " + result;
+	eqContainer.innerHTML = equation + " = " + result.toString().replace("e+","E");
 	eqContainer.setAttribute("class", "eq-container")
 	var removeButton = document.createElement("i");
 	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
@@ -109,7 +109,7 @@ function updatePlaceholder(result) {
 // Update: #current-memory
 // Return: N/A
 function updateMemory(memory) {
-	document.getElementById("current-memory").innerHTML = memory;
+	document.getElementById("current-memory").innerHTML = memory.toString().replace("e+","E");
 }
 
 // Author: Mike
@@ -133,10 +133,7 @@ function showM(event) {
 			memoryField.innerHTML = 0;
 			break;
 		case "mr":
-			equationField.value = memory;
-			break;
-		case "mr":
-			equationField.value = memory;
+			equationField.value = memory.toString().replace("e+","E");
 			break;
 		case "ms":
 			var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
@@ -169,13 +166,13 @@ function hideM(event) {
 			equationField.value = equation;
 			break;
 		case "mc":
-			memoryField.innerHTML = memory;
+			memoryField.innerHTML = memory.toString().replace("e+","E");
 			break;
 		case "mr":
 			equationField.value = equation;
 			break;
 		case "ms":
-			memoryField.innerHTML = memory.toString();
+			memoryField.innerHTML = memory.toString().replace("e+","E");
 			break;
 		default:
 			break;
