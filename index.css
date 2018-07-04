@@ -180,3 +180,9 @@ footer i{
     height: 100px;
   }
 }
+
+input:disabled{
+  background: white;
+  color: #304468;
+  height: 50px;
+}
