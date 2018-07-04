@@ -364,6 +364,7 @@ function printToScreen(input){
       case "M-":
       case "MC":
       case "=":
+		handlePlaceholder()
         result = normalize(evaluate());
         updatePlaceholder(result);
         addHistory(equation, result);
