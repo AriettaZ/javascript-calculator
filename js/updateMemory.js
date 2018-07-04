@@ -5,9 +5,9 @@
 // MS, M+, M-, MC can only be called if the equation == "0".
 // MR is can be used after operation
 
-var memory = 0;
+//var memory = 0;
 function handleMemory(){
-  updateMemory(); // Node need to display the memory
+  updateMemory(memory); // Node need to display the memory
   document.getElementById("mr").addEventListener("click", handleMR);
   document.getElementById("ms").addEventListener("click", handleMS);
   document.getElementById("m+").addEventListener("click", handleMPlus);
@@ -24,7 +24,7 @@ function disableMemory(){
 */
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, rewritten to handle errors in input and expression eval.
 // Description: MS(Memory Store) puts the displayed result into the memory
 // Require: N/A
 // Update: memory
@@ -34,10 +34,10 @@ function handleMS(){
   if (!invalid_expression) {
     printToScreen("=");
     memory = result;
+    updateMemory(memory);
   } else {
     update("ERROR");
   }
-  updateMemory();
 }
 
 // Author: Gail Chen
@@ -48,9 +48,11 @@ function handleMS(){
 // Update: memory
 // Return: N/A
 function handleMR(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  //result += memory;
-  update(equation + memory.toString());
+  equation = memory.toString();
+  if(equation.includes(".")){
+    dot=1;
+  }
+  update(equation);
 }
 
 // Author: Gail Chen
@@ -61,9 +63,14 @@ function handleMR(){
 // Update: equation, #current-input
 // Return: N/A
 function handleMPlus(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  memory += result;
-  updateMemory();
+  var invalid_expression = invalidToAdd("=");
+  if (!invalid_expression) {
+    printToScreen("=");
+    memory += result;
+    updateMemory(memory);
+  } else {
+    update("ERROR");
+  }
 }
 
 // Author: Gail Chen
@@ -74,19 +81,24 @@ function handleMPlus(){
 // Update: memory
 // Return: N/A
 function handleMMinus(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  memory -= result;
-  updateMemory();
+  var invalid_expression = invalidToAdd("=");
+  if (!invalid_expression) {
+    printToScreen("=");
+      memory -= result;
+      updateMemory(memory);
+  } else {
+    update("ERROR");
+  }
 }
 
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, updated call to updateMemory.
 // Description: MC(Memory Clear) sets the memory to 0
 // Require: N/A
 // Update: memory
 // Return: N/A
 function handleMC(){
   memory = 0;
-  updateMemory();
+  updateMemory(memory);
 }

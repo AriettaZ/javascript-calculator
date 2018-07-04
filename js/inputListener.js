@@ -3,7 +3,7 @@
 // Edit: Gail 7/2 update corresponding to design of buttons in index.html
 // Description: Using buttons and keyboard to enter the equation.
 
-var equation = "";
+//var equation = "";
 var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 
 // Author: Gail Chen
@@ -173,7 +173,7 @@ var endOp = ["^2", ")", "%"];
 var clear = ["=", "C", "MR", "MS", "M+", "M-", "MC"];
 var other = ["<-"];
 var setexp = 0;
-var dot = 0;
+//var dot = 0;
 
 function invalidToAdd(input) {
 	var last = equation.slice(-1);
