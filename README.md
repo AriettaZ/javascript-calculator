@@ -36,20 +36,42 @@
 
 #### Development
 Mike:
+* view.js
+* tokenizer.js
+* index.js
 
 Channing:
-
+* evaluate.js
 
 Gail:
+* inputListener.js
+* updateMemory.js
 
 
 Ariel:
-
+* normalize.js
+* index.js
+* index.css
+* index.html
 
 #### Testing
 ##### Test plans can be found under test folder
 ##### Unit Testing is implemented on single methods:
+Mike:
+* unit_testing_view.js
+* unit_testing_tokenizer.js
+* unit_testing_index.js
 
+Channing:
+* unit_testing_evaluate.js
+
+Gail:
+* unit_testing_inputListener.js
+* unit_testing_updateMemory.js
+
+
+Ariel:
+* unit_testing_normalize.js
 
 
 ##### Integration testing
