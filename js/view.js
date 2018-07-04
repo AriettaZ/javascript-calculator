@@ -110,3 +110,54 @@ function updatePlaceholder(result){
 function updateMemory(memory){
   document.getElementById("current-memory").innerHTML = memory;
 }
+
+function showM(event){
+	var equationField = document.getElementById("equation-container");
+	var memoryField = document.getElementById("current-memory");
+	switch (event.target.id){
+		case "m+":
+			equationField.value = "Memory+("+equationField.value+")"
+			break;
+		case "m-":
+			equationField.value = "Memory-("+equationField.value+")"
+			break;
+		case "mc":
+			memoryField.innerHTML = "0";
+			break;
+		case "mr":
+			equationField.value=memory;
+			break;
+		case "mr":
+			equationField.value = memory;
+			break;
+		case "ms":
+			memoryField.innerHTML = equation;
+			break;
+		default:
+			break;
+	}
+}
+
+function hideM(event){
+	var equationField = document.getElementById("equation-container")
+	var memoryField = document.getElementById("current-memory");
+	switch (event.target.id){
+		case "m+":
+			equationField.value = equation;
+			break;
+		case "m-":
+			equationField.value = equation;
+			break;
+		case "mc":
+			memoryField.innerHTML = memory;
+			break;
+		case "mr":
+			equationField.value=equation;
+			break;
+		case "ms":
+			memory.innerHTML = memory;
+			break;
+		default:
+			break;
+	}
+}
