@@ -7,7 +7,7 @@
 
 var memory = 0;
 function handleMemory(){
-  showMemory(); // Node need to display the memory
+  updateMemory(); // Node need to display the memory
   document.getElementById("mr").addEventListener("click", handleMR);
   document.getElementById("ms").addEventListener("click", handleMS);
   document.getElementById("m+").addEventListener("click", handleMPlus);
@@ -30,13 +30,14 @@ function disableMemory(){
 // Update: memory
 // Return: N/A
 function handleMS(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  result =
-  memory = result;
-  //console.info(result)
-  //equation = memory.toString(); // Just for testing purpose
-  update(memory.toString()); // Just for testing purpose
-  showMemory();
+  var invalid_expression = invalidToAdd("=");
+  if (!invalid_expression) {
+    printToScreen("=");
+    memory = result;
+  } else {
+    update("ERROR");
+  }
+  updateMemory();
 }
 
 // Author: Gail Chen
@@ -62,7 +63,7 @@ function handleMR(){
 function handleMPlus(){
   // var result = parseFloat(document.getElementById("current-value").innerHTML);
   memory += result;
-  showMemory();
+  updateMemory();
 }
 
 // Author: Gail Chen
@@ -75,7 +76,7 @@ function handleMPlus(){
 function handleMMinus(){
   // var result = parseFloat(document.getElementById("current-value").innerHTML);
   memory -= result;
-  showMemory();
+  updateMemory();
 }
 
 // Author: Gail Chen
@@ -87,9 +88,9 @@ function handleMMinus(){
 // Return: N/A
 function handleMC(){
   memory = 0;
-  showMemory();
+  updateMemory();
 }
 
-function showMemory(){
+function updateMemory(){
   document.getElementById("current-memory").innerHTML = memory;
 }
