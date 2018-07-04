@@ -7,7 +7,6 @@
 function update(equation) {
 	var equationField = document.getElementById("equation-container"); //Which equation
 	// equationField.innerHTML=equation;
-
 	equationField.value = equation;
 
 }
@@ -25,7 +24,7 @@ function addHistory(equation, result) {
 	var line = document.createElement("div");
 	line.setAttribute("class", "history-line");
 	var eqContainer = document.createElement("p");
-	eqContainer.innerHTML = equation + "=" + result;
+	eqContainer.innerHTML = equation +" = "+ result;
 	eqContainer.setAttribute("class", "eq-container")
 	var removeButton = document.createElement("i");
 	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
@@ -43,6 +42,9 @@ function addHistory(equation, result) {
 	if(currentLines.length == 1) {
 		changeClearButtonOpacity(1);
 	}
+
+	historyContainer.scrollTop=historyContainer.scrollHeight
+
 }
 
 //Author: Mike
