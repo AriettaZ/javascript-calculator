@@ -24,7 +24,7 @@ function addHistory(equation, result) {
 	var line = document.createElement("div");
 	line.setAttribute("class", "history-line");
 	var eqContainer = document.createElement("p");
-	eqContainer.innerHTML = equation +" = "+ result;
+	eqContainer.innerHTML = equation + " = " + result.toString().replace("e+","E");
 	eqContainer.setAttribute("class", "eq-container")
 	var removeButton = document.createElement("i");
 	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
@@ -43,7 +43,7 @@ function addHistory(equation, result) {
 		changeClearButtonOpacity(1);
 	}
 
-	historyContainer.scrollTop=historyContainer.scrollHeight
+	historyContainer.scrollTop = historyContainer.scrollHeight
 
 }
 
@@ -89,7 +89,92 @@ function changeClearButtonOpacity(opacity) {
 	clearButton.style.opacity = opacity;
 }
 
-function updatePlaceholder(result){
+//Author: Mike
+//Created: 7/3
+//Edit: N/A
+//Description: Update the place holder of the equation-container
+//Update: #equation-container
+//Return: N/A
+function updatePlaceholder(result) {
 	var equationContainer = document.getElementById("equation-container");
-	equationContainer.setAttribute("placeholder",result);
+	result = result.toString().replace("e+","E");
+	equationContainer.setAttribute("placeholder", result);
+}
+
+// Author: Gail Chen
+// Created: 7/2
+// Edit: N/A
+// Description: Update memory in the view
+// Require: N/A
+// Update: #current-memory
+// Return: N/A
+function updateMemory(memory) {
+	document.getElementById("current-memory").innerHTML = memory.toString().replace("e+","E");
+}
+
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: show memory illustration
+// Require: N/A
+// Update: #current-memory, #equation-container
+// Return: N/A
+function showM(event) {
+	var equationField = document.getElementById("equation-container");
+	var memoryField = document.getElementById("current-memory");
+	switch(event.target.id) {
+		case "m+":
+			equationField.value = "Memory+(" + equationField.value + ")"
+			break;
+		case "m-":
+			equationField.value = "Memory-(" + equationField.value + ")"
+			break;
+		case "mc":
+			memoryField.innerHTML = 0;
+			break;
+		case "mr":
+			equationField.value = memory.toString().replace("e+","E");
+			break;
+		case "ms":
+			var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
+			if(equation != "") {
+				memoryField.innerHTML = "= " + equation;
+			}else if(placeholder!=0){
+				memoryField.innerHTML = "= " + placeholder;
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: hide memory illustration
+// Require: N/A
+// Update: #current-memory, #equation-container
+// Return: N/A
+function hideM(event) {
+	var equationField = document.getElementById("equation-container")
+	var memoryField = document.getElementById("current-memory");
+	switch(event.target.id) {
+		case "m+":
+			equationField.value = equation;
+			break;
+		case "m-":
+			equationField.value = equation;
+			break;
+		case "mc":
+			memoryField.innerHTML = memory.toString().replace("e+","E");
+			break;
+		case "mr":
+			equationField.value = equation;
+			break;
+		case "ms":
+			memoryField.innerHTML = memory.toString().replace("e+","E");
+			break;
+		default:
+			break;
+	}
 }

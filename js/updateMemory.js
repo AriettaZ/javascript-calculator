@@ -6,33 +6,41 @@
 // MR is can be used after operation
 
 function handleMemory(){
+  updateMemory(memory); // Node need to display the memory
   document.getElementById("mr").addEventListener("click", handleMR);
-  showMemory(); // Node need to display the memory
   document.getElementById("ms").addEventListener("click", handleMS);
   document.getElementById("m+").addEventListener("click", handleMPlus);
   document.getElementById("m-").addEventListener("click", handleMMinus);
   document.getElementById("mc").addEventListener("click", handleMC);
 }
-
+/*
 function disableMemory(){
   document.getElementById("ms").removeEventListener("click", handleMS);
   document.getElementById("m+").removeEventListener("click", handleMPlus);
   document.getElementById("m-").removeEventListener("click", handleMMinus);
   document.getElementById("mc").removeEventListener("click", handleMC);
 }
-
+*/
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, rewritten to handle errors in input and expression eval.
 // Description: MS(Memory Store) puts the displayed result into the memory
 // Require: N/A
 // Update: memory
 // Return: N/A
 function handleMS(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  memory = result;
-  equation = memory.toString(); // Just for testing purpose
-  update(equation); // Just for testing purpose
+  var invalid_expression = invalidToAdd("=");
+  var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
+  if (!invalid_expression) {
+    printToScreen("=");
+    memory = result;
+    updateMemory(memory);
+  } else if(placeholder !=0){
+  	memory = parseFloat(placeholder);
+  	updateMemory(memory);
+  }else {
+    update("ERROR");
+  }
 }
 
 // Author: Gail Chen
@@ -43,8 +51,10 @@ function handleMS(){
 // Update: memory
 // Return: N/A
 function handleMR(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  result += memory;
+  equation = memory.toString().replace("e+","E");
+  if(equation.includes(".")){
+    dot=1;
+  }
   update(equation);
 }
 
@@ -56,9 +66,14 @@ function handleMR(){
 // Update: equation, #current-input
 // Return: N/A
 function handleMPlus(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  memory += result;
-  showMemory();
+  var invalid_expression = invalidToAdd("=");
+  if (!invalid_expression) {
+    printToScreen("=");
+    memory += result;
+    updateMemory(memory);
+  } else {
+    update("ERROR");
+  }
 }
 
 // Author: Gail Chen
@@ -69,23 +84,24 @@ function handleMPlus(){
 // Update: memory
 // Return: N/A
 function handleMMinus(){
-  // var result = parseFloat(document.getElementById("current-value").innerHTML);
-  memory -= result;
-  showMemory();
+  var invalid_expression = invalidToAdd("=");
+  if (!invalid_expression) {
+    printToScreen("=");
+      memory -= result;
+      updateMemory(memory);
+  } else {
+    update("ERROR");
+  }
 }
 
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, updated call to updateMemory.
 // Description: MC(Memory Clear) sets the memory to 0
 // Require: N/A
 // Update: memory
 // Return: N/A
 function handleMC(){
   memory = 0;
-  showMemory();
-}
-
-function showMemory(){
-  document.getElementById("current-memory").innerHTML = memory;
+  updateMemory(memory);
 }

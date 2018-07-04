@@ -183,7 +183,7 @@ var clear = ["=", "C", "MR", "MS", "M+", "M-", "MC"];
 var other = ["<-"];
 var setexp = 0;
 
-function invalidToAdd(input){
+function invalidToAdd(input) {
 	var last = equation.slice(-1);
   var last2 = equation.slice(-2);
   var twoBefore = equation.charAt(equation.length - 2);
@@ -229,8 +229,8 @@ function printToScreen(input){
   var cutLast = equation.substring(0, equation.length - 1);
   var cutLast2 = equation.substring(0, equation.length - 2);
 	var invalid = invalidToAdd(input);
-	if(document.getElementById("equation-container").getAttribute("placeholder")!=0){
-		invalid=false;
+	if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
+		invalid = false;
 	}
 
 	if(!invalid){
@@ -253,47 +253,47 @@ function printToScreen(input){
         break;
 
 			case "e":
-			clearPlaceholder()
-				if(last == "."){
+				clearPlaceholder()
+				if(last == ".") {
 					equation = cutLast;
 				}
 				break;
 
-      case "+":
-      case "*":
-      case "/":
-      handlePlaceholder()
-        var last = equation.slice(-1);
-        if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
-          equation = cutLast;
-        }
-        break;
+			case "+":
+			case "*":
+			case "/":
+				handlePlaceholder()
+				var last = equation.slice(-1);
+				if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√(") {
+					equation = cutLast;
+				}
+				break;
 
-      case "-":
-      handlePlaceholder()
-        var last = equation.slice(-1);
-        if(["+", "-", "*", "/", "^", "."].includes(last) || (last == "0" && twoBefore == "")){
-          equation = cutLast;
-        }
-        break;
+			case "-":
+				handlePlaceholder()
+				var last = equation.slice(-1);
+				if(["+", "-", "*", "/", "^", "."].includes(last) || (last == "0" && twoBefore == "")) {
+					equation = cutLast;
+				}
+				break;
 
       case "%":
 	      handlePlaceholder()
         var last = equation.slice(-1);
 
-        if(["+", "-", "*", "/", "^", "E", "(", ".", "%"].includes(last)){
-          equation = cutLast;
-        }
-        break;
+				if(["+", "-", "*", "/", "^", "E", "(", ".", "%"].includes(last)) {
+					equation = cutLast;
+				}
+				break;
 
-      case "^":
-      case "^2":
-      handlePlaceholder()
-        var last = equation.slice(-1);
-        if(["+", "-", "*", "/", "E", "(", "."].includes(last)){
-          equation = cutLast;
-        }
-        break;
+			case "^":
+			case "^2":
+				handlePlaceholder()
+				var last = equation.slice(-1);
+				if(["+", "-", "*", "/", "E", "(", "."].includes(last)) {
+					equation = cutLast;
+				}
+				break;
 
       case ".":
 	      handlePlaceholder()
@@ -364,10 +364,6 @@ function printToScreen(input){
       case "M-":
       case "MC":
       case "=":
-	      clearPlaceholder()
-        // if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
-        //   equation = cutLast;
-        // }
         result = normalize(evaluate());
         updatePlaceholder(result);
         addHistory(equation, result);
@@ -402,22 +398,35 @@ function printToScreen(input){
 	}
 }
 
-
-function handlePlaceholder(){
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description:
+// Require: N/A
+// Update: #equation-container
+// Return: N/A
+function handlePlaceholder() {
 	var inputfield = document.getElementById("equation-container");
 	var placeholder = inputfield.getAttribute("placeholder");
-	if(placeholder!=0){
-		equation=placeholder.toString();
-		inputfield.setAttribute("placeholder",0);
-		if(parseFloat(equation)!=parseInt(equation)){
-			dot=1;
+	if(placeholder != 0) {
+		equation = placeholder.toString();
+		inputfield.setAttribute("placeholder", 0);
+		if(parseFloat(equation) != parseInt(equation)) {
+			dot = 1;
 		}
 		update(equation);
 	}
 }
 
-function clearPlaceholder(){
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: show memory illustration
+// Require: N/A
+// Update: #equation-container
+// Return: N/A
+function clearPlaceholder() {
 	var inputfield = document.getElementById("equation-container");
 	var placeholder = inputfield.getAttribute("placeholder");
-	inputfield.setAttribute("placeholder",0);
+	inputfield.setAttribute("placeholder", 0);
 }
