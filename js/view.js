@@ -89,7 +89,24 @@ function changeClearButtonOpacity(opacity) {
 	clearButton.style.opacity = opacity;
 }
 
+//Author: Mike
+//Created: 7/3
+//Edit: N/A
+//Description: Update the place holder of the equation-container
+//Update: #equation-container
+//Return: N/A
 function updatePlaceholder(result){
 	var equationContainer = document.getElementById("equation-container");
 	equationContainer.setAttribute("placeholder",result);
+}
+
+// Author: Gail Chen
+// Created: 7/2
+// Edit: N/A
+// Description: Update memory in the view
+// Require: N/A
+// Update: #current-memory
+// Return: N/A
+function updateMemory(memory){
+  document.getElementById("current-memory").innerHTML = memory;
 }

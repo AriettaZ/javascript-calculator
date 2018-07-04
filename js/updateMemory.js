@@ -90,7 +90,3 @@ function handleMC(){
   memory = 0;
   updateMemory();
 }
-
-function updateMemory(){
-  document.getElementById("current-memory").innerHTML = memory;
-}
