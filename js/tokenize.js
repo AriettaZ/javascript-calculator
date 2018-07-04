@@ -6,6 +6,7 @@
 //Update: N/A
 //Return: An array of tokens
 function tokenize(equation) {
+	equation = sqrt2exp(equation);
 	var parenthesis = 0;
 	var tokens = new Array();
 	for(var i = 0; i < equation.length; i++) {
@@ -59,11 +60,11 @@ function tokenize(equation) {
 				tokens.push(str);
 				parenthesis+=1;
 				break;
-			case /s/.test(str):
+			case /√/.test(str):
 				if(tokens[tokens.length - 1] == "%" || tokens[tokens.length - 1] == ")") {
 					tokens.push("*")
 				}
-				tokens.push("sqrt");
+				tokens.push("^");
 				i = i + 3;
 				break;
 			case /\)/.test(str):
@@ -87,4 +88,44 @@ function tokenize(equation) {
 		alert("Parenthesis error");
 	}
 	return tokens;
+}
+
+//Author: Mike
+//Created: 7/3
+//Edit: N/A
+//Description: Take a string of equation, change all √(x) to (x)^(0.5)
+//Update: N/A
+//Return: equation after changing sqrt to exp
+function sqrt2exp(equation){
+	for(var i=0;i<equation.length;i++){
+		if(equation[i]=="√"){
+			equation = equation.slice(0, i) + equation.slice(i + 1, equation.length);
+			var endParenIndex = findEndParenIndex(equation,i);
+			equation = equation.slice(0,endParenIndex+1)+"^(0.5)"+equation.slice(endParenIndex+1,equation.length)
+		}
+	}
+	return equation;
+}
+
+//Author: Mike
+//Created: 7/3
+//Edit: N/A
+//Description: Take a string of equation and index of a left parenthesis, find the index of its right parenthesis.
+//Update: N/A
+//Return: Index of the right parenthesis
+function findEndParenIndex(equation, index){
+	var parenthesis = 0;
+	for(var i=index;i<equation.length;i++){
+		if(equation[i]=="("){
+			parenthesis++;
+		}else if(equation[i]==")"){
+			parenthesis--;
+		}
+		if(parenthesis==0){
+			return i;
+		}
+	}
+	if(parenthesis<0){
+		alert("Root Match Error")
+	}
 }
