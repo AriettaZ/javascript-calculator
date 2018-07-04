@@ -257,17 +257,23 @@ footer i{
   body{
     width: 90%;
   }
-  .history-container{
-    height: 100px;
-  }
   .memory span{
     display: none;
   }
   .memory #current-memory{
     width: 100%;
   }
-  .history-section{
-    height: 200px;
+  .history-line{
+    width: 88%;
+  }
+  .info-section{
+    margin:0px;
+  }
+  header{
+    height:70px;
+    line-height: 70px;
+    font-size: 30px;
+    weight:bold;
   }
 }
 
