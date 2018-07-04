@@ -125,7 +125,6 @@ function updateMemory(memory) {
 	if(memory > Number.MAX_SAFE_INTEGER) {
 		document.getElementById("current-memory").innerHTML = memory.toExponential(5).replace("e+", "E");
 	} else {
-
 		document.getElementById("current-memory").innerHTML = memory.toString().replace("e+", "E");
 	}
 

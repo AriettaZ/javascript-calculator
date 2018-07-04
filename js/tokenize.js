@@ -56,7 +56,7 @@ function tokenize(equation) {
 				}
 				break;
 			case /\(/.test(str):
-				if(/\d/.test(equation[i - 1]) || tokens[tokens.length - 1] == ")") {
+				if(/\d.*/.test(tokens[tokens.length-1]) || tokens[tokens.length - 1] == ")") {
 					tokens.push("*")
 				}
 				tokens.push(str);
@@ -83,16 +83,12 @@ function tokenize(equation) {
 		var parse2num = parseFloat(tokens[i]);
 		if(!isNaN(parse2num)) {
 			tokens[i] = parse2num;
-			//			if(parse2num + 1 == parse2num) {
-			//				alert("Change to science")
-			//				tokens[i] = parseFloat(parse2num.toExponential(5));
-			//			}
 		}
 	}
 
 	//Parenthesis mismatch
 	if(parenthesis != 0) {
-		alert("Parenthesis error");
+		alert("Error, Parenthesis Mismatch.");
 		tokens = [NaN]
 	}
 	return tokens;
