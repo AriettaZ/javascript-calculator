@@ -139,6 +139,7 @@ function keyboardInput(event) {
               break;
             case 8: // backspace
               input = "<-";
+              event.preventDefault();
               document.getElementsByClassName('fa-backspace')[0].click();
               break;
             case 46:

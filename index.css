@@ -238,3 +238,9 @@ footer i{
     width: 100%;
   }
 }
+
+input:disabled{
+  background: white;
+  color: #304468;
+  height: 50px;
+}
