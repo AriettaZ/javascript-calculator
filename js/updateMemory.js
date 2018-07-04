@@ -51,7 +51,7 @@ function handleMS(){
 // Update: memory
 // Return: N/A
 function handleMR(){
-  equation = memory.toString();
+  equation = memory.toString().replace("e+","E");
   if(equation.includes(".")){
     dot=1;
   }

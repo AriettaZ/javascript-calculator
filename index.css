@@ -22,7 +22,8 @@ Description: stylesheet foe calculator display page */
 .keyboard-item{
   background: #6599f5;
   padding: 10px;
-  border: solid 3px #304468;;
+  border: solid 3px #304468;
+  -webkit-user-select: none;
 }
 
 .keyboard-item:hover{
