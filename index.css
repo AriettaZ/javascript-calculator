@@ -58,6 +58,7 @@ Description: stylesheet foe calculator display page */
   position: relative;
   margin: 10px 20px;
   width: 94%;
+  font-family: 'Noto Serif', serif;
 }
 .history-line p{
   overflow-wrap: break-word;
