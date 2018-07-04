@@ -192,7 +192,7 @@ function printToScreen(input){
   var cutLast = equation.substring(0, equation.length - 1);
   var cutLast2 = equation.substring(0, equation.length - 2);
 	// Not acceptable inputs: start the equation with midOp or endOp
-	//												
+	//
   var nochange = ((equation == "" || equation == "0") && [")"].includes(input)) ||
 									(equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
                   (operation.includes(last) && input == ".") ||
@@ -313,8 +313,8 @@ function printToScreen(input){
         if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
           equation = cutLast;
         }
-        result = evaluate()
-        addHistory(equation, result)
+        result = normalize(evaluate())
+        addHistory(equation, result);
         equation = "";
         setexp = 0;
         dot = 0;

@@ -122,7 +122,12 @@ button{
   line-height: 50px;
   width: 92%;
 }
-#current-value{
+#current-memory{
+  width: 80%;
+  float:right;
+}
+
+.memory{
   background: #6599f5;
   color: white;
   font-family: 'Bitter', serif;
@@ -132,6 +137,11 @@ button{
   padding-right: 10px;
   text-align: right;
   height: 50%;
+}
+.memory span{
+  width: 10%;
+  float: left;
+  padding-left: 10px;
 }
 button:focus,input:focus{
   outline:0;
@@ -153,6 +163,9 @@ footer i{
   z-index: 10;
 }
 
+/* #current-memory{
+  display: inline;
+} */
 @media screen and (max-width: 1020px) {
   .keyboard-container{
     width:100%;
@@ -178,6 +191,12 @@ footer i{
   }
   .history-container{
     height: 100px;
+  }
+  .memory span{
+    display: none;
+  }
+  .memory #current-memory{
+    width: 100%;
   }
 }
 
