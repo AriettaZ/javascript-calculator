@@ -183,12 +183,6 @@ footer i{
   .history-container{
     height: 150px;
   }
-  .memory span{
-    display: none;
-  }
-  .memory #current-memory{
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 438px) {
@@ -197,5 +191,11 @@ footer i{
   }
   .history-container{
     height: 100px;
+  }
+  .memory span{
+    display: none;
+  }
+  .memory #current-memory{
+    width: 100%;
   }
 }
