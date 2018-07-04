@@ -312,7 +312,6 @@ function printToScreen(input){
         if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
           equation = cutLast;
         }
-        equation += "=";
         result = normalize(evaluate())
         addHistory(equation, result);
         equation = "";
