@@ -122,7 +122,12 @@ button{
   line-height: 50px;
   width: 92%;
 }
-#current-value{
+#current-memory{
+  width: 80%;
+  float:right;
+}
+
+.memory{
   background: #6599f5;
   color: white;
   font-family: 'Bitter', serif;
@@ -132,6 +137,11 @@ button{
   padding-right: 10px;
   text-align: right;
   height: 50%;
+}
+.memory span{
+  width: 10%;
+  float: left;
+  padding-left: 10px;
 }
 button:focus,input:focus{
   outline:0;
@@ -151,6 +161,48 @@ footer i{
 .screen-container  i:hover{
   cursor: pointer;
   z-index: 10;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    visibility:collapse;
+    width: 100px;
+    background-color: #7fc9a5;
+    color: #fff;
+    text-align: center;
+    padding: 5px 5px;
+    font-family: 'Bitter', serif;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top:25px;
+    right:0px;
+    font-size: 12px;
+}
+.tooltip .left-tooltiptext {
+    visibility: hidden;
+    visibility:collapse;
+    width: 120px;
+    background-color: #7fc9a5;
+    color: #fff;
+    text-align: center;
+    padding: 5px 5px;
+    font-family: 'Bitter', serif;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top:25px;
+    left:0px;
+    font-size: 12px;
+}
+.tooltip:hover .tooltiptext, .tooltip:hover .left-tooltiptext {
+    visibility: visible;
+    transition-delay:1s;
 }
 
 @media screen and (max-width: 1020px) {
@@ -179,4 +231,16 @@ footer i{
   .history-container{
     height: 100px;
   }
+  .memory span{
+    display: none;
+  }
+  .memory #current-memory{
+    width: 100%;
+  }
+}
+
+input:disabled{
+  background: white;
+  color: #304468;
+  height: 50px;
 }

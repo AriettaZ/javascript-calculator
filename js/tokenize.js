@@ -60,16 +60,15 @@ function tokenize(equation) {
 				tokens.push(str);
 				parenthesis+=1;
 				break;
-			case /√/.test(str):
-				if(tokens[tokens.length - 1] == "%" || tokens[tokens.length - 1] == ")") {
-					tokens.push("*")
-				}
-				tokens.push("^");
-				i = i + 3;
-				break;
 			case /\)/.test(str):
 				parenthesis-=1;
 				tokens.push(str);
+				break;
+			case /e/.test(str):
+				if(/\d.*/.test(tokens[tokens.length-1])||tokens[tokens.length-1]==")"){
+					tokens.push("*")
+				}
+				tokens.push(Math.E);
 				break;
 			default:
 				tokens.push(str);

@@ -8,7 +8,7 @@ function update(equation) {
 	var equationField = document.getElementById("equation-container"); //Which equation
 	// equationField.innerHTML=equation;
 	equationField.value = equation;
-	
+
 }
 
 //Author: Mike
@@ -42,9 +42,9 @@ function addHistory(equation, result) {
 	if(currentLines.length == 1) {
 		changeClearButtonOpacity(1);
 	}
-	
+
 	historyContainer.scrollTop=historyContainer.scrollHeight
-	
+
 }
 
 //Author: Mike

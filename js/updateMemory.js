@@ -91,5 +91,5 @@ function handleMC(){
 }
 
 function showMemory(){
-  document.getElementById("current-value").innerHTML = memory;
+  document.getElementById("current-memory").innerHTML = memory;
 }

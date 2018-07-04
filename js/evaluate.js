@@ -4,6 +4,7 @@
 // Description: Evaluates a well-formatted input string. Returning
 // a single number. Updates the string == "".
 function evaluate() {
+  // alert("0");
 //var equation = ["(",1,")"]
 var eq = tokenize(equation)
   return expression(eq);
