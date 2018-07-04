@@ -5,7 +5,6 @@
 // MS, M+, M-, MC can only be called if the equation == "0".
 // MR is can be used after operation
 
-var memory = 0;
 function handleMemory(){
   document.getElementById("mr").addEventListener("click", handleMR);
   showMemory(); // Node need to display the memory
