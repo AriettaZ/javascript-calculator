@@ -58,7 +58,7 @@ Description: stylesheet foe calculator display page */
   position: relative;
   margin: 10px 20px;
   width: 94%;
-  font-family: 'Noto Serif', serif;
+  font-family: 'Roboto Mono', monospace;
 }
 .history-line p{
   overflow-wrap: break-word;
@@ -146,12 +146,15 @@ button{
   border-width: 0px;
   padding: 0px;
   color: black;
-  font-family: 'Noto Serif', serif;
+  font-family: 'Roboto Mono', monospace;
   weight: 700;
-  font-size: 28px;
+  font-size: 30px;
   text-align: right;
   line-height: 50px;
   width: 92%;
+}
+.screen-container .memory span{
+  font-family: 'Bitter', serif;
 }
 #current-memory{
   width: 80%;
@@ -160,9 +163,9 @@ button{
 .memory{
   background: #6599f5;
   color: white;
-  font-family: 'Noto Serif', serif;
+  font-family: 'Roboto Mono', monospace;
   weight:bold;
-  font-size: 25px;
+  font-size: 30px;
   line-height: 50px;
   padding-right: 10px;
   text-align: right;
