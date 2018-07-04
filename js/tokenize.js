@@ -9,7 +9,7 @@ function tokenize(equation) {
 	equation = sqrt2exp(equation);
 	var parenthesis = 0;
 	var tokens = new Array();
-	
+
 	//Replace semantic combination of symbols to math functions
 	for(var i = 0; i < equation.length; i++) {
 		var str = equation[i];
@@ -60,14 +60,14 @@ function tokenize(equation) {
 					tokens.push("*")
 				}
 				tokens.push(str);
-				parenthesis+=1;
+				parenthesis += 1;
 				break;
 			case /\)/.test(str):
-				parenthesis-=1;
+				parenthesis -= 1;
 				tokens.push(str);
 				break;
 			case /e/.test(str):
-				if(/\d.*/.test(tokens[tokens.length-1])||tokens[tokens.length-1]==")"){
+				if(/\d.*/.test(tokens[tokens.length - 1]) || tokens[tokens.length - 1] == ")") {
 					tokens.push("*")
 				}
 				tokens.push(Math.E);
@@ -77,18 +77,23 @@ function tokenize(equation) {
 				break;
 		}
 	}
-	
+
 	//Replace string of floats/ints to type number
 	for(var i = 0; i < tokens.length; i++) {
 		var parse2num = parseFloat(tokens[i]);
-		if(!isNaN(parse2num)){
-			tokens[i]=parse2num;
+		if(!isNaN(parse2num)) {
+			tokens[i] = parse2num;
+			//			if(parse2num + 1 == parse2num) {
+			//				alert("Change to science")
+			//				tokens[i] = parseFloat(parse2num.toExponential(5));
+			//			}
 		}
 	}
-	
+
 	//Parenthesis mismatch
-	if(parenthesis!=0){
+	if(parenthesis != 0) {
 		alert("Parenthesis error");
+		tokens = [NaN]
 	}
 	return tokens;
 }
@@ -99,12 +104,12 @@ function tokenize(equation) {
 //Description: Take a string of equation, change all √(x) to (x)^(0.5)
 //Update: N/A
 //Return: equation after changing sqrt to exp
-function sqrt2exp(equation){
-	for(var i=0;i<equation.length;i++){
-		if(equation[i]=="√"){
+function sqrt2exp(equation) {
+	for(var i = 0; i < equation.length; i++) {
+		if(equation[i] == "√") {
 			equation = equation.slice(0, i) + equation.slice(i + 1, equation.length);
-			var endParenIndex = findEndParenIndex(equation,i);
-			equation = equation.slice(0,endParenIndex+1)+"^(0.5)"+equation.slice(endParenIndex+1,equation.length)
+			var endParenIndex = findEndParenIndex(equation, i);
+			equation = equation.slice(0, endParenIndex + 1) + "^(0.5)" + equation.slice(endParenIndex + 1, equation.length)
 		}
 	}
 	return equation;
@@ -116,19 +121,19 @@ function sqrt2exp(equation){
 //Description: Take a string of equation and index of a left parenthesis, find the index of its right parenthesis.
 //Update: N/A
 //Return: Index of the right parenthesis
-function findEndParenIndex(equation, index){
+function findEndParenIndex(equation, index) {
 	var parenthesis = 0;
-	for(var i=index;i<equation.length;i++){
-		if(equation[i]=="("){
+	for(var i = index; i < equation.length; i++) {
+		if(equation[i] == "(") {
 			parenthesis++;
-		}else if(equation[i]==")"){
+		} else if(equation[i] == ")") {
 			parenthesis--;
 		}
-		if(parenthesis==0){
+		if(parenthesis == 0) {
 			return i;
 		}
 	}
-	if(parenthesis<0){
+	if(parenthesis < 0) {
 		alert("Root Match Error")
 	}
 }

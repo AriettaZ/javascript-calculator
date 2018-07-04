@@ -35,12 +35,12 @@ function getInput() {
 	// });
 
 	// Active buttons for inputs.
-  var backSpace = document.getElementsByClassName('fa-backspace');
-  backSpace[0].addEventListener("click", buttonInput);
-  var buttons = document.getElementsByClassName("keyboard-item");
-  for (i = 5; i < buttons.length; i++){
-    buttons[i].addEventListener("click", buttonInput);
-  }
+	var backSpace = document.getElementsByClassName('fa-backspace');
+	backSpace[0].addEventListener("click", buttonInput);
+	var buttons = document.getElementsByClassName("keyboard-item");
+	for(i = 5; i < buttons.length; i++) {
+		buttons[i].addEventListener("click", buttonInput);
+	}
 }
 
 // Author: Mike
@@ -83,8 +83,8 @@ function inputKeyHandling(event) {
 // Require: N/A
 // Update: equation, #equation-container, result, dotExists
 // Return: N/A
-function buttonInput(){
-  printToScreen(this.getAttribute("name"));
+function buttonInput() {
+	printToScreen(this.getAttribute("name"));
 }
 
 // Author: Gail Chen
@@ -95,66 +95,66 @@ function buttonInput(){
 // Update: equation, #equation-container
 // Return: N/A
 function keyboardInput(event) {
-  var keyCode = event.which || event.keyCode;
-  if (keyCode != 0) {
+	var keyCode = event.which || event.keyCode;
+	if(keyCode != 0) {
 		// Prevent the user from entering unacceptable inputs.
-    if (!((keyCode <= 57) && (keyCode >= 48)) && !KEY_CODE.includes(keyCode)) {
-      event.preventDefault();
-    }else {
+		if(!((keyCode <= 57) && (keyCode >= 48)) && !KEY_CODE.includes(keyCode)) {
+			event.preventDefault();
+		} else {
 			// Get keyboard input and click the corresponding button.
-      if((keyCode <= 57) && (keyCode >= 48)){
-        var input = String.fromCharCode(keyCode);
-        document.getElementById(input).click();
-      } else {
-          switch(keyCode){
-            case 43:
-              document.getElementById("plus").click();
-              break;
-            case 45:
-              document.getElementById("minus").click();
-              break;
-            case 42:
-              document.getElementById("times").click();
-              break;
-            case 47:
-              document.getElementById("division").click();
-              break;
-            case 40:
-              document.getElementById("(").click();
-              break;
-            case 41:
-              document.getElementById(")").click();
-              break;
-            case 69:
-              document.getElementById("scientific").click();
-              break;
-						case 101:
-              document.getElementById("e").click();
-              break;
-            case 13: //enter
-            case 61:
-              document.getElementById("equal").click();
-              break;
-            case 8: // backspace
-              event.preventDefault();
-              document.getElementsByClassName('fa-backspace')[0].click();
-              break;
-            case 46:
-              document.getElementById("dot").click();
-              break;
-            case 37:
-              document.getElementById("percentage").click();
-              break;
-            case 94:
-              document.getElementById("exponentiation").click();
-              break;
-            case 8730:
-              document.getElementById("squareroot").click();
-              break;
-          }
-        }
-      }
-    }
+			if((keyCode <= 57) && (keyCode >= 48)) {
+				var input = String.fromCharCode(keyCode);
+				document.getElementById(input).click();
+			} else {
+				switch(keyCode) {
+					case 43:
+						document.getElementById("plus").click();
+						break;
+					case 45:
+						document.getElementById("minus").click();
+						break;
+					case 42:
+						document.getElementById("times").click();
+						break;
+					case 47:
+						document.getElementById("division").click();
+						break;
+					case 40:
+						document.getElementById("(").click();
+						break;
+					case 41:
+						document.getElementById(")").click();
+						break;
+					case 69:
+						document.getElementById("scientific").click();
+						break;
+					case 101:
+						document.getElementById("e").click();
+						break;
+					case 13: //enter
+					case 61:
+						document.getElementById("equal").click();
+						break;
+					case 8: // backspace
+						event.preventDefault();
+						document.getElementsByClassName('fa-backspace')[0].click();
+						break;
+					case 46:
+						document.getElementById("dot").click();
+						break;
+					case 37:
+						document.getElementById("percentage").click();
+						break;
+					case 94:
+						document.getElementById("exponentiation").click();
+						break;
+					case 8730:
+						document.getElementById("squareroot").click();
+						break;
+				}
+			}
+		}
+	}
 }
 
 var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C", "^", "^2", "E", "e", "(", ")", "%", "√(", ".", "<-"];
@@ -179,30 +179,33 @@ var others = ["<-"];
 // Return: invalidToAdd
 function invalidToAdd(input) {
 	var last = equation.slice(-1); // The last character of the equation.
-  var last2 = equation.slice(-2); // The last two characters of the equation, for checking '^2' and '√('.
-  var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
+	var last2 = equation.slice(-2); // The last two characters of the equation, for checking '^2' and '√('.
+	var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
 
 	// Inputs will not be added to the end of the equation in following situations:
-	// 1. add an operator in midOp or endOp shown above to an empty equation
-	// 2. add a decimal point after operators or e or when the term has '.' in it already
+	// 1. add an input that is not a number or one of ["(", "√(", "-", "e"] to an empty equation
+	// 2. add a decimal point when the equation is not ended with a number and the number already has a decimal point
 	// 3. add a number after %, ) or e
-	// 4. add an operator in midOp or endOp after (
+	// 4. add an operator in midOp or endOp or '=' after (
 	// 5. add ) or % after an operator in startOp or midOp
 	// 6. add E after %
 	// 7. add ^, ^2 after %
 	// 8. add ^, ^2 after an operator in ["+", "-", "*", "/", "^", "E", ".", "^2"] where there is a % before the operator
 	// 9. add an operator in endOp or midOp to an equation that is "-" or "(-"
 	// 10. enter "=" when equation is empty or the equation ends with an operator in startOp or midOp
-  var invalidToAdd = (equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
-                  ((operator.includes(last) || last == "e" || dotExists == 1) && input == ".") ||
-									(numbers.includes(input) && (endOp.includes(last) || last == "e" )) ||
-                  (last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
-									([")", "%"].includes(input) && (startOp.includes(last) || midOp.includes(last))) ||
-                  (input == "E" && last == "%") ||
-                  (["^", "^2"].includes(input) && last == "%") ||
-									(["^", "^2"].includes(input) && (twoBefore == "%" && (["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "^2"))) ||
-                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && ["", "("].includes(twoBefore)) ||
-									(input == "=" && (equation == "" || midOp.includes(last) || startOp.includes(last)));
+  var invalidToAdd = (equation == "" && !(numbers.includes(input) || startOp.includes(input) || input === "e")) ||
+		(!(numbers.includes(last) && dotExists == 0) && input == ".") ||
+		(numbers.includes(input) && (endOp.includes(last) || last == "e" )) ||
+		(last == "(" && (endOp.includes(input) || midOp.includes(input) || input == "=")) ||
+		([")", "%"].includes(input) && (startOp.includes(last) || midOp.includes(last))) ||
+		(input == "E" && last == "%") ||
+		(["^", "^2"].includes(input) && last == "%") ||
+		(["^", "^2"].includes(input) && (twoBefore == "%" && (["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "^2"))) ||
+		((endOp.includes(input) || midOp.includes(input)) && last == "-" && ["", "("].includes(twoBefore)) ||
+		(input == "=" && (equation == "" || midOp.includes(last) || startOp.includes(last)));
+		if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
+			invalidToAdd = true;
+		}
 	return invalidToAdd;
 }
 
@@ -214,167 +217,175 @@ function invalidToAdd(input) {
 // Require: N/A
 // Update: equation, #equation-container, #history-container
 // Return: N/A
-function printToScreen(input){
+function printToScreen(input) {
 	var last = equation.slice(-1); // The last character of the equation.
-  var last2 = equation.slice(-2); // The last two characters of the equation, for checking '^2' and '√('.
-  var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
-  var cutLast = equation.substring(0, equation.length - 1); // Remove the equation's last character.
-  var cutLast2 = equation.substring(0, equation.length - 2); // Remove the equation's last 2 characters.
+	var last2 = equation.slice(-2); // The last two characters of the equation, for checking '^2' and '√('.
+	var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
+	var cutLast = equation.substring(0, equation.length - 1); // Remove the equation's last character.
+	var cutLast2 = equation.substring(0, equation.length - 2); // Remove the equation's last 2 characters.
 	var invalid = invalidToAdd(input); // Checks if the input is valid to be added to the end of equation.
-	if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
-		invalid = false;
-	} // Has a problem with adding '.', )
+	// Has a problem with adding '.', )
 
 	// If the input is valid to be added to the end of equation, do the following.
-	if(!invalid){
-    switch(input){
-      case "0":
-      case "1":
-      case "2":
-      case "3":
-      case "4":
-      case "5":
-      case "6":
-      case "7":
-      case "8":
-      case "9":
-				// If a nonzero number starts with 0, remove the leading 0.
-        if(last == "0" && !numbers.includes(twoBefore) && twoBefore != "."){
-          equation = cutLast;
-        }
-        clearPlaceholder();
-        break;
+	//	if(!invalid) {
+	switch(input) {
+		case "0":
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+		case "5":
+		case "6":
+		case "7":
+		case "8":
+		case "9":
+			clearPlaceholder();
+			if(invalidToAdd(input)) return;
+			// If a nonzero number starts with 0, remove the leading 0.
+			if(last == "0" && !numbers.includes(twoBefore) && twoBefore != ".") {
+				equation = cutLast;
+			}
+			break;
 
-			case "e":
-				clearPlaceholder()
-				// If the last character in the equation is a decimal point,
-				// repace the decimal point with the input and set the dotExists flag to 0.
-				if(last == ".") {
-					equation = cutLast;
-					dotExists = 0;
-				}
-				break;
+		case "e":
+			clearPlaceholder()
+			if(invalidToAdd(input)) return;
+			// If the last character in the equation is a decimal point,
+			// repace the decimal point with the input and set the dotExists flag to 0.
+			if(last == ".") {
+				equation = cutLast;
+				dotExists = 0;
+			}
+			break;
 
-			case "+":
-			case "-":
-			case "*":
-			case "/":
-			case "^":
-			case "^2":
-			case "E":
-			case "%":
+		case "+":
+		case "-":
+		case "*":
+		case "/":
+		case "^":
+		case "^2":
+		case "E":
+		case "%":
 			// If the equation is ended with '-' or an operator in mipDop, replace that operator with the input.
-				handlePlaceholder()
-				var last = equation.slice(-1);
-				if(midOp.includes(last) || last == "-") {
-					equation = cutLast;
-				}
-				break;
+			handlePlaceholder()
+			if(invalidToAdd(input)) return;
+			var last = equation.slice(-1);
+			if(midOp.includes(last) || last == "-") {
+				equation = cutLast;
+			}
+			break;
 
-      case ".":
-	      handlePlaceholder()
-        // var last = equation.slice(-1);
-			  // var last2 = equation.slice(-2);
-        // if(["%", ")"].includes(last)){
-        //   equation = cutLast;
-        // }
-        break;
+		case ".":
+			handlePlaceholder()
+			if(invalidToAdd(input)) return;
+			//				 var last = equation.slice(-1);
+			//				 var last2 = equation.slice(-2);
+			//				 if(["%", ")"].includes(last)){
+			//				   equation = cutLast;
+			//				 }
+			break;
 
-      case "√(":
-			case "(": // If the equation is ended with the decimal point, replace '.' with the input.
-	      clearPlaceholder();
-	      var last = equation.slice(-1);
-        if(last == "."){
-          equation = cutLast;
-        }
-        break;
+		case "√(":
+		case "(": // If the equation is ended with the decimal point, replace '.' with the input.
+			clearPlaceholder();
+			if(invalidToAdd(input)) return;
+			var last = equation.slice(-1);
+			if(last == ".") {
+				equation = cutLast;
+			}
+			break;
 
-      case ")": // If the equation is ended with an operator from midOp or startOp, remove this operator.
-	      clearPlaceholder()
-        // if(midOp.includes(last) || startOp.includes(last)){
-        //   equation = cutLast;
-        // }
-        break;
+		case ")": // If the equation is ended with an operator from midOp or startOp, remove this operator.
+			clearPlaceholder()
+			if(invalidToAdd(input)) return;
+			// if(midOp.includes(last) || startOp.includes(last)){
+			//   equation = cutLast;
+			// }
+			break;
 
-      case "<-":
-      	handlePlaceholder();
-    	  last = equation.slice(-1);
-			  cutLast = equation.substring(0, equation.length - 1);
+		case "<-":
+			handlePlaceholder();
+			if(invalidToAdd(input)) return;
+			last = equation.slice(-1);
+			cutLast = equation.substring(0, equation.length - 1);
 
-				// If the equation is ended with '√(', remove '√(';
-				// otherwise, remove the last character in the equataion.
-        if(last2 == "√("){
-          equation = cutLast2;
-        } else {
-          equation = cutLast;
-        }
+			// If the equation is ended with '√(', remove '√(';
+			// otherwise, remove the last character in the equataion.
+			if(last2 == "√(") {
+				equation = cutLast2;
+			} else {
+				equation = cutLast;
+			}
 
-				// Reset the dotExists flag if the removed character is a decimal point.
-        if(last == "."){
-          dotExists = 0;
-        }
-        break;
+			// Reset the dotExists flag if the removed character is a decimal point.
+			if(last == ".") {
+				dotExists = 0;
+			}
+			break;
 
-      case "C":
-	      clearPlaceholder()
-        equation = ""; // Clear the equation.
-				dotExists = 0; // Reset the dotExists flag.
-        break;
+		case "C":
+			clearPlaceholder();
+			if(invalidToAdd(input)) return;
+			equation = ""; // Clear the equation.
+			dotExists = 0; // Reset the dotExists flag.
+			break;
 
-      case "=":
-        result = normalize(evaluate()); // Evaluate the equation and update the result.
-        updatePlaceholder(result); // Update the placeholder with the calculated result.
-        addHistory(equation, result); // Add the equation and its result to the history.
-        equation = ""; // Clear the equation;
-        dotExists = 0; // Reset the dotExists flag.
-        break;
-      }
-
-		// If the input doesn't clear the equation or delete the last character of the equation,
-		// add the input to the end of the equation.
-    if(!clear.includes(input) && input != "<-"){
-			equation += input;
-			// If the input is in ["+", "-", "*", "/", "(", ")", "^", "^2", '√('] which means
-			// a new number will be entered after it, then reset the dotExists flag.
-      if (["+", "-", "*", "/", "(", ")", "^", "^2", '√('].includes(input)){
-        dotExists = 0;
-      }
-
-			// If the input is a decimal point, set dotExists flag to 1.
-			if (input == "."){
-        dotExists = 1;
-      }
-    }
-
-		// Display the resulting equation to #equation-container.
-		update(equation);
+		case "=":
+			if(invalidToAdd(input)) return;
+			result = normalize(evaluate()); // Evaluate the equation and update the result.
+			updatePlaceholder(result); // Update the placeholder with the calculated result.
+			addHistory(equation, result); // Add the equation and its result to the history.
+			equation = ""; // Clear the equation;
+			dotExists = 0; // Reset the dotExists flag.
+			break;
 	}
+	// If the input doesn't clear the equation or delete the last character of the equation,
+	// add the input to the end of the equation.
+	if(!clear.includes(input) && input != "<-") {
+		equation += input;
+		// If the input is in ["+", "-", "*", "/", "(", ")", "^", "^2", '√('] which means
+		// a new number will be entered after it, then reset the dotExists flag.
+		if(["+", "-", "*", "/", "(", ")", "^", "^2", '√(', "E"].includes(input)) {
+			dotExists = 0;
+		}
+
+		// If the input is a decimal point, set dotExists flag to 1.
+		if(input == ".") {
+			dotExists = 1;
+		}
+	}
+
+	// Display the resulting equation to #equation-container.
+	update(equation);
 }
+//}
 
 // Author: Mike
 // Created: 7/3
 // Edit: N/A
-// Description:
+// Description: Put placeholder as the equation, update view and set set placeholder to 0
 // Require: N/A
-// Update: #equation-container
+// Update: #equation-container, equation
 // Return: N/A
 function handlePlaceholder() {
 	var inputfield = document.getElementById("equation-container");
 	var placeholder = inputfield.getAttribute("placeholder");
 	if(placeholder != 0) {
+		//Change equation to placeholder
 		equation = placeholder.toString();
-		inputfield.setAttribute("placeholder", 0);
-		if(parseFloat(equation) != parseInt(equation)) {
+		if(equation.includes(".")) {
 			dotExists = 1;
 		}
 		update(equation);
+		//Change placeholder to 0
+		inputfield.setAttribute("placeholder", 0);
 	}
 }
 
 // Author: Mike
 // Created: 7/3
 // Edit: N/A
-// Description: show memory illustration
+// Description: change placeholder to 0
 // Require: N/A
 // Update: #equation-container
 // Return: N/A
