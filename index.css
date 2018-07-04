@@ -163,9 +163,48 @@ footer i{
   z-index: 10;
 }
 
-/* #current-memory{
-  display: inline;
-} */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    visibility:collapse;
+    width: 100px;
+    background-color: #7fc9a5;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    font-family: 'Bitter', serif;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top:25px;
+    right:0px;
+    font-size: 12px;
+}
+.tooltip .left-tooltiptext {
+    visibility: hidden;
+    visibility:collapse;
+    width: 120px;
+    background-color: #7fc9a5;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    font-family: 'Bitter', serif;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top:25px;
+    left:0px;
+    font-size: 12px;
+}
+.tooltip:hover .tooltiptext, .tooltip:hover .left-tooltiptext {
+    visibility: visible;
+    transition-delay:1s;
+}
+
 @media screen and (max-width: 1020px) {
   .keyboard-container{
     width:100%;
