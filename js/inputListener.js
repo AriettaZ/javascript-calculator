@@ -193,6 +193,7 @@ function printToScreen(input){
   var cutLast2 = equation.substring(0, equation.length - 2);
 	// Not acceptable inputs: start the equation with midOp or endOp
 	//
+//nochange is false, if the equation can be evaluated
   var nochange = ((equation == "" || equation == "0") && [")"].includes(input)) ||
 									(equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
                   (operation.includes(last) && input == ".") ||
@@ -202,6 +203,9 @@ function printToScreen(input){
                   ((input == "^" || input == "^2") && last == "%") ||
                   ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "") ||
 									(input == "=" && (equation == "" || operation.includes(last) || last2 == "√("));
+	if(document.getElementById("equation-container").getAttribute("placeholder")!=0){
+		nochange=false;
+	}
 
   if (!nochange){
     id = "";
@@ -219,9 +223,11 @@ function printToScreen(input){
         if(last == "0" && !numbers.includes(twoBefore) && twoBefore != "."){
           equation = cutLast;
         }
+        clearPlaceholder();
         break;
 
 			case "e":
+			clearPlaceholder()
 				if(last == "."){
 					equation = cutLast;
 				}
@@ -230,18 +236,25 @@ function printToScreen(input){
       case "+":
       case "*":
       case "/":
+      handlePlaceholder()
+        var last = equation.slice(-1);
         if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "-":
+      handlePlaceholder()
+        var last = equation.slice(-1);
         if(["+", "-", "*", "/", "^", "."].includes(last) || (last == "0" && twoBefore == "")){
           equation = cutLast;
         }
         break;
 
       case "%":
+      handlePlaceholder()
+        var last = equation.slice(-1);
+
         if(["+", "-", "*", "/", "^", "E", "(", ".", "%"].includes(last)){
           equation = cutLast;
         }
@@ -249,42 +262,56 @@ function printToScreen(input){
 
       case "^":
       case "^2":
+      handlePlaceholder()
+        var last = equation.slice(-1);
         if(["+", "-", "*", "/", "E", "(", "."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case ".":
+      handlePlaceholder()
+        var last = equation.slice(-1);
+  var last2 = equation.slice(-2);
         if(["%", ")"].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "√(":
+      clearPlaceholder();
+      var last = equation.slice(-1);
         if(["","."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case "(":
+      clearPlaceholder()
         if(["."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case ")":
+      clearPlaceholder()
         if(["+", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
 
       case "E":
+      	handlePlaceholder()
+      	  var last = equation.slice(-1);
         if (!numbers.includes(last)){
           equation = cutLast;
         }
         break;
 
       case "<-":
+      	handlePlaceholder();
+      	  var last = equation.slice(-1);
+  var cutLast = equation.substring(0, equation.length - 1);
         if(last2 == "√("){
           equation = cutLast2;
         } else {
@@ -299,6 +326,7 @@ function printToScreen(input){
         break;
 
       case "C":
+      clearPlaceholder()
         equation = "";
 				dot = 0;
 				setexp = 0;
@@ -310,10 +338,12 @@ function printToScreen(input){
       case "M-":
       case "MC":
       case "=":
+      clearPlaceholder()
         if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
           equation = cutLast;
         }
-        result = normalize(evaluate())
+        result = normalize(evaluate());
+        updatePlaceholder(result);
         addHistory(equation, result);
         equation = "";
         setexp = 0;
@@ -352,4 +382,24 @@ function printToScreen(input){
 			handleMemory();
 		}
 	}
+}
+
+
+function handlePlaceholder(){
+	var inputfield = document.getElementById("equation-container");
+	var placeholder = inputfield.getAttribute("placeholder");
+	if(placeholder!=0){
+		equation=placeholder.toString();
+		inputfield.setAttribute("placeholder",0);
+		if(parseFloat(equation)!=parseInt(equation)){
+			dot=1;
+		}
+		update(equation);
+	}
+}
+
+function clearPlaceholder(){
+	var inputfield = document.getElementById("equation-container");
+	var placeholder = inputfield.getAttribute("placeholder");
+	inputfield.setAttribute("placeholder",0);
 }
