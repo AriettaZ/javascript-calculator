@@ -98,6 +98,11 @@ function changeClearButtonOpacity(opacity) {
 function updatePlaceholder(result) {
 	var equationContainer = document.getElementById("equation-container");
 	result = result.toString().replace("e+","E");
+	if(result == Infinity){
+		result = 0;
+	}else if(result.toString()== "NaN"){
+		result = 0;
+	}
 	equationContainer.setAttribute("placeholder", result);
 }
 
