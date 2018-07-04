@@ -8,7 +8,7 @@
 var memory = 0;
 function handleMemory(){
   document.getElementById("mr").addEventListener("click", handleMR);
-  showMemory(); // Node need to display the memory
+  updateMemory(); // Node need to display the memory
   document.getElementById("ms").addEventListener("click", handleMS);
   document.getElementById("m+").addEventListener("click", handleMPlus);
   document.getElementById("m-").addEventListener("click", handleMMinus);
@@ -87,6 +87,4 @@ function handleMC(){
   showMemory();
 }
 
-function showMemory(){
-  document.getElementById("current-memory").innerHTML = memory;
-}
+

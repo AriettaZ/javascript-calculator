@@ -9,6 +9,8 @@ function tokenize(equation) {
 	equation = sqrt2exp(equation);
 	var parenthesis = 0;
 	var tokens = new Array();
+	
+	//Replace semantic combination of symbols to math functions
 	for(var i = 0; i < equation.length; i++) {
 		var str = equation[i];
 		switch(true) {
@@ -75,14 +77,16 @@ function tokenize(equation) {
 				break;
 		}
 	}
+	
+	//Replace string of floats/ints to type number
 	for(var i = 0; i < tokens.length; i++) {
 		var parse2num = parseFloat(tokens[i]);
 		if(!isNaN(parse2num)){
 			tokens[i]=parse2num;
 		}
-//		document.write(tokens[i]);
-//		document.write(typeof(tokens[i]) + "<br />");
 	}
+	
+	//Parenthesis mismatch
 	if(parenthesis!=0){
 		alert("Parenthesis error");
 	}
