@@ -206,7 +206,7 @@ footer i{
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    top:35px;
+    top:38px;
     right:0px;
     font-size: 12px;
 }
@@ -228,7 +228,7 @@ footer i{
 }
 .tooltip:hover .tooltiptext, .tooltip:hover .left-tooltiptext {
     visibility: visible;
-    transition-delay:1s;
+    transition-delay:2s;
 }
 
 @media screen and (max-width: 1020px) {
