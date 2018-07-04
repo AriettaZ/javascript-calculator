@@ -3,7 +3,7 @@
 // Edit: Gail 7/2 update corresponding to design of buttons in index.html
 // Description: Using buttons and keyboard to enter the equation.
 
-var equation = "0";
+var equation = "";
 var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 
 // Author: Gail Chen
@@ -14,7 +14,7 @@ var CHAR_CODE = [43, 45, 56, 42, 47, 40, 41, 69, 13, 61, 8, 46, 37, 94, 8730];
 // Update: equation, #current-input
 // Return: N/A
 function getInput() {
-	//update("0");
+	update(equation);
 	// handleMemory();
 
 	var textArea = document.getElementById("equation-container");
@@ -164,9 +164,10 @@ function keyboardInput(event) {
 }
 
 var all = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C", "^", "^2", "E", "(", ")", "%", "√(", ".", "MR", "MS", "M+", "M-", "MC", "<-"];
+var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var operation = ["+", "-", "*", "/", "^", "E", ".", "(", "√("];
 var startOp = ["(", "√(", "-"];
-var midOp = ["+", "*", "/", "^", "E"];
+var midOp = ["+", "*", "/", "^", "E", "."];
 var endOp = ["^2", ")", "%"];
 var clear = ["=", "C", "MR", "MS", "M+", "M-", "MC"];
 var other = ["<-"];
@@ -189,13 +190,17 @@ function printToScreen(input){
   var threeBefore = equation.charAt(equation.length - 3);
   var cutLast = equation.substring(0, equation.length - 1);
   var cutLast2 = equation.substring(0, equation.length - 2);
-  var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  var nochange = ((equation == "0") && [")", "<-"].includes(input)) ||
+	// Not acceptable inputs: start the equation with midOp or endOp
+	//												
+  var nochange = ((equation == "" || equation == "0") && [")"].includes(input)) ||
+									(equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
                   (operation.includes(last) && input == ".") ||
+									(numbers.includes(input) && endOp.includes(last)) ||
                   (last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
                   (input == "%" && (startOp.includes(last) || midOp.includes(last))) ||
-                  ((input == "^" || input == "^2") && (last == "%")) ||
-                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "");
+                  ((input == "^" || input == "^2") && last == "%") ||
+                  ((endOp.includes(input) || midOp.includes(input)) && last == "-" && twoBefore == "") ||
+									(input == "=" && (equation == "" || operation.includes(last) || last2 == "√("));
 
   if (!nochange){
     id = "";
@@ -209,11 +214,17 @@ function printToScreen(input){
       case "6":
       case "7":
       case "8":
-      case "9":
-        if((last == "0" && !numbers.includes(twoBefore) && twoBefore != ".") || endOp.includes(last)){
+      case "9": // || endOp.includes(last)
+        if(last == "0" && !numbers.includes(twoBefore) && twoBefore != "."){
           equation = cutLast;
         }
         break;
+
+			case "e":
+				if(last == "."){
+					equation = cutLast;
+				}
+				break;
 
       case "+":
       case "*":
@@ -255,13 +266,13 @@ function printToScreen(input){
         break;
 
       case "(":
-        if(["."].includes(last) || (last == "0" && twoBefore == "")){
+        if(["."].includes(last)){
           equation = cutLast;
         }
         break;
 
       case ")":
-        if(["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
+        if(["+", "*", "/", "^", "E", "."].includes(last) || last2 == "√("){
           equation = cutLast;
         }
         break;
@@ -287,7 +298,9 @@ function printToScreen(input){
         break;
 
       case "C":
-        equation = "0";
+        equation = "";
+				dot = 0;
+				setexp = 0;
         break;
 
       case "MR":
@@ -299,10 +312,9 @@ function printToScreen(input){
         if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
           equation = cutLast;
         }
-        equation += "=";
         result = evaluate()
         addHistory(equation, result)
-        equation = "0";
+        equation = "";
         setexp = 0;
         dot = 0;
         break;
@@ -329,11 +341,11 @@ function printToScreen(input){
     }
 
 
-		if(equation === "") {
-			equation += "0";
-		}
+		// if(equation === "") {
+		// 	equation += "0";
+		// }
 		update(equation);
-		if(equation !== "0") {
+		if(equation !== "") {
 			disableMemory();
 		} else {
 			handleMemory();
