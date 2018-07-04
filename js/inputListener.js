@@ -183,29 +183,29 @@ function invalidToAdd(input) {
 	var twoBefore = equation.charAt(equation.length - 2); // The second-to-last character of the equation.
 
 	// Inputs will not be added to the end of the equation in following situations:
-	// 1. add an operator in midOp or endOp shown above to an empty equation
-	// 2. add a decimal point after operators or e or when the term has '.' in it already
+	// 1. add an input that is not a number or one of ["(", "√(", "-", "e"] to an empty equation
+	// 2. add a decimal point when the equation is not ended with a number and the number already has a decimal point
 	// 3. add a number after %, ) or e
-	// 4. add an operator in midOp or endOp after (
+	// 4. add an operator in midOp or endOp or '=' after (
 	// 5. add ) or % after an operator in startOp or midOp
 	// 6. add E after %
 	// 7. add ^, ^2 after %
 	// 8. add ^, ^2 after an operator in ["+", "-", "*", "/", "^", "E", ".", "^2"] where there is a % before the operator
 	// 9. add an operator in endOp or midOp to an equation that is "-" or "(-"
 	// 10. enter "=" when equation is empty or the equation ends with an operator in startOp or midOp
-	var invalidToAdd = (equation == "" && (midOp.includes(input) || endOp.includes(input))) ||
-		((operator.includes(last) || last == "e" || dotExists == 1) && input == ".") ||
-		(numbers.includes(input) && (endOp.includes(last) || last == "e")) ||
-		(last == "(" && (endOp.includes(input) || midOp.includes(input))) ||
+  var invalidToAdd = (equation == "" && !(numbers.includes(input) || startOp.includes(input) || input === "e")) ||
+		(!(numbers.includes(last) && dotExists == 0) && input == ".") ||
+		(numbers.includes(input) && (endOp.includes(last) || last == "e" )) ||
+		(last == "(" && (endOp.includes(input) || midOp.includes(input) || input == "=")) ||
 		([")", "%"].includes(input) && (startOp.includes(last) || midOp.includes(last))) ||
 		(input == "E" && last == "%") ||
 		(["^", "^2"].includes(input) && last == "%") ||
 		(["^", "^2"].includes(input) && (twoBefore == "%" && (["+", "-", "*", "/", "^", "E", "."].includes(last) || last2 == "^2"))) ||
 		((endOp.includes(input) || midOp.includes(input)) && last == "-" && ["", "("].includes(twoBefore)) ||
 		(input == "=" && (equation == "" || midOp.includes(last) || startOp.includes(last)));
-	if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
-		invalidToAdd = true;
-	}
+		if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
+			invalidToAdd = true;
+		}
 	return invalidToAdd;
 }
 
@@ -224,146 +224,146 @@ function printToScreen(input) {
 	var cutLast = equation.substring(0, equation.length - 1); // Remove the equation's last character.
 	var cutLast2 = equation.substring(0, equation.length - 2); // Remove the equation's last 2 characters.
 	var invalid = invalidToAdd(input); // Checks if the input is valid to be added to the end of equation.
-	 // Has a problem with adding '.', )
+	// Has a problem with adding '.', )
 
 	// If the input is valid to be added to the end of equation, do the following.
-//	if(!invalid) {
-		switch(input) {
-			case "0":
-			case "1":
-			case "2":
-			case "3":
-			case "4":
-			case "5":
-			case "6":
-			case "7":
-			case "8":
-			case "9":
-				clearPlaceholder();
-				if(invalidToAdd(input)) return;
-				// If a nonzero number starts with 0, remove the leading 0.
-				if(last == "0" && !numbers.includes(twoBefore) && twoBefore != ".") {
-					equation = cutLast;
-				}
-				break;
+	//	if(!invalid) {
+	switch(input) {
+		case "0":
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+		case "5":
+		case "6":
+		case "7":
+		case "8":
+		case "9":
+			clearPlaceholder();
+			if(invalidToAdd(input)) return;
+			// If a nonzero number starts with 0, remove the leading 0.
+			if(last == "0" && !numbers.includes(twoBefore) && twoBefore != ".") {
+				equation = cutLast;
+			}
+			break;
 
-			case "e":
-				clearPlaceholder()
-				if(invalidToAdd(input)) return;
-				// If the last character in the equation is a decimal point,
-				// repace the decimal point with the input and set the dotExists flag to 0.
-				if(last == ".") {
-					equation = cutLast;
-					dotExists = 0;
-				}
-				break;
-
-			case "+":
-			case "-":
-			case "*":
-			case "/":
-			case "^":
-			case "^2":
-			case "E":
-			case "%":
-				// If the equation is ended with '-' or an operator in mipDop, replace that operator with the input.
-				handlePlaceholder()
-				if(invalidToAdd(input)) return;
-				var last = equation.slice(-1);
-				if(midOp.includes(last) || last == "-") {
-					equation = cutLast;
-				}
-				break;
-
-			case ".":
-				handlePlaceholder()
-				if(invalidToAdd(input)) return;
-//				 var last = equation.slice(-1);
-//				 var last2 = equation.slice(-2);
-//				 if(["%", ")"].includes(last)){
-//				   equation = cutLast;
-//				 }
-				break;
-
-			case "√(":
-			case "(": // If the equation is ended with the decimal point, replace '.' with the input.
-				clearPlaceholder();
-				if(invalidToAdd(input)) return;
-				var last = equation.slice(-1);
-				if(last == ".") {
-					equation = cutLast;
-				}
-				break;
-
-			case ")": // If the equation is ended with an operator from midOp or startOp, remove this operator.
-				clearPlaceholder()
-				if(invalidToAdd(input)) return;
-				// if(midOp.includes(last) || startOp.includes(last)){
-				//   equation = cutLast;
-				// }
-				break;
-
-			case "<-":
-				handlePlaceholder();
-				if(invalidToAdd(input)) return;
-				last = equation.slice(-1);
-				cutLast = equation.substring(0, equation.length - 1);
-
-				// If the equation is ended with '√(', remove '√(';
-				// otherwise, remove the last character in the equataion.
-				if(last2 == "√(") {
-					equation = cutLast2;
-				} else {
-					equation = cutLast;
-				}
-
-				// Reset the dotExists flag if the removed character is a decimal point.
-				if(last == ".") {
-					dotExists = 0;
-				}
-				break;
-
-			case "C":
-				clearPlaceholder();
-				if(invalidToAdd(input)) return;
-				equation = ""; // Clear the equation.
-				dotExists = 0; // Reset the dotExists flag.
-				break;
-
-			case "=":
-				if(invalidToAdd(input)) return;
-				result = normalize(evaluate()); // Evaluate the equation and update the result.
-				updatePlaceholder(result); // Update the placeholder with the calculated result.
-				addHistory(equation, result); // Add the equation and its result to the history.
-				equation = ""; // Clear the equation;
-				dotExists = 0; // Reset the dotExists flag.
-				break;
-		}
-		// If the input doesn't clear the equation or delete the last character of the equation,
-		// add the input to the end of the equation.
-		if(!clear.includes(input) && input != "<-") {
-			equation += input;
-			// If the input is in ["+", "-", "*", "/", "(", ")", "^", "^2", '√('] which means
-			// a new number will be entered after it, then reset the dotExists flag.
-			if(["+", "-", "*", "/", "(", ")", "^", "^2", '√('].includes(input)) {
+		case "e":
+			clearPlaceholder()
+			if(invalidToAdd(input)) return;
+			// If the last character in the equation is a decimal point,
+			// repace the decimal point with the input and set the dotExists flag to 0.
+			if(last == ".") {
+				equation = cutLast;
 				dotExists = 0;
 			}
+			break;
 
-			// If the input is a decimal point, set dotExists flag to 1.
-			if(input == ".") {
-				dotExists = 1;
+		case "+":
+		case "-":
+		case "*":
+		case "/":
+		case "^":
+		case "^2":
+		case "E":
+		case "%":
+			// If the equation is ended with '-' or an operator in mipDop, replace that operator with the input.
+			handlePlaceholder()
+			if(invalidToAdd(input)) return;
+			var last = equation.slice(-1);
+			if(midOp.includes(last) || last == "-") {
+				equation = cutLast;
 			}
+			break;
+
+		case ".":
+			handlePlaceholder()
+			if(invalidToAdd(input)) return;
+			//				 var last = equation.slice(-1);
+			//				 var last2 = equation.slice(-2);
+			//				 if(["%", ")"].includes(last)){
+			//				   equation = cutLast;
+			//				 }
+			break;
+
+		case "√(":
+		case "(": // If the equation is ended with the decimal point, replace '.' with the input.
+			clearPlaceholder();
+			if(invalidToAdd(input)) return;
+			var last = equation.slice(-1);
+			if(last == ".") {
+				equation = cutLast;
+			}
+			break;
+
+		case ")": // If the equation is ended with an operator from midOp or startOp, remove this operator.
+			clearPlaceholder()
+			if(invalidToAdd(input)) return;
+			// if(midOp.includes(last) || startOp.includes(last)){
+			//   equation = cutLast;
+			// }
+			break;
+
+		case "<-":
+			handlePlaceholder();
+			if(invalidToAdd(input)) return;
+			last = equation.slice(-1);
+			cutLast = equation.substring(0, equation.length - 1);
+
+			// If the equation is ended with '√(', remove '√(';
+			// otherwise, remove the last character in the equataion.
+			if(last2 == "√(") {
+				equation = cutLast2;
+			} else {
+				equation = cutLast;
+			}
+
+			// Reset the dotExists flag if the removed character is a decimal point.
+			if(last == ".") {
+				dotExists = 0;
+			}
+			break;
+
+		case "C":
+			clearPlaceholder();
+			if(invalidToAdd(input)) return;
+			equation = ""; // Clear the equation.
+			dotExists = 0; // Reset the dotExists flag.
+			break;
+
+		case "=":
+			if(invalidToAdd(input)) return;
+			result = normalize(evaluate()); // Evaluate the equation and update the result.
+			updatePlaceholder(result); // Update the placeholder with the calculated result.
+			addHistory(equation, result); // Add the equation and its result to the history.
+			equation = ""; // Clear the equation;
+			dotExists = 0; // Reset the dotExists flag.
+			break;
+	}
+	// If the input doesn't clear the equation or delete the last character of the equation,
+	// add the input to the end of the equation.
+	if(!clear.includes(input) && input != "<-") {
+		equation += input;
+		// If the input is in ["+", "-", "*", "/", "(", ")", "^", "^2", '√('] which means
+		// a new number will be entered after it, then reset the dotExists flag.
+		if(["+", "-", "*", "/", "(", ")", "^", "^2", '√(', "E"].includes(input)) {
+			dotExists = 0;
 		}
 
-		// Display the resulting equation to #equation-container.
-		update(equation);
+		// If the input is a decimal point, set dotExists flag to 1.
+		if(input == ".") {
+			dotExists = 1;
+		}
 	}
+
+	// Display the resulting equation to #equation-container.
+	update(equation);
+}
 //}
 
 // Author: Mike
 // Created: 7/3
 // Edit: N/A
-// Description: Put placeholder as the equation and update view
+// Description: Put placeholder as the equation, update view and set set placeholder to 0
 // Require: N/A
 // Update: #equation-container, equation
 // Return: N/A
