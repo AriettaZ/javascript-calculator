@@ -93,8 +93,11 @@ body{
   display: block;
   width: 80%;
   margin: auto;
+  cursor: default;
 }
-
+header p{
+  margin:0px;
+}
 #clear-button{
   width:100%;
   opacity: 0;
@@ -152,7 +155,6 @@ button{
   width: 80%;
   float:right;
 }
-
 .memory{
   background: #6599f5;
   color: white;
