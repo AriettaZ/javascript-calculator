@@ -360,10 +360,10 @@ function printToScreen(input) {
 			case "M+":
 			case "M-":
 			case "MC":
-				clearPlaceholder()
-				if(invalidToAdd(input)){
-					break;
-				}
+//				handlePlaceholder()
+//				if(invalidToAdd(input)){
+//					break;
+//				}
 				// if(["+", "-", "*", "/", "^", "E", ".", "("].includes(last)  || last2 == "√("){
 				//   equation = cutLast;
 				// }
@@ -408,6 +408,13 @@ function printToScreen(input) {
 	}
 }
 
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: 
+// Require: N/A
+// Update: #equation-container
+// Return: N/A
 function handlePlaceholder() {
 	var inputfield = document.getElementById("equation-container");
 	var placeholder = inputfield.getAttribute("placeholder");
@@ -421,6 +428,13 @@ function handlePlaceholder() {
 	}
 }
 
+// Author: Mike
+// Created: 7/3
+// Edit: N/A
+// Description: show memory illustration
+// Require: N/A
+// Update: #equation-container
+// Return: N/A
 function clearPlaceholder() {
 	var inputfield = document.getElementById("equation-container");
 	var placeholder = inputfield.getAttribute("placeholder");

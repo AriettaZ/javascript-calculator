@@ -30,11 +30,15 @@ function disableMemory(){
 // Return: N/A
 function handleMS(){
   var invalid_expression = invalidToAdd("=");
+  var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
   if (!invalid_expression) {
     printToScreen("=");
     memory = result;
     updateMemory(memory);
-  } else {
+  } else if(placeholder !=0){
+  	memory = parseFloat(placeholder);
+  	updateMemory(memory);
+  }else {
     update("ERROR");
   }
 }

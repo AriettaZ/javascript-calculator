@@ -97,6 +97,7 @@ function changeClearButtonOpacity(opacity) {
 //Return: N/A
 function updatePlaceholder(result) {
 	var equationContainer = document.getElementById("equation-container");
+	result = result.toString().replace("e+","E");
 	equationContainer.setAttribute("placeholder", result);
 }
 
@@ -129,7 +130,7 @@ function showM(event) {
 			equationField.value = "Memory-(" + equationField.value + ")"
 			break;
 		case "mc":
-			memoryField.innerHTML = "0";
+			memoryField.innerHTML = 0;
 			break;
 		case "mr":
 			equationField.value = memory;
@@ -138,8 +139,11 @@ function showM(event) {
 			equationField.value = memory;
 			break;
 		case "ms":
+			var placeholder = document.getElementById("equation-container").getAttribute("placeholder");
 			if(equation != "") {
 				memoryField.innerHTML = "= " + equation;
+			}else if(placeholder!=0){
+				memoryField.innerHTML = "= " + placeholder;
 			}
 			break;
 		default:
