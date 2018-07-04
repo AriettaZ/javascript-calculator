@@ -89,7 +89,9 @@ function tokenize(equation) {
 	//Parenthesis mismatch
 	if(parenthesis!=0){
 		alert("Parenthesis error");
+		tokens = [NaN]
 	}
+	alert(tokens)
 	return tokens;
 }
 
