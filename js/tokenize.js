@@ -91,7 +91,6 @@ function tokenize(equation) {
 		alert("Parenthesis error");
 		tokens = [NaN]
 	}
-	alert(tokens)
 	return tokens;
 }
 
