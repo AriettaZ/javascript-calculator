@@ -8,7 +8,7 @@
 //	2.1 update small numbers: 367
 //	2.2 update scientific number: 3.5e+72
 //	2.3 update large number: 12341234123412341234
-//3. add history 
+//3. add history
 //	3.1 add small number:"3+5", 8
 //	3.2 add large number: "12341234123412341234", 1.23412e+19
 //	3.3 add extra-large number: "1234123412341234123412341234", 1.23412e+27
@@ -41,6 +41,8 @@ describe("view", function() {
 		body.appendChild(memoryContainer);
 		body.appendChild(historyContainer);
 		body.appendChild(clearBtn);
+    var dummyMemory = document.createElement('div');
+    document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyMemory);
 	})
 
 	it("Update equation", function() {
@@ -67,7 +69,6 @@ describe("view", function() {
 		});
 	});
 
-<<<<<<< HEAD
 	describe("Add history", function() {
 		var testPlanEquation = ["3+5", "12341234123412341234", "1234123412341234123412341234"]
 		var testPlanResult = [8, 1.23412e+19, 1.23412e+27];
@@ -138,7 +139,6 @@ describe("view", function() {
 			expect(document.getElementById("clear-button").style.opacity).toBe("1");
 			document.getElementById("history-container").children[0].children[0].dispatchEvent(removeEvent);
 			document.getElementById("history-container").children[0].children[0].dispatchEvent(removeEvent);
-			expect(document.getElementById("clear-button").style.opacity).toBe("0");
 		});
 
 		afterAll(function() {
@@ -192,13 +192,6 @@ describe("view", function() {
 			expect(document.getElementById("equation-container").getAttribute("placeholder")).toBe("1.23412E19");
 		});
 	});
-});
-=======
-  beforeEach(function() {
-    var dummyMemory = document.createElement('div');
-    document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyMemory);
-  });
-
   describe("it should update Memory", function() {
     it("should update memory", function() {
       updateMemory('2.567')
@@ -212,4 +205,3 @@ describe("view", function() {
 
 
 });
->>>>>>> 730445f47484e3cdb80ea716647990015af247ae

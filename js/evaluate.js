@@ -1,7 +1,7 @@
 // Author: Channing Jacobs
 // Created: 7/3/18
 // Edit: N/A
-// Description: Evaluates a well-formatted input string. Returning
+// Description: Evaluates a well-formatted input array of character. Returning
 // 				a single number. Updates the string == "".
 function evaluate() {
 	var eq = tokenize(equation);

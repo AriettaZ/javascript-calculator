@@ -1,10 +1,7 @@
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
-// Description: Handles MS, MR, M+, M-, MC
-// MS, M+, M-, MC can only be called if the equation == "0".
-// MR is can be used after operation
-
+// Edit: Channing, Removed hiding memory and updated all functions.
+// Description: Handles MS, MR, M+, M-, MC button presses.
 function handleMemory() {
 	updateMemory(memory); // Node need to display the memory
 	document.getElementById("mr").addEventListener("click", handleMR);
@@ -13,14 +10,7 @@ function handleMemory() {
 	document.getElementById("m-").addEventListener("click", handleMMinus);
 	document.getElementById("mc").addEventListener("click", handleMC);
 }
-/*
-function disableMemory(){
-  document.getElementById("ms").removeEventListener("click", handleMS);
-  document.getElementById("m+").removeEventListener("click", handleMPlus);
-  document.getElementById("m-").removeEventListener("click", handleMMinus);
-  document.getElementById("mc").removeEventListener("click", handleMC);
-}
-*/
+
 // Author: Gail Chen
 // Created: 7/2
 // Edit: Channing, rewritten to handle errors in input and expression eval.
@@ -45,7 +35,7 @@ function handleMS() {
 
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, handling decimal values in memory when recalled.
 // Description: MR(Memory Recall) uses the number in memory, acts as if you had keyed in that number yourself
 // Require: N/A
 // Update: memory
@@ -65,7 +55,7 @@ function handleMR() {
 
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, error handling for invalid expressions.
 // Description: M+(Memory Add) adds the result of current equation to the memory
 // Require: N/A
 // Update: equation, #current-input
@@ -83,7 +73,7 @@ function handleMPlus() {
 
 // Author: Gail Chen
 // Created: 7/2
-// Edit: N/A
+// Edit: Channing, error handling for invalid expressions.
 // Description: Handles memory store.
 // Require: N/A
 // Update: memory
