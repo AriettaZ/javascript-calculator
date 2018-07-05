@@ -2,22 +2,10 @@
 Author: Gail Chen
 Created: 7/4
 Edit: N/A
-Description: Test functions in inputListener.js
-Test plan for function invalidToAdd():
-Return false if: (equation doesn't change after printToScreen)
-1. input is in ["+", "*", "/", "=", "C", "^", "^2", "E", ")", "%", ".", "<-"] and equation is ""
-2. input is "." and (equation is not ended with a number from 0 to 9 and dotExists is true)
-3. input is a number from 0 to 9, and equation is ended with %, ) or e
-4. input is in ["+", "*", "/", "^", "E", ".", "^2", ")", "%", "="], and equation is ended with "("
-5. input is in [")", "%"], and equation is ended with a character in ["(", "-", "+", "*", "/", "^", "E", "."]
-6. input is in ["E", "^", "^2"], and equation is ended with "%"
-7. input is in ["^", "^2"], and the equation is ended with an character in ["-", "+", "*", "/", E", "."] where "%" is before this character
-8. input is in ["+", "*", "/", "^", "E", ".", "^2", ")", "%"], and equation is "-" or "(-"
-9. input is "=", and (equation is "" or equation ends with a character in ["(", "-", "+", "*", "/", "^", "E", "."])
-10. document.getElementById("equation-container").getAttribute("placeholder") == 0
+Description: Interation test for functions in inputListener.js
 
-Test plan for printToScreen: checks equation
-Place holder == 0:
+Test plan for printToScreen (invovls invalidToAdd(), evaluate()): checks final equation
+  The input will be added to the end of the equation, special cases are identified for differnet inputs bellow.
 1. input is a number from 0 to 9:
   If a nonzero number starts with 0, remove the leading 0 and add input to 0.
   If the equation is ended with %, ) or e, no change to equation.
@@ -37,7 +25,10 @@ Place holder == 0:
   - initial equation == "(10.5)", final equation == "(10.5)"
 
 2. input is "e":
-  If the last character in the equation is a decimal point, repace the decimal point with the input and reset the dotExists flag.
+  If the last character in the equation is a decimal point, replace the decimal point with the input and reset the dotExists flag.
+  - initial equation == "", final equation == "e"
+  - initial equation == "(", final equation == "(e"
+  - initial equation == "10.4-", final equation == "10.4-e"
   - initial equation == "10", final equation == "10e"
   - initial equation == "10E", final equation == "10Ee"
   - initial equation == "2.3", final equation == "2.3e", dotExists == true
@@ -46,20 +37,23 @@ Place holder == 0:
 3. input is in ["+", "*", "/"]:
   If the equation is "", "-", "(-", or ends with "(", the equation doesn't change.
   If the quation is end with a character in ["+", "*", "/", "^", "E", ".", "-"], replace thie character with the input.
-  input is "+":
+  For all:
   - initial equation == "", final equation == ""
+  - initial equation == "-", final equation == "-"
+  - initial equation == "(-", final equation == "(-"
+  - initial equation == "10(", final equation == "10("
+  input is "+":
   - initial equation == "10.4-", final equation == "10.4+"
   - initial equation == "10.4+", final equation == "10.4+"
   - initial equation == "10.4*", final equation == "10.4+"
   - initial equation == "10.4", final equation == "10.4+"
   input is "*":
-  - initial equation == "10(", final equation == "10("
-  - initial equation == "-", final equation == "-"
+  - initial equation == "10.4-", final equation == "10.4*"
   - initial equation == "10.4/", final equation == "10.4*"
   - initial equation == "10.4^", final equation == "10.4*"
   - initial equation == "10.4", final equation == "10.4*"
   input is "/":
-  - initial equation == "(-", final equation == "(-"
+  - initial equation == "10.4-", final equation == "10.4/"
   - initial equation == "10.4E", final equation == "10.4/"
   - initial equation == "104.", final equation == "104/"
   - initial equation == "10.4", final equation == "10.4/"
@@ -71,113 +65,124 @@ Place holder == 0:
   - initial equation == "(-", final equation == "(-"
   - initial equation == "10.4^", final equation == "10.4-"
   - initial equation == "10.4E", final equation == "10.4-"
+  - initial equation == "10.4-", final equation == "10.4-"
   - initial equation == "10.4", final equation == "10.4-"
+  - initial equation == "10*34", final equation == "10*34-"
 
 5. input is in ["^", "^2"]:
   If the equation doesn't change if the equation is "", "-", "(-", or ends with "(" or "%",
     or is ended with an character in ["-", "+", "*", "/", E", "."] where "%" is before this character.
   If the quation is end with a character in ["+", "*", "/", "^", "E", ".", "-"], replace thie character with the input.
-  input == "^":
+  For both:
   - initial equation == "", final equation == ""
+  - initial equation == "-", final equation == "-"
   - initial equation == "(-", final equation == "(-"
+  - initial equation == "10(", final equation == "10("
   - initial equation == "10%", final equation == "10%"
   - initial equation == "10%-", final equation == "10%-"
-  - initial equation == "10%^", final equation == "10%^"
+  - initial equation == "10%/", final equation == "10%/"
+  input == "^":
   - initial equation == "10.4^2", final equation == "10.4^2^"
   - initial equation == "10.4-", final equation == "10.4^"
   - initial equation == "10.4*", final equation == "10.4^"
   - initial equation == "10.4/", final equation == "10.4^"
   input == "^2":
-  - initial equation == "-", final equation == "-"
-  - initial equation == "10(", final equation == "10("
-  - initial equation == "10%^", final equation == "10%^"
+  - initial equation == "10^", final equation == "10^2"
   - initial equation == "10.4^2", final equation == "10.4^2^2"
   - initial equation == "10.4E", final equation == "10.4^2"
   - initial equation == "104.", final equation == "104^2"
 
-6. input == "%":
-  The equation doesn't change if the equation is "", "-", "(-", or ends with "(",
-    or ends with a character in ["(", "-", "+", "*", "/", "^", "E", ". "].
-  - initial equation == "", final equation == ""
-  - initial equation == "10(", final equation == "10("
-  - initial equation == "10.4-", final equation == "10.4-"
-  - initial equation == "10.4^", final equation == "10.4^"
-  - initial equation == "10.4", final equation == "10.4%"
-
-7. input == "E":
+6. input == "E":
   If the equation is "", "-", "(-", or ends with "(", the equation doesn't change.
   If the quation is end with a character in ["+", "*", "/", "^", "E", ".", "-", "%"], replace thie character with the input.
   - initial equation == "", final equation == ""
+  - initial equation == "-", final equation == "-"
+  - initial equation == "(-", final equation == "(-"
   - initial equation == "10(", final equation == "10("
   - initial equation == "10.4-", final equation == "10.4E"
   - initial equation == "10.4*", final equation == "10.4E"
   - initial equation == "10.4", final equation == "10.4E"
   - initial equation == "10.4%", final equation == "10.4%"
 
-8. input == ".":
-  If the equation is "", "-", "(-", or ends with "(", the equation doesn't change.
-  If the quation is end with a character in ["+", "*", "/", "^", "E", ".", "-"], replace thie character with the input.
-
+7. input == ".":
+  The equation doesn't change if the equation is "", "-", "(-", or ends with "(",
+    or the equation is not ended with a number from 0 to 9 or dotExists is true
   - initial equation == "", final equation == ""
+  - initial equation == "-", final equation == "-"
+  - initial equation == "(-", final equation == "(-"
+  - initial equation == "10(", final equation == "10("
+  - initial equation == "10", final equation == "10."
+  - initial equation == "10.3", final equation == "10.3"
+  - initial equation == "10.3+", final equation == "10.3+"
+  - initial equation == "10.3e^2", final equation == "10.3^2."
 
-9. input == "√(":
+8. input in ["√(", "("]:
+  If the equation is ended with the decimal point, replace '.' with the input.
+  input == "√(":
   - initial equation == "", final equation == "√("
-
-10. input == "(":
-
+  - initial equation == "-", final equation == "-√("
+  - initial equation == "-12.", final equation == "12√("
+  - initial equation == "-12(", final equation == "12(√("
+  - initial equation == "-12*", final equation == "12*√("
+  - initial equation == "-12%", final equation == "12%√("
+  input == "(":
   - initial equation == "", final equation == "("
+  - initial equation == "-", final equation == "-("
+  - initial equation == "-12.", final equation == "12("
+  - initial equation == "-12^", final equation == "-12^("
+  - initial equation == "(-12)", final equation == "(-12)("
 
-11. input == ")":
+9. input in [")", "%]":
+  The equation doesn't change if the equation is "", "-", "(-",
+    or ends with a character in ["(", "-", "+", "*", "/", "^", "E", "."].
+  For both:
   - initial equation == "", final equation == ""
+  - initial equation == "-", final equation == "-"
+  - initial equation == "(-", final equation == "(-"
   - initial equation == "√(", final equation == "√("
+  - initial equation == "10(", final equation == "10("
+  - initial equation == "10.4-", final equation == "10.48"
+  - initial equation == "10.4^", final equation == "10.4^"
+  - initial equation == "10.4E", final equation == "10.4E"
+  - initial equation == "104.", final equation == "104."
+  - initial equation == "10.4%+", final equation == "10.4%+"
+  input == ")":
+  - initial equation == "(10.4", final equation == "(10.4)"
+  - initial equation == "√(234.3", final equation == "√(234.3)"
+  - initial equation == "(23*4.3", final equation == "(23*4.3)"
+  input == "%":
+  - initial equation == "(10.4", final equation == "(10.4%"
+  - initial equation == "√(234.3", final equation == "√(234.3%"
+  - initial equation == "23*4.3", final equation == "23*4.3%"
 
-12. input == "<-":
-  - initial equation == "", final equation == ""
+10. input == "<-":
+  If the equation is ended with '√(', remove '√('; otherwise, remove the last character in the equataion.
+  Reset the dotExists flag if the removed character is a decimal point.
+  - initial equation == "", final equation == "", final dotExists == false
+  - initial equation == "18.93-", final equation == "18.93", final dotExists == true
+  - initial equation == "18.93√(", final equation == "18.93", final dotExists == true
+  - initial equation == "19.0", final equation == "19.", final dotExists == true
+  - initial equation == "19.", final equation == "19", final dotExists == false
 
-13. input == "C":
-  - initial equation == "", final equation == ""
+11. input == "C":
+  Clear the equation and reset dotExists.
+  - initial equation == "", final equation == "", final dotExists == false
+  - initial equation == "(10.4*23-)", final equation == "", final dotExists == false
+  - initial equation == "(", final equation == "", final dotExists == false
+  - initial equation == "4.03^", final equation == "", final dotExists == false
+  - initial equation == "10.8", final equation == "", final dotExists == false
 
-14. input == "=":
+12. input == "=":
+  The equation doesn't change if the equation is "", "-", "(-" or
+    equation ends with a character in ["(", "-", "+", "*", "/", "^", "E", "."].
   - initial equation == "", final equation == ""
+  - initial equation == "-", final equation == "-"
+  - initial equation == "(-", final equation == "(-"
+  - initial equation == "√(", final equation == "√("
+  - initial equation == "10.4+9.3", final equation == "", result = 19.7
+  - initial equation == "10.4*4^3.9", final equation == "", result = 2317.7538197
+  - initial equation == "13^2^2", final equation == "", result = 28561
+  - initial equation == "10.4^5", final equation == "", result = 121665.29024
+  - initial equation == "10.4√(81)", final equation == "", result = 93.6
 
 */
-
-describe("inputListener", function() {
-
-  beforeEach(function() {
-  });
-
-  it("", function() {
-
-  });
-
-  describe("", function() {
-    beforeEach(function() {
-
-    });
-
-    it("", function() {
-
-    });
-
-    it("", function() {
-
-    });
-  });
-
-  it("", function() {
-
-  });
-
-  it("", function() {
-
-  });
-
-  //demonstrates use of expected exceptions
-  describe("", function() {
-    it("", function() {
-      // expect(function() {
-      // }).toThrowError("");
-    });
-  });
-});
