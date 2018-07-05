@@ -20,7 +20,7 @@ The MAGiC team was tasked with designing a web page with classic calculator func
 ***
 
 ### User Manual
-Open the ¡Calculator by openning index.html in the browser (Suggest browser: Safari [Why?](#Known-error-with-Different-Browsers)).
+Open the ¡Calculator by openning index.html in the browser (Suggest browser: Safari [Why?](#known-error)).
 
 
 Or, open browser and enter the following URL: https://i-calculator.herokuapp.com/
@@ -98,7 +98,7 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 	6.2 Result dismiss: after evaluation, previous result is dismissed if <b>number</b> is entered immediately.
 
 
-#### Known error with Different Browsers
+#### Known Error
 1. Firefox (Keycode Conflict)
 
 	1.1 Keyboard left-arrow(←) will append Percentage(%) to the end of the equation

@@ -275,6 +275,9 @@ function printToScreen(input) {
 			break;
 
 		case "%":
+			handlePlaceholder()
+			if(invalidToAdd(input)) return;
+			break;
 		case ")":
 			clearPlaceholder()
 			if(invalidToAdd(input)) return;
