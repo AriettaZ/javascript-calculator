@@ -105,20 +105,20 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 
 	1.2 Keyboard down-array(↓) will append left parenthesis('(') to the end of equation
 
-	1.3 In Ubuntu (not on MacOS), after mouse click clearHistory button, 'enter' key cannot add element to history container, unless the user click on the browser before hit 'enter'.
+	1.3 On Ubuntu (not on MacOS), after the mouse clicks the clearHistory button, the 'enter' key cannot add any elements to the history container, unless the user clicks on the browser before hitting 'enter'.
 
 		In code, addHistory() function call is made correctly but nothing is appended to the history-container.
 		The group tried a lot of methods, even hardcoded innerHTML cannot solve this problem.
 2. Chrome
 
-	2.1 Keyboard delete(⌫) does not work
+	2.1 Keyboard delete(⌫) does not work.
 
-	2.2 In MacOS, after mouse click clearHistory button, 'enter' key cannot add element to history container, unless the user click on the browser before hit 'enter'.
+	2.2 In MacOS, after the mouse clicks clearHistory button, 'enter' key cannot add element to history container, unless the user clicks on the browser before hitting 'enter'.
 
 		In code, addHistory() function call is made correctly but nothing is appended to the history-container.
 		The group tried a lot of methods, even hardcoded innerHTML cannot solve this problem.
 3. Safari
-	*  no error detected so far
+	*  No known errors.
 
 ***
 
