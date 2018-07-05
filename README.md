@@ -11,6 +11,11 @@
 
 ### Overview
 
+The MAGiC team was tasked with designing a web page with classic calculator functionalities. The team developed ¡Calculator which features:
+  *  Arithmetic Operators: + , - , * , \ , square root, exponentiation, percentage, scientific notation
+  *  Memory Management: MS, MC, MR, M+, M-
+  *  History Display
+
 ***
 
 ### User Manual
@@ -67,24 +72,21 @@ Channing:
 
 Gail:
 * unit_testing_inputListener.js
-* unit_testing_updateMemory.js
 
 
 Ariel:
 * unit_testing_normalize.js
 
-
 ##### Integration testing
-
+* updateMemory.js
 
 #### Meetings
 
 * June 26th
   * Group came up with the overall algorithm and structure together
   * Group assigned tasks and set timeline
+  * Group started developing testing plan
 * July 3rd
-  *
-  *
+  * Group finalized version 1
 * July 4th
-  *
-  *
+  * Group finished up code, documentation and testing
