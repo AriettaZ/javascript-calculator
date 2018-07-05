@@ -71,7 +71,7 @@
         </div>
       </div>
       <footer>
-        <p>
+        <p id="secret">
           Created by MAG¡C with <i class="fas fa-heart"></i>
         </p>
       </footer>
@@ -84,11 +84,12 @@
     <script type="text/javascript" src="js/normalize.js"></script>
     <script type="text/javascript" src="js/updateMemory.js"></script>
 
+    <script type="text/javascript" src="js/theme.js"></script>
     <!-- global variables -->
     <script>
-      var result = 0;
-      var memory = 0;
-      var equation = "";
+      var result = 0; // value returned from evaluate (later formatted for memory and equation)
+      var memory = 0; // current memory value being displayed
+      var equation = ""; // equation value currently displayed
       var dotExists = 0; // A flag indicates the existence of a decimal point in current number.
       getInput();
     </script>

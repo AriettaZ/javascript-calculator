@@ -1,6 +1,6 @@
 /* Author: Ariel Zhu
 Created: 7/3/18
-Edit: N/A
+Edit: Channing, weight => font-weight, slow transitions.
 Description: stylesheet foe calculator display page */
 .screen-container {
   display: block;
@@ -24,6 +24,7 @@ Description: stylesheet foe calculator display page */
   padding: 10px;
   border: solid 3px #304468;
   -webkit-user-select: none;
+  transition-duration: 0.2s;
 }
 
 .keyboard-item:hover{
@@ -67,6 +68,7 @@ Description: stylesheet foe calculator display page */
   display: inline;
   margin-right: 50px;
   color:#7fc9a5;
+  transition-duration: 0.2s;
 }
 .history-line i:hover{
   display: inline;
@@ -84,7 +86,6 @@ header{
   height:80px;
   line-height: 100px;
   font-size: 40px;
-  weight:bold;
 }
 body{
   background-color: #304468;
@@ -104,6 +105,7 @@ header p{
   width:100%;
   opacity: 0;
   border-top: 2px solid #7fc9a5;
+  transition-duration: 0.2s;
 }
 #clear-button:hover{
   background-color: #7fc9a5;
@@ -288,4 +290,8 @@ input:disabled{
   background: white;
   color: #304468;
   height: 50px;
+}
+
+.fa-heart{
+  color: red;
 }
