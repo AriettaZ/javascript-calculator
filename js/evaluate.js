@@ -1,12 +1,20 @@
 // Author: Channing Jacobs
 // Created: 7/3/18
 // Edit: N/A
-// Description: Evaluates a well-formatted input array of character. Returning
-// 				a single number. Updates the string == "".
+// Description: Evaluates a well-formatted input array of character and floats.
+// Returns the value of equation the user entered.
 function evaluate() {
 	var eq = tokenize(equation);
 	return expression(eq);
 }
+
+// Expression takes in an array of character representing a "well-formatted"
+// expression. The format of the expression is constrained by handling
+// user input on button presses and by tokenize.
+//
+// Requires: Well-formatted array of character (string) and floats.
+// Updates: equation => []
+// Returns: The evaluated result of equation (a float).
 
 // Expression consists of [term +|- term] or just [term]
 function expression(equation) {

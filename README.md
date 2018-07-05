@@ -104,20 +104,20 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 	1.1 Keyboard left-arrow(←) will append Percentage(%) to the end of the equation
 
 	1.2 Keyboard down-array(↓) will append left parenthesis('(') to the end of equation
-	
+
 	1.3 In Ubuntu (not on MacOS), after mouse click clearHistory button, 'enter' key cannot add element to history container, unless the user click on the browser before hit 'enter'.
-	
+
 		In code, addHistory() function call is made correctly but nothing is appended to the history-container.
 		The group tried a lot of methods, even hardcoded innerHTML cannot solve this problem.
 2. Chrome
 
 	2.1 Keyboard delete(⌫) does not work
-	
+
 	2.2 In MacOS, after mouse click clearHistory button, 'enter' key cannot add element to history container, unless the user click on the browser before hit 'enter'.
-	
+
 		In code, addHistory() function call is made correctly but nothing is appended to the history-container.
 		The group tried a lot of methods, even hardcoded innerHTML cannot solve this problem.
-3. Safari 
+3. Safari
 	*  no error detected so far
 
 ***
@@ -147,6 +147,8 @@ Mike:
 
 Channing:
 * evaluate.js
+* theme.js
+* updateMemory.js
 
 Gail:
 * inputListener.js

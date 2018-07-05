@@ -1,3 +1,8 @@
+// Author: Channing Jacobs
+// Created: 7/4
+// Edit: N/A
+// Description: Jasmine test cases for expression. Open unit_tests.html
+// to run this test suite and the others in the test folder.
 describe("expression", function() {
 
   describe("handles no operation", function() {
@@ -5,11 +10,14 @@ describe("expression", function() {
       this.equation = [0];
       expect(expression(this.equation)).toBe(0);
     });
-    /*
     it("of a single large value", function() {
-      this.equation = ["123456789012345678901234567890"];
-      expect(expression(this.equation)).toBe()
-    });*/
+      this.equation = [123456789012345678901234567890];
+      expect(expression(this.equation)).toBe(123456789012345678901234567890)
+    });
+    it("of a single scientific value", function() {
+      this.equation = [1234567890123456789012345678901234124348593472508734530];
+      expect(expression(this.equation)).toBe(1.2345678901234568e+54)
+    });
   });
 
   describe("handles addition", function() {
@@ -29,11 +37,10 @@ describe("expression", function() {
       this.equation = [0,"+",-10.0];
       expect(expression(this.equation)).toBe(-10);
     });
-    // it("of two large values", function() {
-    //   this.equation = [123123123123123123123,"+",100000000000000];
-    //   expect(expression(this.equation)).toBe(1.23123223123123e+20);
-    // });
-
+    it("of two large values", function() {
+      this.equation = [123123123123123123123,"+",100000000000000];
+      expect(expression(this.equation)).toBe(123123223123123130000);
+    });
     it("of seven small values", function() {
       this.equation = [0,"+",20,"+",-10,"+",453,"+",19.3234,"+",43242.1,"+",6];
       expect(expression(this.equation)).toBe(43730.4234);
@@ -57,11 +64,10 @@ describe("expression", function() {
       this.equation = [0,"-",-10.0];
       expect(expression(this.equation)).toBe(10);
     });
-    // it("of two large values", function() {
-    //   this.equation = [123123123123123123123,"+",100000000000000];
-    //   expect(expression(this.equation)).toBe(1.23123223123123e+20);
-    // });
-
+    it("of two large values", function() {
+      this.equation = [123123123123123123123,"-",100000000000000];
+      expect(expression(this.equation)).toBe(123123023123123130000);
+    });
     it("of seven small values", function() {
       this.equation = [0,"-",20,"-",-10,"-",453,"-",19.3234,"-",43242.1,"-",6];
       expect(expression(this.equation)).toBe(-43730.4234);
@@ -85,11 +91,10 @@ describe("expression", function() {
       this.equation = [2,"*",-10.0];
       expect(expression(this.equation)).toBe(-20);
     });
-    // it("of two large values", function() {
-    //   this.equation = [123123123123123123123,"+",100000000000000];
-    //   expect(expression(this.equation)).toBe(1.23123223123123e+20);
-    // });
-
+    it("of two large values", function() {
+      this.equation = [123123123123123123123,"*",100000000000000];
+      expect(expression(this.equation)).toBe(1.2312312312312314e+34);
+    });
     it("of seven small values", function() {
       this.equation = [1,"*",20,"*",-10,"*",453,"*",19.3234,"*",43242.1,"*",6];
       expect(expression(this.equation)).toBe(-454223677198.104);
@@ -113,11 +118,10 @@ describe("expression", function() {
       this.equation = [2,"/",-10.0];
       expect(expression(this.equation)).toBe(-0.2);
     });
-    // it("of two large values", function() {
-    //   this.equation = [123123123123123123123,"+",100000000000000];
-    //   expect(expression(this.equation)).toBe(1.23123223123123e+20);
-    // });
-
+    it("of two large values", function() {
+      this.equation = [123123123123123123123,"/",100000000000000];
+      expect(expression(this.equation)).toBe(1231231.2312312312);
+    });
     it("of seven small values", function() {
       this.equation = [9999,"/",20,"/",-10,"/",453,"/",19.3234,"/",43242.1,"/",6];
       expect(expression(this.equation)).toBe(-2.201338349792598e-8);
@@ -141,11 +145,10 @@ describe("expression", function() {
       this.equation = [80,"^",-10.0];
       expect(expression(this.equation)).toBe(9.313225746154785e-20);
     });
-    // it("of two large values", function() {
-    //   this.equation = [123123123123123123123,"+",100000000000000];
-    //   expect(expression(this.equation)).toBe(1.23123223123123e+20);
-    // });
-
+    it("of two large values", function() {
+      this.equation = [123123123123123123123,"^",100000];
+      expect(expression(this.equation)).toBe(Infinity);
+    });
     it("of seven small values", function() {
       this.equation = [5,"^",2,"^",1,"^",2,"^",1,"^",2,"^",6];
       expect(expression(this.equation)).toBe(3.552713678800501e+33);
