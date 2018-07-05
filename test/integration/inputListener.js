@@ -193,14 +193,14 @@ Placeholder != 0:
   - If input is in ["-", "(", "√(", "e"] and integers from 0 to 9, equation will be the same as input.
 
 2. placeholder == 10:
-// - Inputs that will set equation same as the input: "(", "e", "√(", numbers from 0 to 9
-// - Inputs that will set equation to "": ")"
-// - Inputs that will be added to the end of equation: "+", "-", "*", "/", "^", "^2", "E", ".", "%"
+  - Inputs that will replace the equation with the input: "(", "e", "√(", numbers from 0 to 9
+  - Inputs that will set equation to "": ")"
+  - Inputs that will replace the equation with placeholder and add the input to the end of equation: "+", "-", "*", "/", "^", "^2", "E", ".", "%"
 
 3. placeholder == 10.5:
-// - Inputs that will set equation same as the input: "(", "e", "√(", numbers from 0 to 9
-// - Inputs that will set equation to "": ")"
-// - Inputs that will be added to the end of equation: "+", "-", "*", "/", "^", "^2", "E", "%"
-// - Inputs that will set the equation to "10.5": "."
+  - Inputs that will replace the equation with the input: "(", "e", "√(", numbers from 0 to 9
+  - Inputs that will set equation to "": ")"
+  - Inputs that will replace the equation with placeholder and add the input to the end of equation: "+", "-", "*", "/", "^", "^2", "E", "%"
+  - Inputs that will set the equation to "10.5": "."
 
 */
