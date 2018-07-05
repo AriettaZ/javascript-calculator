@@ -48,7 +48,7 @@ function handleMR() {
 		equation = memory.toString().replace("e+", "E");
 	}
 	if(equation.includes(".")) {
-		dotExists = 1;
+		dotExists = true;
 	}
 	update(equation);
 }
