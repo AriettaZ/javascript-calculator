@@ -23,14 +23,14 @@ function addHistory(equation, result) {
 	//Create a record
 	var line = document.createElement("div");
 	line.setAttribute("class", "history-line");
-	var eqContainer = document.createElement("p");
+	var eqContainer = document.createElement("P");
 	var result2String = result.toString();
 	if(result > Number.MAX_SAFE_INTEGER) {
 		result2String = result.toExponential(5);
 	}
 	eqContainer.innerHTML = equation + " = " + result2String.replace("e+", "E");
 	eqContainer.setAttribute("class", "eq-container")
-	var removeButton = document.createElement("i");
+	var removeButton = document.createElement("I");
 	removeButton.setAttribute("class", "far fa-trash-alt remove-button");
 
 	//Append the record to the historyContainer
@@ -42,13 +42,12 @@ function addHistory(equation, result) {
 	removeButton.addEventListener("click", removeHistory);
 
 	//If there is no record in the history container, then let clear button appear
-	var currentLines = historyContainer.getElementsByClassName("history-line");
-	if(currentLines.length == 1) {
+	var currentLines = historyContainer.children;
+	if(currentLines.length >= 1) {
 		changeClearButtonOpacity(1);
 	}
 
 	historyContainer.scrollTop = historyContainer.scrollHeight
-
 }
 
 //Author: Mike

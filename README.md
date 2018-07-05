@@ -20,7 +20,8 @@ The MAGiC team was tasked with designing a web page with classic calculator func
 ***
 
 ### User Manual
-Open the ¡Calculator by openning index.html in the Firefox browser (Suggest browser: Safari).
+Open the ¡Calculator by openning index.html in the browser (Suggest browser: Safari [Why?](#Known-error-with-Different-Browsers)).
+
 
 Or, open browser and enter the following URL: https://i-calculator.herokuapp.com/
 
@@ -103,11 +104,21 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 	1.1 Keyboard left-arrow(←) will append Percentage(%) to the end of the equation
 
 	1.2 Keyboard down-array(↓) will append left parenthesis('(') to the end of equation
+	
+	1.3 In Ubuntu (not on MacOS), after mouse click clearHistory button, 'enter' key cannot add element to history container, unless the user click on the browser before hit 'enter'.
+	
+		In code, addHistory() function call is made correctly but nothing is appended to the history-container.
+		The group tried a lot of methods, even hardcoded innerHTML cannot solve this problem.
 2. Chrome
 
 	2.1 Keyboard delete(⌫) does not work
-3. Safari (no error detected so far)
-
+	
+	2.2 In MacOS, after mouse click clearHistory button, 'enter' key cannot add element to history container, unless the user click on the browser before hit 'enter'.
+	
+		In code, addHistory() function call is made correctly but nothing is appended to the history-container.
+		The group tried a lot of methods, even hardcoded innerHTML cannot solve this problem.
+3. Safari 
+	*  no error detected so far
 
 ***
 
