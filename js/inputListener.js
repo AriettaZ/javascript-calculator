@@ -5,7 +5,7 @@
 // Description: Using buttons and keyboard to enter the equation.
 
 // Key codes for acceptable keyboard inputs.
-var KEY_CODE = [43, 45, 42, 47, 40, 41, 69, 101, 13, 61, 8, 46, 37, 94, 8730];
+var KEY_CODE = [43, 45, 42, 47, 40, 41, 69, 101, 13, 61, 8, 46, 37, 94, 8730, 99];
 
 // Author: Gail Chen
 // Created: 7/2
@@ -138,6 +138,9 @@ function keyboardInput(event) {
 					case 8730:
 						document.getElementById("squareroot").click();
 						break;
+					case 99:
+						document.getElementById("c").click();
+						break;
 				}
 			}
 		}
@@ -171,28 +174,26 @@ function invalidToAdd(input) {
 
 	// Inputs will not be added to the end of the equation in following situations:
 	// 1. add an input that is not a number or one of ["(", "√(", "-", "e"] to an empty equation
-	// 2. add a decimal point when the equation is not ended with a number and the number already has a decimal point
+	// 2. add a decimal point when the equation is not ended with a number or the number already has a decimal point
 	// 3. add a number after %, ) or e
 	// 4. add an operator in midOp or endOp or '=' after (
 	// 5. add ) or % after an operator in startOp or midOp
-	// 6. add E after %
-	// 7. add ^, ^2 after %
-	// 8. add ^, ^2 after an operator in ["+", "-", "*", "/", "^", "E", ".", "^2"] where there is a % before the operator
-	// 9. add an operator in endOp or midOp to an equation that is "-" or "(-"
-	// 10. enter "=" when equation is empty or the equation ends with an operator in startOp or midOp
+	// 6. add ^, ^2, E after %
+	// 7. add ^, ^2 after an operator in ["+", "-", "*", "/", "^", "E", ".", "^2"] where there is a % before the operator
+	// 8. add an operator in endOp or midOp to an equation that is "-" or "(-"
+	// 9. enter "=" when equation is empty or the equation ends with an operator in startOp or midOp
   var invalidToAdd = (equation == "" && !(numbers.includes(input) || startOp.includes(input) || input === "e")) ||
 		(!(numbers.includes(last) && dotExists == false) && input == ".") ||
 		(numbers.includes(input) && (endOp.includes(last) || last == "e" )) ||
 		(last == "(" && (endOp.includes(input) || midOp.includes(input) || input == "=")) ||
 		([")", "%"].includes(input) && (startOp.includes(last) || midOp.includes(last))) ||
-		(input == "E" && last == "%") ||
-		(["^", "^2"].includes(input) && last == "%") ||
+		(["^", "^2", "E"].includes(input) && last == "%") ||
 		(["^", "^2"].includes(input) && (twoBefore == "%" && ["+", "-", "*", "/", "E", "."].includes(last))) ||
 		((endOp.includes(input) || midOp.includes(input)) && last == "-" && ["", "("].includes(twoBefore)) ||
 		(input == "=" && (equation == "" || midOp.includes(last) || startOp.includes(last)));
-		if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
-			invalidToAdd = true;
-		}
+	if(document.getElementById("equation-container").getAttribute("placeholder") != 0) {
+		invalidToAdd = true;
+	}
 	return invalidToAdd;
 }
 
@@ -235,7 +236,7 @@ function printToScreen(input) {
 			clearPlaceholder()
 			if(invalidToAdd(input)) return;
 			// If the last character in the equation is a decimal point,
-			// repace the decimal point with the input and reset the dotExists flag.
+			// replace the decimal point with the input and reset the dotExists flag.
 			if(last == ".") {
 				equation = cutLast;
 				dotExists = false;
@@ -249,7 +250,6 @@ function printToScreen(input) {
 		case "^":
 		case "^2":
 		case "E":
-		case "%":
 			// If the equation is ended with '-' or an operator in mipDop, replace that operator with the input.
 			handlePlaceholder()
 			if(invalidToAdd(input)) return;
@@ -274,7 +274,8 @@ function printToScreen(input) {
 			}
 			break;
 
-		case ")": // If the equation is ended with an operator from midOp or startOp, remove this operator.
+		case "%":
+		case ")":
 			clearPlaceholder()
 			if(invalidToAdd(input)) return;
 			break;
