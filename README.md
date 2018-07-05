@@ -32,6 +32,8 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 
 	| operation|Button|Keyboard|
 	| ------------- |-------------|
+	| Number|0-9|<kbd>0</kbd>-<kbd>9</kbd>|
+	| Dot|.|<kbd>.</kbd>|
 	| Addition|+|<kbd>+</kbd>|
 	| Subtraction|-|<kbd>-</kbd>|
 	| Multiplication|×|<kbd>*</kbd>|
@@ -39,6 +41,7 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 	| Exponential|x<sup>y</sup>|<kbd>^</kbd>|
 	| Square Root|√x|<kbd>alt</kbd>+<kbd>v</kbd>|
 	| Parenthesis|( or )|<kbd>(</kbd> or <kbd>)</kbd>|
+	| Evaluation|=|<kbd>⏎</kbd> or <kbd>=</kbd>|
 2. Shortcuts
 
 	| Shortcut|Button|Keyboard|
@@ -150,7 +153,6 @@ Ariel:
 Mike:
 * unit_testing_view.js
 * unit_testing_tokenizer.js
-* unit_testing_index.js
 
 Channing:
 * unit_testing_evaluate.js
