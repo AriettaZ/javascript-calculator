@@ -15,6 +15,8 @@ var buttons = ["ms","mr","m+","m-","mc","(",")","squareroot","square","e","7","8
 var head = document.getElementsByTagName("head")[0];
 var css = ".keyboard-item:hover {background-color: #5c1e19;} .keyboard-item {background-color: #db847d;}";
 css = css + " #clear-button { border-top-color: #b87332; background-color: #db847d;} #clear-button:hover { background-color: #b87332;}"
+css = css + " .fa-trash-alt { color: #b87332; }"
+css = css + " .tooltiptext, .left-tooltiptext {background-color: #b87332;}"
 var style = document.createElement("style");
 style.appendChild(document.createTextNode(css));
 
@@ -39,9 +41,11 @@ function changeTheme() {
     document.getElementsByClassName("history-section")[0].getElementsByTagName("p")[0].removeAttribute("style");
     document.getElementsByClassName("history-section")[0].removeAttribute("style");
     // Remove clear button styling
-    document.getElementById("clear-button").removeAttribute("style");
+    //document.getElementById("clear-button").removeAttribute("style");
     // Revert heart color
     document.getElementsByClassName("fa-heart")[0].removeAttribute("style");
+    // Remove backspace color
+    document.getElementsByClassName("fa-backspace")[0].removeAttribute("style");
     // Remove styling from header (for hover)
     head.removeChild(style);
   } else {
@@ -69,6 +73,9 @@ function changeTheme() {
     }
     // Change heart color
     document.getElementsByClassName("fa-heart")[0].style.color = "blue";
+
+    // Change backspace color
+    document.getElementsByClassName("fa-backspace")[0].style.color = "#5c1e19";
 
     // Append styling to allow for hover
     head.appendChild(style);

@@ -4,9 +4,12 @@ Edit: Channing, weight => font-weight, slow transitions.
 Description: stylesheet foe calculator display page */
 .screen-container {
   display: block;
+  /* grid-template-columns: auto; */
+  /* grid-template-rows: 50% 50%; */
   clear:both;
   height: 100px;
   padding-top: 20px;
+  /* float: left; */
 }
 .keyboard-container{
   width: 40%;
@@ -64,16 +67,16 @@ Description: stylesheet foe calculator display page */
 .history-line i{
   display: inline;
   margin-right: 50px;
-  color:#7fc9a5;
+  /*color:#7fc9a5;*/
   transition-duration: 0.2s;
 }
 .history-line i:hover{
   display: inline;
   margin-right: 50px;
-  color:  #44d68e;
   cursor: pointer;
 }
 .main{
+  /* height:100%; */
   display: block;
   margin: auto;
   overflow: auto;
@@ -199,11 +202,11 @@ footer i{
     display: inline-block;
 }
 
-.tooltip .tooltiptext, .tooltip .left-tooltiptext{
+.tooltip .tooltiptext {
     visibility: hidden;
     visibility:collapse;
     width: 100px;
-    background-color: #7fc9a5;
+    /*background-color: #7fc9a5;*/
     color: #fff;
     text-align: center;
     padding: 5px 5px;
@@ -215,11 +218,18 @@ footer i{
     right:0px;
     font-size: 12px;
 }
-.tooltip .tooltiptext{
-    width: 100px;
-}
 .tooltip .left-tooltiptext {
-    width: 100px;
+    visibility: hidden;
+    visibility:collapse;
+    width: 120px;
+    /*background-color: #7fc9a5;*/
+    color: #fff;
+    text-align: center;
+    padding: 5px 5px;
+    font-family: 'Bitter', serif;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
     top:35px;
     left:0px;
     font-size: 12px;
@@ -283,4 +293,19 @@ input:disabled{
 
 .fa-heart{
   color: red;
+}
+
+.fa-backspace{
+  color: #304468;
+}
+
+.fa-trash-alt{
+    color: #7fc9a5;
+}
+.fa-trash-alt:hover{
+    color:  red;
+}
+
+.tooltiptext, .left-tooltiptext{
+  background-color:  #7fc9a5;
 }
