@@ -61,6 +61,7 @@ Ariel:
 
 #### Testing
 ##### Test plans can be found under test folder
+##### Run test/unit_test.html for testing report
 ##### Unit Testing is implemented on single methods:
 Mike:
 * unit_testing_view.js
@@ -78,7 +79,7 @@ Ariel:
 * unit_testing_normalize.js
 
 ##### Integration testing
-* updateMemory.js
+* 
 
 #### Meetings
 
