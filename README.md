@@ -12,9 +12,10 @@
 ### Overview
 
 The MAGiC team was tasked with designing a web page with classic calculator functionalities. The team developed ¡Calculator which features:
-  *  Arithmetic Operators: + , - , * , \ , square root, exponentiation, percentage, scientific notation
+  *  Arithmetic Operators: + , - , * , / , square root, exponentiation, percentage, scientific notation
   *  Memory Management: MS, MC, MR, M+, M-
   *  History Display
+  *  Wrong Input Prevention
 
 ***
 
@@ -23,15 +24,15 @@ Open the ¡Calculator by openning index.html in the Firefox browser (Suggest bro
 
 Or, open browser and enter the following URL: https://i-calculator.herokuapp.com/
 
-####Input methods:
+#### Input methods:
 1. Button (mouse)
 2. Keyboard
 
-####Functions
+#### Functions
 1. Arithmetic Operations
 
 	| operation|Button|Keyboard|
-	| ------------- |-------------|
+	| :-------------: |:-------------:|:-----:|
 	| Number|0-9|<kbd>0</kbd>-<kbd>9</kbd>|
 	| Dot|.|<kbd>.</kbd>|
 	| Addition|+|<kbd>+</kbd>|
@@ -45,7 +46,7 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 2. Shortcuts
 
 	| Shortcut|Button|Keyboard|
-	| ------------- |-------------|
+	| :-------------: |:-------------:|:-----:|
 	| Scientific notation|E|<kbd>E</kbd>|
 	| Euler's number|e|<kbd>e</kbd>|
 	| Square|x<sup>2</sup>|<kbd>N/A</kbd>|
@@ -53,7 +54,7 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 3. Memory
 
 	| Memory Operation|Button|Keyboard|
-	| ------------- |-------------|
+	| :-------------: |:-------------:|:-----:|
 	| Memory Save|MS|<kbd>N/A</kbd>|
 	| Memory Read|MR|<kbd>N/A</kbd>|
 	| Memory Plus|M+|<kbd>N/A</kbd>|
@@ -96,7 +97,7 @@ Or, open browser and enter the following URL: https://i-calculator.herokuapp.com
 	6.2 Result dismiss: after evaluation, previous result is dismissed if <b>number</b> is entered immediately.
 
 
-####Known error with Different Browsers
+#### Known error with Different Browsers
 1. Firefox (Keycode Conflict)
 
 	1.1 Keyboard left-arrow(←) will append Percentage(%) to the end of the equation
