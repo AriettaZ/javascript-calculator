@@ -2,10 +2,10 @@
 Author: Gail Chen
 Created: 7/4
 Edit: N/A
-Description: Interation test for functions in inputListener.js
-
-Test plan for printToScreen (invovls invalidToAdd(), evaluate()): checks final equation
+Description: Integration tests functions in inputListener.js
+Test plan for printToScreen (invovls invalidToAdd(), evaluate(), update()): checks final equation
   The input will be added to the end of the equation, special cases are identified for differnet inputs bellow.
+Placeholder == 0:
 1. input is a number from 0 to 9:
   If a nonzero number starts with 0, remove the leading 0 and add input to 0.
   If the equation is ended with %, ) or e, no change to equation.
@@ -18,7 +18,7 @@ Test plan for printToScreen (invovls invalidToAdd(), evaluate()): checks final e
   - initial equation == "(10.5)", final equation == "(10.5)"
   input == "0":
   - initial equation == "0", final equation == "0"
-  - initial equation == "5*0", final equation == "10*5"
+  - initial equation == "5*0", final equation == "5*0"
   - initial equation == "0.0", final equation == "0.00"
   - initial equation == "10.5%", final equation == "10.5%"
   - initial equation == "10.5e", final equation == "10.5e"
@@ -184,5 +184,23 @@ Test plan for printToScreen (invovls invalidToAdd(), evaluate()): checks final e
   - initial equation == "13^2^2", final equation == "", result = 28561
   - initial equation == "10.4^5", final equation == "", result = 121665.29024
   - initial equation == "10.4√(81)", final equation == "", result = 93.6
+
+Placeholder != 0:
+  The placeholder will be shown when equation is "".
+  The placeholer is always a number with or without a decimal point.
+1. placeholder == 0
+  - If input is in ["+", *", "/", "^", "^2", "E", ".", ")", "%"], equation == ""
+  - If input is in ["-", "(", "√(", "e"] and integers from 0 to 9, equation will be the same as input.
+
+2. placeholder == 10:
+// - Inputs that will set equation same as the input: "(", "e", "√(", numbers from 0 to 9
+// - Inputs that will set equation to "": ")"
+// - Inputs that will be added to the end of equation: "+", "-", "*", "/", "^", "^2", "E", ".", "%"
+
+3. placeholder == 10.5:
+// - Inputs that will set equation same as the input: "(", "e", "√(", numbers from 0 to 9
+// - Inputs that will set equation to "": ")"
+// - Inputs that will be added to the end of equation: "+", "-", "*", "/", "^", "^2", "E", "%"
+// - Inputs that will set the equation to "10.5": "."
 
 */
